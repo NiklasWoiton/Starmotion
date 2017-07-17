@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_main_title_padding_top">30dp</dimen>
+    <dimen name="activity_main_title_padding_top">20dp</dimen>
     <dimen name="activity_main_title_text_size">50sp</dimen>
     <dimen name="activity_main_button_start_text_size">23sp</dimen>
 </resources>
