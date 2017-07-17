@@ -2,6 +2,8 @@ package com.starproductions.starmotion.starmotion;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.SurfaceView;
 import android.view.View;
 
 public class GameActivity extends Activity {
@@ -11,6 +13,8 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         onWindowFocusChanged(true);
+        SurfaceView view = new GameView(this);
+        setContentView(view);
     }
 
     @Override
