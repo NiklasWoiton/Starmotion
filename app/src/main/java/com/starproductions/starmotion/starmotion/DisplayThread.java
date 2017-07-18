@@ -17,32 +17,26 @@ public class DisplayThread extends Thread {
 
     private boolean isRunning;
     private SurfaceHolder surfaceHolder;
+    private GameEngine gameEngine;
     private int delay = 20;
 
-    private Rect rect = new Rect(100, 100, 200, 200);
-    private Paint paint = new Paint();
 
-
-    public DisplayThread(SurfaceHolder surfaceHolder){
+    public DisplayThread(SurfaceHolder surfaceHolder, GameEngine gameEngine){
         this.surfaceHolder = surfaceHolder;
+        this.gameEngine = gameEngine;
         isRunning = true;
-
-        paint.setColor(Color.YELLOW);
     }
 
     @Override
     public void run(){
         while (isRunning){
-            //Update Engine
-            rect.offset(1, 1);
+            gameEngine.update();
 
             Canvas canvas = surfaceHolder.lockCanvas();
 
             if (canvas != null){
                 synchronized (surfaceHolder){
-                    //Draw Objects on Screen
-                    canvas.drawColor(Color.BLACK);
-                    canvas.drawRect(rect, paint);
+                    gameEngine.draw(canvas);
                 }
                 surfaceHolder.unlockCanvasAndPost(canvas);
             }

@@ -16,19 +16,22 @@ import java.io.Console;
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     private DisplayThread displayThread;
+    private GameEngine gameEngine;
 
     public GameView(Context context) {
         super(context);
 
         getHolder().addCallback(this);
 
-        displayThread = new DisplayThread(getHolder());
+        gameEngine = new GameEngine();
+
+        displayThread = new DisplayThread(getHolder(), gameEngine);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
         if (!displayThread.getIsRunning()) {
-            displayThread = new DisplayThread(getHolder());
+            displayThread = new DisplayThread(getHolder(), gameEngine);
             displayThread.start();
         }
         else {
