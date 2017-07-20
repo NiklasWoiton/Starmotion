@@ -1,25 +1,27 @@
 package com.starproductions.starmotion.starmotion;
 
-import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.util.Log;
 import android.view.SurfaceHolder;
+
+import com.starproductions.starmotion.starmotion.PlayerMovement.GameConstants;
+
+import java.util.Calendar;
 
 /**
  * Created by jakob on 17.07.2017.
  */
 
-//Parts of this are created with the help of: https://www.codeproject.com/Articles/827608/Android-Basic-Game-Loop
+//Parts of this are created with the help of:
+// -https://www.codeproject.com/Articles/827608/Android-Basic-Game-Loop
+// -http://gameprogrammingpatterns.com/game-loop.html
 public class DisplayThread extends Thread {
 
     private boolean isRunning;
     private SurfaceHolder surfaceHolder;
     private GameEngine gameEngine;
-    private int delay = 20;
 
+    private double previous = System.currentTimeMillis();
+    private double lag = 0.0;
 
     public DisplayThread(SurfaceHolder surfaceHolder, GameEngine gameEngine){
         this.surfaceHolder = surfaceHolder;
@@ -29,21 +31,25 @@ public class DisplayThread extends Thread {
 
     @Override
     public void run(){
+        previous = System.currentTimeMillis();
         while (isRunning){
-            gameEngine.update();
+            double current = System.currentTimeMillis();
+            double elapsed = current - previous;
+            previous = current;
+            lag += elapsed;
+
+            while (lag >= GameConstants.MS_PER_UPDATE){
+                gameEngine.update();
+                lag -= GameConstants.MS_PER_UPDATE;
+            }
 
             Canvas canvas = surfaceHolder.lockCanvas();
 
             if (canvas != null){
                 synchronized (surfaceHolder){
-                    gameEngine.draw(canvas);
+                    gameEngine.draw(canvas, lag/GameConstants.MS_PER_UPDATE);
                 }
                 surfaceHolder.unlockCanvasAndPost(canvas);
-            }
-            try{
-                Thread.sleep(delay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }
