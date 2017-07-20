@@ -3,10 +3,6 @@ package com.starproductions.starmotion.starmotion;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.GameConstants;
-
-import java.util.Calendar;
-
 /**
  * Created by jakob on 17.07.2017.
  */

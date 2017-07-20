@@ -1,4 +1,4 @@
-package com.starproductions.starmotion.starmotion.PlayerMovement;
+package com.starproductions.starmotion.starmotion;
 
 /**
  * Created by jakob on 20.07.2017.
