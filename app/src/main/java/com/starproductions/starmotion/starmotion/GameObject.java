@@ -25,6 +25,6 @@ public abstract class GameObject {
         this.y = y;
     }
 
-    abstract public void draw(Canvas c);
-    abstract public void update(Canvas c);
+    abstract public void draw(Canvas c, double extrapolation);
+    abstract public void update();
 }

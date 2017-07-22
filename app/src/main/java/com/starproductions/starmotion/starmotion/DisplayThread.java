@@ -19,6 +19,8 @@ public class DisplayThread extends Thread {
     private double previous = System.currentTimeMillis();
     private double lag = 0.0;
 
+    //TODO: Add Framerate
+
     public DisplayThread(SurfaceHolder surfaceHolder, GameEngine gameEngine){
         this.surfaceHolder = surfaceHolder;
         this.gameEngine = gameEngine;
