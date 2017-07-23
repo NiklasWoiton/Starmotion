@@ -5,5 +5,9 @@ package com.starproductions.starmotion.starmotion;
  */
 
 public abstract class SpaceShip extends Actor {
+    public SpaceShip(GameEngine gameEngine) {
+        super(gameEngine);
+    }
+
     abstract void shoot();
 }

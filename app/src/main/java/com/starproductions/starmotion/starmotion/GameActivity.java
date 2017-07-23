@@ -1,6 +1,7 @@
 package com.starproductions.starmotion.starmotion;
 
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -13,6 +14,11 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         onWindowFocusChanged(true);
+        Point size = new Point();
+        getWindowManager().getDefaultDisplay().getSize(size);
+        GameConstants.SIZE = size;
+        int width = size.x;
+        int height = size.y;
         SurfaceView view = new GameView(this);
         setContentView(view);
     }

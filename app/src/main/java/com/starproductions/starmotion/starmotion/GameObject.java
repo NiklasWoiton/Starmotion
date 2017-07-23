@@ -1,5 +1,6 @@
 package com.starproductions.starmotion.starmotion;
 
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
@@ -7,9 +8,18 @@ import android.graphics.Canvas;
  */
 
 public abstract class GameObject {
-    protected int x, y;
+    protected double x, y;
+    protected GameEngine gameEngine;
+    protected Bitmap asset;
 
-    public int getX() {
+
+    public GameObject(GameEngine gameEngine){
+        this.gameEngine = gameEngine;
+        gameEngine.registerGameObject(this);
+        setAsset();
+    }
+
+    public double getX() {
         return x;
     }
 
@@ -17,7 +27,7 @@ public abstract class GameObject {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
@@ -25,6 +35,7 @@ public abstract class GameObject {
         this.y = y;
     }
 
+    abstract protected void setAsset();
     abstract public void draw(Canvas c, double extrapolation);
     abstract public void update();
 }

@@ -1,5 +1,6 @@
 package com.starproductions.starmotion.starmotion;
 
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,8 +16,11 @@ import java.util.List;
 public class GameEngine {
 
     private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+    private Resources resources;
 
-    public GameEngine(){
+    public GameEngine(Resources resources){
+        this.resources = resources;
+        new EnemyShip(this, 100, 100);
     }
 
     public void update(){
@@ -28,6 +32,7 @@ public class GameEngine {
     }
 
     public void draw(Canvas canvas, double extrapolation){
+        canvas.drawColor(getResources().getColor(R.color.black));
         for (GameObject gameObject: gameObjects){
             gameObject.draw(canvas, extrapolation);
         }
@@ -37,4 +42,7 @@ public class GameEngine {
         gameObjects.add(gameObject);
     }
 
+    public Resources getResources(){
+        return resources;
+    }
 }

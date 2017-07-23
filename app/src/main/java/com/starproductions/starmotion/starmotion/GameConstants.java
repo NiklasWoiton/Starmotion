@@ -1,5 +1,8 @@
 package com.starproductions.starmotion.starmotion;
 
+import android.graphics.Point;
+import android.view.Display;
+
 /**
  * Created by jakob on 20.07.2017.
  */
@@ -9,4 +12,5 @@ public final class GameConstants {
     private static final double MS_PER_UPDATE_BASE = 4;
     public static final double MS_PER_UPDATE = MS_PER_UPDATE_BASE * MULTIPLICATOR;
 
+    public static Point SIZE;
 }

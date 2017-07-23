@@ -5,6 +5,10 @@ package com.starproductions.starmotion.starmotion;
  */
 
 public abstract class Actor extends GameObject implements Collidable{
+    public Actor(GameEngine gameEngine) {
+        super(gameEngine);
+    }
+
     abstract void move();
 
 }
