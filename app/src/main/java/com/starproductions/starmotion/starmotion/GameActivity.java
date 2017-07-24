@@ -7,8 +7,10 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class GameActivity extends Activity {
+import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
 
+public class GameActivity extends Activity {
+private MovementManager movementManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,8 @@ public class GameActivity extends Activity {
         GameConstants.SIZE = size;
         int width = size.x;
         int height = size.y;
-        SurfaceView view = new GameView(this);
+        movementManager = new MovementManager(this, GameConstants.SIZE.x);
+        SurfaceView view = new GameView(this, movementManager);
         setContentView(view);
     }
 
@@ -36,5 +39,17 @@ public class GameActivity extends Activity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        movementManager.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        movementManager.stop();
     }
 }

@@ -12,17 +12,15 @@ import java.util.Observer;
 public class MovementManager extends Observable implements Observer{
     private final OrientationController oc;
     private final int maxX;
-    private final float speed;
+    private float speed = 1;
 
     /**
      *
      * @param context The calling activity
      * @param maxX The maximum X coordinate (should be screen width - the player's width)
-     * @param speed The speed of the player (should be 500 minimum)
      */
-    public MovementManager(Context context, int maxX, float speed){
+    public MovementManager(Context context, int maxX){
         this.maxX = maxX;
-        this.speed = speed;
         oc = new OrientationController(context);
         oc.addObserver(this);
     }
@@ -49,6 +47,14 @@ public class MovementManager extends Observable implements Observer{
             float x = calculateX(tilt);
             notify(x);
         }
+    }
+
+    public float getSpeed(){
+        return speed;
+    }
+
+    public void setSpeed(float speed){
+        this.speed = speed;
     }
 
     private float calculateX(float tilt) {

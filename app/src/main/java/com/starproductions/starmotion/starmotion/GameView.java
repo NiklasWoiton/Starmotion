@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
+import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
+
 import java.io.Console;
 
 /**
@@ -18,12 +20,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private DisplayThread displayThread;
     private GameEngine gameEngine;
 
-    public GameView(Context context) {
+    public GameView(Context context, MovementManager movementManager) {
         super(context);
 
         getHolder().addCallback(this);
 
-        gameEngine = new GameEngine(getResources());
+        gameEngine = new GameEngine(getResources(), movementManager);
 
         displayThread = new DisplayThread(getHolder(), gameEngine);
     }

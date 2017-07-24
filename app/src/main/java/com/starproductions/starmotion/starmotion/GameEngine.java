@@ -1,11 +1,14 @@
 package com.starproductions.starmotion.starmotion;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
+
+import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,13 +24,14 @@ public class GameEngine {
     private Resources resources;
     private Rect activeSpace;
 
-    public GameEngine(Resources resources){
+    public GameEngine(Resources resources, MovementManager movementManager){
         this.resources = resources;
         activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_Factor + 1)),
                                 (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_Factor + 1)));
         objectSpawner = new ObjectSpawner(this);
+        new PlayerShip(this, movementManager);
     }
 
     public void update(){
