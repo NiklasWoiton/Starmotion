@@ -8,6 +8,7 @@ import android.graphics.Canvas;
  */
 
 public abstract class GameObject {
+
     protected double x, y;
     protected GameEngine gameEngine;
     protected Bitmap asset;
@@ -33,6 +34,12 @@ public abstract class GameObject {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    //Call this and the GameObject will destroy itself.
+    //Override to add further actions
+    public void destroy(){
+        gameEngine.deregisterGameObject(this);
     }
 
     abstract protected void setAsset();

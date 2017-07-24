@@ -13,4 +13,9 @@ public final class GameConstants {
     public static final double MS_PER_UPDATE = MS_PER_UPDATE_BASE * MULTIPLICATOR;
 
     public static Point SIZE;
+
+    public static final double DESPAWN_BORDER_Factor = 0.3;
+
+    public static final double MS_BETWEEN_ENEMY_SHIPS = 1000;
+    public static final double START_ENEMY_SHIPS_Y_Factor = -0.2;
 }

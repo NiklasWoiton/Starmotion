@@ -11,7 +11,7 @@ import android.graphics.Rect;
 
 public class EnemyShip extends SpaceShip {
 
-    private double speedX = 0.2;
+    private double speedX = 0;
     private double speedY = 1;
 
     public EnemyShip(GameEngine gameEngine, double x, double y){
@@ -40,7 +40,7 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     public Rect getHitBox() {
-        return null;
+        return new Rect((int) x, (int) y, (int) (x + asset.getWidth()), (int) (y + asset.getHeight()));
     }
 
     @Override
