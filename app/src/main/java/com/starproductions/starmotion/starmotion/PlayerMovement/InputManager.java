@@ -1,6 +1,11 @@
 package com.starproductions.starmotion.starmotion.PlayerMovement;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,19 +14,20 @@ import java.util.Observer;
  * Call addObserver() after creation.
  * Observer gets an
  */
-public class MovementManager extends Observable implements Observer{
+public class InputManager extends Observable implements Observer {
     private final OrientationController oc;
     private final int maxX;
     private float speed = 1;
+    private Notification lastNotification = new Notification(0, false);
 
     /**
      *
-     * @param context The calling activity
+     * @param activity The calling activity
      * @param maxX The maximum X coordinate (should be screen width - the player's width)
      */
-    public MovementManager(Context context, int maxX){
+    public InputManager(Activity activity, int maxX){
         this.maxX = maxX;
-        oc = new OrientationController(context);
+        oc = new OrientationController(activity);
         oc.addObserver(this);
     }
 
@@ -45,7 +51,7 @@ public class MovementManager extends Observable implements Observer{
             float[] orientation = (float[]) o;
             float tilt = orientation[1];
             float x = calculateX(tilt);
-            notify(x);
+            notifyPosition(x);
         }
     }
 
@@ -70,10 +76,34 @@ public class MovementManager extends Observable implements Observer{
         return result;
     }
 
-    private void notify(float x){
+    private void notifyPosition(float x){
         if(countObservers() > 0) {
             setChanged();
-            notifyObservers(x);
+            lastNotification = new Notification(x, lastNotification.isTouching());
+            notifyObservers(lastNotification);
         }
     }
+
+
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getActionMasked()){
+            case MotionEvent.ACTION_DOWN:
+                notifyTouch(true);
+                return true;
+
+            case MotionEvent.ACTION_UP:
+                notifyTouch(false);
+                return false;
+        }
+        return true;
+    }
+
+    private void notifyTouch(boolean isTouching){
+        if(countObservers() > 0) {
+            setChanged();
+            lastNotification = new Notification(lastNotification.getX(), isTouching);
+            notifyObservers(lastNotification);
+        }
+    }
+
 }

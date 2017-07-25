@@ -1,13 +1,13 @@
 package com.starproductions.starmotion.starmotion;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
+import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
+import com.starproductions.starmotion.starmotion.PlayerMovement.Notification;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -20,15 +20,16 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     private double speedX = 500;
     private double speedY = 0;
+    private long lastShot = 0;
 
-    public PlayerShip(GameEngine gameEngine, MovementManager movementManager){
+    public PlayerShip(GameEngine gameEngine, InputManager inputManager){
         super(gameEngine);
         this.x = GameConstants.SIZE.x;
         this.y = GameConstants.SIZE.y * 0.8;
 
-        movementManager.setSpeed((float) speedX);
-        movementManager.addObserver(this);
-        movementManager.start();
+        inputManager.setSpeed((float) speedX);
+        inputManager.addObserver(this);
+        inputManager.start();
     }
 
     @Override
@@ -41,7 +42,11 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     void shoot() {
-
+        if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS){
+            lastShot = System.currentTimeMillis();
+            // Shoot here
+            Log.d("Shoot", "SHOOT!!!!");
+        }
     }
 
     @Override
@@ -68,11 +73,13 @@ public class PlayerShip extends SpaceShip implements Observer{
     public void update() {
     }
 
-    // Movement update
+    // Input update
     @Override
     public void update(Observable observable, Object o) {
-        if(observable instanceof MovementManager){
-            x = (float) o;
+        if(observable instanceof InputManager){
+            Notification n = (Notification) o;
+            x = n.getX();
+            if( n.isTouching() ) shoot();
         }
     }
 }

@@ -1,17 +1,13 @@
 package com.starproductions.starmotion.starmotion;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
+import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by jakob on 18.07.2017.
@@ -24,14 +20,14 @@ public class GameEngine {
     private Resources resources;
     private Rect activeSpace;
 
-    public GameEngine(Resources resources, MovementManager movementManager){
+    public GameEngine(Resources resources, InputManager inputManager){
         this.resources = resources;
         activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_Factor + 1)),
                                 (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_Factor + 1)));
         objectSpawner = new ObjectSpawner(this);
-        new PlayerShip(this, movementManager);
+        new PlayerShip(this, inputManager);
     }
 
     public void update(){

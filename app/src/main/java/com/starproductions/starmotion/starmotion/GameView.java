@@ -1,14 +1,10 @@
 package com.starproductions.starmotion.starmotion;
 
 import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
-
-import java.io.Console;
+import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
 
 /**
  * Created by jakob on 17.07.2017.
@@ -20,12 +16,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private DisplayThread displayThread;
     private GameEngine gameEngine;
 
-    public GameView(Context context, MovementManager movementManager) {
+    public GameView(Context context, InputManager inputManager) {
         super(context);
 
         getHolder().addCallback(this);
 
-        gameEngine = new GameEngine(getResources(), movementManager);
+        gameEngine = new GameEngine(getResources(), inputManager);
 
         displayThread = new DisplayThread(getHolder(), gameEngine);
     }
@@ -58,4 +54,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             }
             catch (InterruptedException ignored) {}
     }
+
+
 }

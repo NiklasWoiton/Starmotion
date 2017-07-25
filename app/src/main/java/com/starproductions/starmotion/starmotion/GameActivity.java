@@ -3,14 +3,14 @@ package com.starproductions.starmotion.starmotion;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.MovementManager;
+import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
 
-public class GameActivity extends Activity {
-private MovementManager movementManager;
+public class GameActivity extends Activity implements View.OnTouchListener {
+private InputManager inputManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,9 +21,10 @@ private MovementManager movementManager;
         GameConstants.SIZE = size;
         int width = size.x;
         int height = size.y;
-        movementManager = new MovementManager(this, GameConstants.SIZE.x);
-        SurfaceView view = new GameView(this, movementManager);
+        SurfaceView view = new GameView(this, inputManager);
         setContentView(view);
+        view.setOnTouchListener(this);
+        inputManager = new InputManager(this, GameConstants.SIZE.x);
     }
 
     @Override
@@ -44,12 +45,17 @@ private MovementManager movementManager;
     @Override
     protected void onResume() {
         super.onResume();
-        movementManager.start();
+        inputManager.start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        movementManager.stop();
+        inputManager.stop();
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return inputManager.onTouch(view, motionEvent);
     }
 }
