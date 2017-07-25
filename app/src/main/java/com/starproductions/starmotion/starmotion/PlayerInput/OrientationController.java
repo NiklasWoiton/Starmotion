@@ -1,4 +1,4 @@
-package com.starproductions.starmotion.starmotion.PlayerMovement;
+package com.starproductions.starmotion.starmotion.PlayerInput;
 
 import android.content.Context;
 import android.hardware.Sensor;

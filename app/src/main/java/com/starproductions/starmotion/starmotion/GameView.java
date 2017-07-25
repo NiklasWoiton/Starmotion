@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
+import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 
 /**
  * Created by jakob on 17.07.2017.

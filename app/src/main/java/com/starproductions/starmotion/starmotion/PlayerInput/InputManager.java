@@ -1,8 +1,6 @@
-package com.starproductions.starmotion.starmotion.PlayerMovement;
+package com.starproductions.starmotion.starmotion.PlayerInput;
 
 import android.app.Activity;
-import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 

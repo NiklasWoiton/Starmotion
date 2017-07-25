@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
+import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 
 import java.util.ArrayList;
 

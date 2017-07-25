@@ -6,8 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
-import com.starproductions.starmotion.starmotion.PlayerMovement.Notification;
+import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
+import com.starproductions.starmotion.starmotion.PlayerInput.Notification;
 
 import java.util.Observable;
 import java.util.Observer;

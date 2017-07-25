@@ -1,8 +1,4 @@
-package com.starproductions.starmotion.starmotion.PlayerMovement;
-
-/**
- * Created by Shoggomo on 25.07.2017.
- */
+package com.starproductions.starmotion.starmotion.PlayerInput;
 
 /**
  * A object containing input information for the player

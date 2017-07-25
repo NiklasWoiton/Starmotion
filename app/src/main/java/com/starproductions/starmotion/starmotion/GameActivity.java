@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
-import com.starproductions.starmotion.starmotion.PlayerMovement.InputManager;
+import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 
 public class GameActivity extends Activity implements View.OnTouchListener {
 private InputManager inputManager;
