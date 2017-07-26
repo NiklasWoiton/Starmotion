@@ -17,6 +17,9 @@ import java.util.List;
 public class GameEngine {
 
     private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+    private ArrayList<GameObject> toAdd = new ArrayList<GameObject>();
+    private ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+
     private ObjectSpawner objectSpawner;
     private Resources resources;
     private Rect activeSpace;
@@ -38,6 +41,7 @@ public class GameEngine {
         for (GameObject gameObject: gameObjects){
             gameObject.update();
         }
+        refreshGameObjectsList();
     }
 
     public void draw(Canvas canvas, double extrapolation){
@@ -47,35 +51,38 @@ public class GameEngine {
         }
     }
 
-    public void checkOutOfScreen(){
-        GameObject[] toDestroy = new GameObject[gameObjects.size()];
-        int iterator = 0;
+    private void checkOutOfScreen(){
         for (GameObject gameObject: gameObjects){
             if (Collidable.class.isInstance(gameObject)){
                 try {
                     if (!(((Collidable) gameObject).getHitBox().intersect(activeSpace))){
-                        toDestroy[iterator] = gameObject;
-                        iterator++;
+                        gameObject.destroy();
                     }
                 }catch (NullPointerException e){
                     Log.e("GameEngine", "checkOutOfScreen: Keine Boundingbox zurückgegeben", e);
                 }
-
-
             }
-        }
-        for (int i = 0; i < iterator; i++){
-            toDestroy[i].destroy();
         }
     }
 
+    private void refreshGameObjectsList(){
+        for (GameObject gameObject: toAdd){
+            gameObjects.add(gameObject);
+        }
+        toAdd.clear();
+        for (GameObject gameObject: toRemove){
+            gameObjects.remove(gameObject);
+        }
+        toRemove.clear();
+    }
+
     public void registerGameObject(GameObject gameObject){
-        gameObjects.add(gameObject);
+        toAdd.add(gameObject);
         Log.d("GameObject Count", "registeredGameObjects: " + gameObjects.size());
     }
 
     public void deregisterGameObject(GameObject gameObject){
-        gameObjects.remove(gameObject);
+        toRemove.add(gameObject);
     }
 
     public Resources getResources(){

@@ -6,31 +6,18 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 /**
- * Created by jakob on 23.07.2017.
+ * Created by jakob on 24.07.2017.
  */
 
-public class EnemyShip extends SpaceShip {
+public class Laser extends Actor {
 
     private double speedX = 0;
-    private double speedY = 1;
+    private double speedY = 2;
 
-    public EnemyShip(GameEngine gameEngine, double x, double y){
+    public Laser(GameEngine gameEngine, double x, double y){
         super(gameEngine);
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut);
-        int newWidth = GameConstants.SIZE.x / 10;
-        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
-        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
-    }
-
-    @Override
-    void shoot() {
-        new Laser(gameEngine, x, y);
     }
 
     @Override
@@ -49,6 +36,14 @@ public class EnemyShip extends SpaceShip {
     }
 
     @Override
+    protected void setAsset() {
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet);
+        int newWidth = GameConstants.SIZE.x / 50;
+        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
+        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
+    }
+
+    @Override
     public void draw(Canvas c, double extrapolation) {
         c.drawBitmap(asset, (float)(x + speedX*extrapolation), (float)(y + speedY*extrapolation), null);
     }
@@ -57,6 +52,5 @@ public class EnemyShip extends SpaceShip {
     public void update() {
         x += speedX;
         y += speedY;
-        if (Math.random() > 0.999) shoot();
     }
 }
