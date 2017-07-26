@@ -3,12 +3,14 @@ package com.starproductions.starmotion.starmotion;
 import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 
-public class GameActivity extends Activity {
+import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 
+public class GameActivity extends Activity implements View.OnTouchListener {
+private InputManager inputManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +21,10 @@ public class GameActivity extends Activity {
         GameConstants.SIZE = size;
         int width = size.x;
         int height = size.y;
-        SurfaceView view = new GameView(this);
+        SurfaceView view = new GameView(this, inputManager);
         setContentView(view);
+        view.setOnTouchListener(this);
+        inputManager = new InputManager(this, GameConstants.SIZE.x);
     }
 
     @Override
@@ -36,5 +40,22 @@ public class GameActivity extends Activity {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
             );
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inputManager.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        inputManager.stop();
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        return inputManager.onTouch(view, motionEvent);
     }
 }
