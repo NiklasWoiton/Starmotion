@@ -29,6 +29,7 @@ public class PlayerShip extends SpaceShip implements Observer{
         this.y = GameConstants.SIZE.y * 0.8;
 
         inputManager.setSpeed((float) speedX);
+        inputManager.setMaxX(GameConstants.SIZE.x - asset.getWidth());
         inputManager.addObserver(this);
         inputManager.start();
     }

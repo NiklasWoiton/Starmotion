@@ -14,7 +14,7 @@ import java.util.Observer;
  */
 public class InputManager extends Observable implements Observer {
     private final OrientationController oc;
-    private final int maxX;
+    private int maxX;
     private float speed = 1;
     private Notification lastNotification = new Notification(0, false);
 
@@ -59,6 +59,10 @@ public class InputManager extends Observable implements Observer {
 
     public void setSpeed(float speed){
         this.speed = speed;
+    }
+
+    public void setMaxX(int maxX){
+        this.maxX = maxX;
     }
 
     private float calculateX(float tilt) {
