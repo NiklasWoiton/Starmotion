@@ -1,0 +1,40 @@
+package com.starproductions.starmotion.starmotion;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+
+/**
+ * Created by Shoggomo on 26.07.2017.
+ */
+
+public class Lifebar extends HudObject {
+    PlayerShip player;
+
+    public Lifebar(GameEngine gameEngine, PlayerShip player){
+        super(gameEngine);
+        this.player = player;
+        x = GameConstants.SIZE.x / 20;
+        y = GameConstants.SIZE.y / 20;
+    }
+
+    @Override
+    protected void setAsset() {
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.heart);
+        int newWidth = GameConstants.SIZE.x / 20;
+        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
+        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
+    }
+
+    @Override
+    public void draw(Canvas c, double extrapolation) {
+        float space = asset.getWidth();
+        for(int i = 0; i < player.getLife(); i++)
+            c.drawBitmap(asset, (float) x + i * space , (float) y, null);
+    }
+
+    @Override
+    public void update() {
+
+    }
+}

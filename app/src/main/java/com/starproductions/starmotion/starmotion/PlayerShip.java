@@ -18,9 +18,10 @@ import java.util.Observer;
 
 public class PlayerShip extends SpaceShip implements Observer{
 
-    private double speedX = 500;
+    private double speedX = 700;
     private double speedY = 0;
     private long lastShot = 0;
+    private int life = GameConstants.PLAYER_START_LIFE;
 
     public PlayerShip(GameEngine gameEngine, InputManager inputManager){
         super(gameEngine);
@@ -30,6 +31,10 @@ public class PlayerShip extends SpaceShip implements Observer{
         inputManager.setSpeed((float) speedX);
         inputManager.addObserver(this);
         inputManager.start();
+    }
+
+    public int getLife() {
+        return life;
     }
 
     @Override

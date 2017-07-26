@@ -15,9 +15,10 @@ import java.util.ArrayList;
 
 public class GameEngine {
 
-    private ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
-    private ArrayList<GameObject> toAdd = new ArrayList<GameObject>();
-    private ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+    private ArrayList<Actor> gameActors = new ArrayList<>();
+    private ArrayList<HudObject> hudObjects = new ArrayList<>();
+    private ArrayList<GameObject> toAdd = new ArrayList<>();
+    private ArrayList<GameObject> toRemove = new ArrayList<>();
 
     private ObjectSpawner objectSpawner;
     private Resources resources;
@@ -30,7 +31,8 @@ public class GameEngine {
                                 (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_Factor + 1)),
                                 (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_Factor + 1)));
         objectSpawner = new ObjectSpawner(this);
-        new PlayerShip(this, inputManager);
+        PlayerShip playerShip = new PlayerShip(this, inputManager);
+        new Lifebar(this, playerShip);
     }
 
     public void update(){
@@ -38,7 +40,7 @@ public class GameEngine {
         //Check Collision
         checkOutOfScreen();
         objectSpawner.update();
-        for (GameObject gameObject: gameObjects){
+        for (GameObject gameObject: gameActors){
             gameObject.update();
         }
         refreshGameObjectsList();
@@ -46,39 +48,46 @@ public class GameEngine {
 
     public void draw(Canvas canvas, double extrapolation){
         canvas.drawColor(getResources().getColor(R.color.black));
-        for (GameObject gameObject: gameObjects){
-            gameObject.draw(canvas, extrapolation);
+        for (Actor actor: gameActors){
+            actor.draw(canvas, extrapolation);
+        }
+        for(HudObject hudObject: hudObjects){
+            hudObject.draw(canvas, extrapolation);
         }
     }
 
-    private void checkOutOfScreen(){
-        for (GameObject gameObject: gameObjects){
-            if (Collidable.class.isInstance(gameObject)){
-                try {
-                    if (!(((Collidable) gameObject).getHitBox().intersect(activeSpace))){
-                        gameObject.destroy();
-                    }
-                }catch (NullPointerException e){
-                    Log.e("GameEngine", "checkOutOfScreen: Keine Boundingbox zurückgegeben", e);
+    private void checkOutOfScreen() {
+        for (Actor actor : gameActors) {
+            try {
+                if (!(actor.getHitBox().intersect(activeSpace))) {
+                    actor.destroy();
                 }
+            } catch (NullPointerException e) {
+                Log.e("GameEngine", "checkOutOfScreen: Keine Boundingbox zurückgegeben", e);
             }
         }
     }
 
     private void refreshGameObjectsList(){
         for (GameObject gameObject: toAdd){
-            gameObjects.add(gameObject);
+            if(gameObject instanceof Actor)
+                gameActors.add((Actor) gameObject);
+            else if(gameObject instanceof HudObject)
+                hudObjects.add((HudObject) gameObject);
         }
         toAdd.clear();
         for (GameObject gameObject: toRemove){
-            gameObjects.remove(gameObject);
+            if(gameObject instanceof Actor)
+                gameActors.remove(gameObject);
+            else if(gameObject instanceof HudObject)
+                hudObjects.remove(gameObject);
         }
         toRemove.clear();
     }
 
     public void registerGameObject(GameObject gameObject){
         toAdd.add(gameObject);
-        Log.d("GameObject Count", "registeredGameObjects: " + gameObjects.size());
+        Log.d("GameObject Count", "registeredGameObjects: " + gameActors.size());
     }
 
     public void deregisterGameObject(GameObject gameObject){

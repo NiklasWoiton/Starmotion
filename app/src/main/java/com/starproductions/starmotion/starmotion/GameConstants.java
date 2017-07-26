@@ -19,4 +19,5 @@ public final class GameConstants {
     public static final double MS_BETWEEN_ENEMY_SHIPS = 1000;
     public static final double START_ENEMY_SHIPS_Y_Factor = -0.2;
     public static final int MS_BETWEEN_PLAYER_SHOOTS = 1000;
+    public static final int PLAYER_START_LIFE = 5;
 }
