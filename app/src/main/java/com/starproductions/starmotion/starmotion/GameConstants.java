@@ -12,7 +12,7 @@ public final class GameConstants {
     private static final double MS_PER_UPDATE_BASE = 4;
     public static final double MS_PER_UPDATE = MS_PER_UPDATE_BASE * MULTIPLICATOR;
 
-    public static Point SIZE;
+    public static Point SIZE = new Point();
 
     public static final double DESPAWN_BORDER_Factor = 0.3;
 

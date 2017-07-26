@@ -1,7 +1,6 @@
 package com.starproductions.starmotion.starmotion;
 
 import android.app.Activity;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
@@ -14,17 +13,12 @@ private InputManager inputManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
         onWindowFocusChanged(true);
-        Point size = new Point();
-        getWindowManager().getDefaultDisplay().getSize(size);
-        GameConstants.SIZE = size;
-        int width = size.x;
-        int height = size.y;
+        getWindowManager().getDefaultDisplay().getSize(GameConstants.SIZE);
+        inputManager = new InputManager(this, GameConstants.SIZE.x);
         SurfaceView view = new GameView(this, inputManager);
         setContentView(view);
         view.setOnTouchListener(this);
-        inputManager = new InputManager(this, GameConstants.SIZE.x);
     }
 
     @Override
