@@ -23,6 +23,7 @@ public class GameEngine {
     private ObjectSpawner objectSpawner;
     private Resources resources;
     private Rect activeSpace;
+    private ScoreHolder scoreHolder = new ScoreHolder();
 
     public GameEngine(Resources resources, InputManager inputManager){
         this.resources = resources;
@@ -33,6 +34,11 @@ public class GameEngine {
         objectSpawner = new ObjectSpawner(this);
         PlayerShip playerShip = new PlayerShip(this, inputManager);
         new Lifebar(this, playerShip);
+        new ScoreDisplay(this);
+    }
+
+    public ScoreHolder getScoreHolder() {
+        return scoreHolder;
     }
 
     public void update(){
