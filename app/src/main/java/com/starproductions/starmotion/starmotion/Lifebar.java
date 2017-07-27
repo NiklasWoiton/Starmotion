@@ -14,8 +14,8 @@ public class Lifebar extends HudObject {
     public Lifebar(GameEngine gameEngine, PlayerShip player){
         super(gameEngine);
         this.player = player;
-        x = GameConstants.SIZE.x / 20;
-        y = GameConstants.SIZE.y / 20;
+        x = GameConstants.SIZE.x * 0.05;
+        y = GameConstants.SIZE.y * 0.05;
     }
 
     @Override
