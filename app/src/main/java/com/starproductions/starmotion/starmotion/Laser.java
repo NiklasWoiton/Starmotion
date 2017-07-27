@@ -14,10 +14,17 @@ public class Laser extends Actor {
     private double speedX = 0;
     private double speedY = 2;
 
-    public Laser(GameEngine gameEngine, double x, double y){
+    public Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY){
         super(gameEngine);
-        this.x = x;
-        this.y = y;
+
+        this.x = posX - asset.getWidth()/2;
+        if (speedY > 0){
+            this.y = posY;
+        } else {
+            this.y = posY - asset.getHeight();
+        }
+        this.speedX = speedX;
+        this.speedY = speedY;
     }
 
     @Override

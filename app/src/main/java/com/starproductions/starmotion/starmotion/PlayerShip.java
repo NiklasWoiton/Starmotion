@@ -50,7 +50,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     void shoot() {
         if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS){
             lastShot = System.currentTimeMillis();
-            new Laser(gameEngine, x, y);
+            new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2);
         }
     }
 

@@ -30,7 +30,7 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x, y);
+        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
     }
 
     @Override
