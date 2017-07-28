@@ -16,8 +16,8 @@ public abstract class GameObject {
 
     public GameObject(GameEngine gameEngine){
         this.gameEngine = gameEngine;
-        gameEngine.registerGameObject(this);
         setAsset();
+        gameEngine.registerGameObject(this);
     }
 
     public double getX() {

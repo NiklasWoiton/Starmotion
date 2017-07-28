@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.PlayerInput.Notification;
+import com.starproductions.starmotion.starmotion.Powerups.PowerupTypes;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -38,6 +39,10 @@ public class PlayerShip extends SpaceShip implements Observer{
         return life;
     }
 
+    public void setLife(int life){
+        this.life = life;
+    }
+
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_player);
@@ -50,6 +55,8 @@ public class PlayerShip extends SpaceShip implements Observer{
     void shoot() {
         if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS){
             lastShot = System.currentTimeMillis();
+            // DEBUG
+            gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup, 100, 100);
             new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2);
         }
     }
@@ -65,7 +72,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     }
 
     @Override
-    void move() {
+    public void move() {
 
     }
 

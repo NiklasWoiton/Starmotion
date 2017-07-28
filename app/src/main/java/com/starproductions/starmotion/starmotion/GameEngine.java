@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.util.Log;
 
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
+import com.starproductions.starmotion.starmotion.Powerups.PowerupFactory;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ public class GameEngine {
     private Resources resources;
     private Rect activeSpace;
     private ScoreHolder scoreHolder = new ScoreHolder();
+    private PowerupFactory powerupFactory;
 
     public GameEngine(Resources resources, InputManager inputManager){
         this.resources = resources;
@@ -31,10 +33,16 @@ public class GameEngine {
                                 (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_Factor + 1)),
                                 (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_Factor + 1)));
+
         objectSpawner = new ObjectSpawner(this);
         PlayerShip playerShip = new PlayerShip(this, inputManager);
         new Lifebar(this, playerShip);
         new ScoreDisplay(this);
+        powerupFactory = new PowerupFactory(this, playerShip);
+    }
+
+    public PowerupFactory getPowerupFactory(){
+        return powerupFactory;
     }
 
     public ScoreHolder getScoreHolder() {

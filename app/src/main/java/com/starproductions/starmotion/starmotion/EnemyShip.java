@@ -44,7 +44,7 @@ public class EnemyShip extends SpaceShip {
     }
 
     @Override
-    void move() {
+    public void move() {
 
     }
 

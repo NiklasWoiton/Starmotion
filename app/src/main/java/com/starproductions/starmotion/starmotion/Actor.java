@@ -9,6 +9,6 @@ public abstract class Actor extends GameObject implements Collidable{
         super(gameEngine);
     }
 
-    abstract void move();
+    abstract public void move();
 
 }

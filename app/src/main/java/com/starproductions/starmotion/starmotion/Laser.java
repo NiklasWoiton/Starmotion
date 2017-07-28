@@ -38,7 +38,7 @@ public class Laser extends Actor {
     }
 
     @Override
-    void move() {
+    public void move() {
 
     }
 
