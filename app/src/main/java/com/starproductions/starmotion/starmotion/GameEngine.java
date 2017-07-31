@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.Powerups.PowerupFactory;
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import java.util.ArrayList;
 
@@ -26,9 +28,11 @@ public class GameEngine {
     private Rect activeSpace;
     private ScoreHolder scoreHolder = new ScoreHolder();
     private PowerupFactory powerupFactory;
+    private SoundEffectManager soundEffectManager;
 
-    public GameEngine(Resources resources, InputManager inputManager){
+    public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager){
         this.resources = resources;
+        this.soundEffectManager = soundEffectManager;
         activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_Factor),
                                 (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_Factor + 1)),
@@ -47,6 +51,10 @@ public class GameEngine {
 
     public ScoreHolder getScoreHolder() {
         return scoreHolder;
+    }
+
+    public void playSound(SoundEffects soundEffect){
+        soundEffectManager.playSound(soundEffect);
     }
 
     public void update(){

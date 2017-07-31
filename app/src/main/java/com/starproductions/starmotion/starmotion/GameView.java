@@ -5,6 +5,7 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;
 
 /**
  * Created by jakob on 17.07.2017.
@@ -16,12 +17,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private DisplayThread displayThread;
     private GameEngine gameEngine;
 
-    public GameView(Context context, InputManager inputManager) {
+    public GameView(Context context, InputManager inputManager, SoundEffectManager soundEffectManager) {
         super(context);
 
         getHolder().addCallback(this);
 
-        gameEngine = new GameEngine(getResources(), inputManager);
+        gameEngine = new GameEngine(getResources(), inputManager, soundEffectManager);
 
         displayThread = new DisplayThread(getHolder(), gameEngine);
     }

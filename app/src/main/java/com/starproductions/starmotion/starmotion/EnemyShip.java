@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
+
 /**
  * Created by jakob on 23.07.2017.
  */
@@ -31,6 +33,7 @@ public class EnemyShip extends SpaceShip {
     @Override
     void shoot() {
         new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
+            gameEngine.playSound(SoundEffects.LaserShoot);
     }
 
     @Override

@@ -9,6 +9,7 @@ import android.util.Log;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.PlayerInput.Notification;
 import com.starproductions.starmotion.starmotion.Powerups.PowerupTypes;
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -55,9 +56,8 @@ public class PlayerShip extends SpaceShip implements Observer{
     void shoot() {
         if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS){
             lastShot = System.currentTimeMillis();
-            // DEBUG
-            gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup, 100, 100);
             new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2);
+            gameEngine.playSound(SoundEffects.LaserShoot);
         }
     }
 
@@ -88,7 +88,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     // Input update
     @Override
     public void update(Observable observable, Object o) {
-        if(observable instanceof InputManager){
+        if(o instanceof Notification){
             Notification n = (Notification) o;
             x = n.getX();
             if( n.isTouching() ) shoot();

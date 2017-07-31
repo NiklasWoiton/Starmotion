@@ -7,16 +7,20 @@ import android.view.SurfaceView;
 import android.view.View;
 
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;
 
 public class GameActivity extends Activity implements View.OnTouchListener {
-private InputManager inputManager;
+    private InputManager inputManager;
+    private SoundEffectManager soundEffectManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         onWindowFocusChanged(true);
         getWindowManager().getDefaultDisplay().getSize(GameConstants.SIZE);
         inputManager = new InputManager(this, GameConstants.SIZE.x);
-        SurfaceView view = new GameView(this, inputManager);
+        soundEffectManager = new SoundEffectManager(this);
+        SurfaceView view = new GameView(this, inputManager, soundEffectManager);
         setContentView(view);
         view.setOnTouchListener(this);
     }
@@ -46,6 +50,12 @@ private InputManager inputManager;
     protected void onPause() {
         super.onPause();
         inputManager.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        soundEffectManager.destroy();
     }
 
     @Override
