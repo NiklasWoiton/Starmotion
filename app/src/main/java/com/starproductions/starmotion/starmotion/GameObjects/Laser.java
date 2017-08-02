@@ -15,8 +15,8 @@ import com.starproductions.starmotion.starmotion.R;
 
 public class Laser extends Actor {
 
-    private double speedX = 0;
-    private double speedY = 2;
+    private double speedX;
+    private double speedY;
 
     public Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY){
         super(gameEngine);
@@ -49,7 +49,7 @@ public class Laser extends Actor {
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet);
-        int newWidth = GameConstants.SIZE.x / 60;
+        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
     }

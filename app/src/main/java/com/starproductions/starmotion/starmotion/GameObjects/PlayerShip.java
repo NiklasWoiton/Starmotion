@@ -48,7 +48,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_player);
-        int newWidth = GameConstants.SIZE.x / 10;
+        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.PLAYER_SHIP_SCALE_FACTOR);
         int newHeigth = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeigth, true);
     }
