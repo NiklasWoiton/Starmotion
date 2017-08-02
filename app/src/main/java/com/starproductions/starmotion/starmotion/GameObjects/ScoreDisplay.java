@@ -1,8 +1,11 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameObjects;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.text.TextPaint;
+
+import com.starproductions.starmotion.starmotion.GameConstants;
+import com.starproductions.starmotion.starmotion.GameEngine;
 
 public class ScoreDisplay extends HudObject {
 

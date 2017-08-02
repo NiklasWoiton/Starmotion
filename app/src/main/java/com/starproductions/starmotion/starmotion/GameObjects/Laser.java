@@ -1,9 +1,13 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameObjects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import com.starproductions.starmotion.starmotion.GameConstants;
+import com.starproductions.starmotion.starmotion.GameEngine;
+import com.starproductions.starmotion.starmotion.R;
 
 /**
  * Created by jakob on 24.07.2017.

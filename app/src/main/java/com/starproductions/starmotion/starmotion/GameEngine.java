@@ -5,6 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
+import com.starproductions.starmotion.starmotion.GameObjects.Actor;
+import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
+import com.starproductions.starmotion.starmotion.GameObjects.HudObject;
+import com.starproductions.starmotion.starmotion.GameObjects.Lifebar;
+import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
+import com.starproductions.starmotion.starmotion.GameObjects.ScoreDisplay;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.Powerups.PowerupFactory;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;

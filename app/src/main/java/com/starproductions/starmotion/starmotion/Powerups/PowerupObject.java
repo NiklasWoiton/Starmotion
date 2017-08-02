@@ -3,10 +3,10 @@ package com.starproductions.starmotion.starmotion.Powerups;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.starproductions.starmotion.starmotion.Actor;
-import com.starproductions.starmotion.starmotion.Collidable;
+import com.starproductions.starmotion.starmotion.GameObjects.Actor;
+import com.starproductions.starmotion.starmotion.GameObjects.Collidable;
 import com.starproductions.starmotion.starmotion.GameEngine;
-import com.starproductions.starmotion.starmotion.PlayerShip;
+import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 
 /**
  * Created by Shoggomo on 28.07.2017.

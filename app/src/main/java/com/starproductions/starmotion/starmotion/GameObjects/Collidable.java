@@ -1,4 +1,4 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameObjects;
 
 import android.graphics.Rect;
 

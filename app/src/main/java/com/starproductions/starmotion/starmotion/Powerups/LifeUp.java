@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory;
 
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
-import com.starproductions.starmotion.starmotion.PlayerShip;
+import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 import com.starproductions.starmotion.starmotion.R;
 
 

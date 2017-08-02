@@ -1,7 +1,7 @@
 package com.starproductions.starmotion.starmotion.Powerups;
 
 import com.starproductions.starmotion.starmotion.GameEngine;
-import com.starproductions.starmotion.starmotion.PlayerShip;
+import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 
 /**
  * Created by Shoggomo on 28.07.2017.

@@ -1,4 +1,6 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameObjects;
+
+import com.starproductions.starmotion.starmotion.GameEngine;
 
 /**
  * Created by Shoggomo on 11.07.2017.

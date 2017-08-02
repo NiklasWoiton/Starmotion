@@ -1,14 +1,15 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameObjects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 
+import com.starproductions.starmotion.starmotion.GameConstants;
+import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.PlayerInput.Notification;
-import com.starproductions.starmotion.starmotion.Powerups.PowerupTypes;
+import com.starproductions.starmotion.starmotion.R;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import java.util.Observable;

@@ -1,6 +1,6 @@
 package com.starproductions.starmotion.starmotion;
 
-import java.util.Random;
+import com.starproductions.starmotion.starmotion.GameObjects.EnemyShip;
 
 /**
  * Created by jakob on 23.07.2017.
