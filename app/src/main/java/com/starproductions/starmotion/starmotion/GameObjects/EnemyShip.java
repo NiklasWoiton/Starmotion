@@ -19,10 +19,15 @@ public class EnemyShip extends SpaceShip {
     private double speedX = 0;
     private double speedY = 1;
 
-    public EnemyShip(GameEngine gameEngine, double x, double y){
+    private double shootingInterval;
+    private double framesTillShooting;
+
+    public EnemyShip(GameEngine gameEngine, double x, double y, double shootingInterval){
         super(gameEngine);
         this.x = x;
         this.y = y;
+        this.shootingInterval = shootingInterval;
+        framesTillShooting = shootingInterval;
     }
 
     @Override
@@ -61,8 +66,20 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     public void update() {
+        updateSpeed();
+        updateShooting();
+    }
+
+    private void updateSpeed(){
         x += speedX;
         y += speedY;
-        if (Math.random() > 0.999) shoot();
+    }
+
+    private void updateShooting(){
+        framesTillShooting--;
+        if (framesTillShooting <= 0){
+            shoot();
+            framesTillShooting = shootingInterval;
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.starproductions.starmotion.starmotion;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
 
@@ -35,6 +36,8 @@ public class GameEngine {
     private ScoreHolder scoreHolder = new ScoreHolder();
     private PowerupFactory powerupFactory;
     private SoundEffectManager soundEffectManager;
+
+    private boolean test = false;
 
     public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager){
         this.resources = resources;
@@ -76,6 +79,9 @@ public class GameEngine {
 
     public void draw(Canvas canvas, double extrapolation){
         canvas.drawColor(getResources().getColor(R.color.black));
+        //Todo: Check hardwareacceleration
+        if(canvas.isHardwareAccelerated()) test = true;
+        if(test) canvas.drawColor(Color.YELLOW);
         for (Actor actor: gameActors){
             actor.draw(canvas, extrapolation);
         }

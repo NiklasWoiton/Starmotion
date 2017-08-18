@@ -18,7 +18,7 @@ public class ObjectSpawner {
     public  void update(){
         counter += GameConstants.MS_PER_UPDATE;
         if (counter >= GameConstants.MS_BETWEEN_ENEMY_SHIPS){
-            new EnemyShip(gameEngine, Math.random()*GameConstants.SIZE.x, GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
+            new EnemyShip(gameEngine, Math.random()*GameConstants.SIZE.x, GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y, 1000);
             counter -= GameConstants.MS_BETWEEN_ENEMY_SHIPS;
         }
     }
