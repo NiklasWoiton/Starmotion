@@ -19,10 +19,16 @@ public class EnemyShip extends SpaceShip {
     private double speedX = 0;
     private double speedY = 1;
 
-    private double shootingInterval;
-    private double framesTillShooting;
+    private int shootingInterval;
+    private int framesTillShooting;
 
-    public EnemyShip(GameEngine gameEngine, double x, double y, double shootingInterval){
+    /**
+     * @param gameEngine: the GameEngine
+     * @param x: the initial x position of the ship
+     * @param y: the initial y position of the Ship
+     * @param shootingInterval: the interval between the shots in Milliseconds
+     */
+    public EnemyShip(GameEngine gameEngine, double x, double y, int shootingInterval){
         super(gameEngine);
         this.x = x;
         this.y = y;
