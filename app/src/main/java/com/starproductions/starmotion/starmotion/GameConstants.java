@@ -36,4 +36,5 @@ public final class GameConstants {
     public static final int SCORE_WITH_MAX_SHIPS = 10000;
     public static final int MS_BETWEEN_ENEMY_SHOTS_MIN = 200;
     public static final int MS_BETWEEN_ENEMY_SHOTS_MAX = 1500;
+    public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
 }
