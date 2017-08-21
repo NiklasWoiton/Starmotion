@@ -46,7 +46,7 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
+        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2, false);
             gameEngine.playSound(SoundEffects.LaserShoot);
     }
 
@@ -54,6 +54,9 @@ public class EnemyShip extends SpaceShip {
     public void onCollide(Collidable obstacle) {
 
     }
+
+    @Override
+    public boolean isPlayer(){return false;}
 
     @Override
     public Rect getHitBox() {

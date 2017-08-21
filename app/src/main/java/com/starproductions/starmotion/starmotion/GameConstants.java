@@ -37,4 +37,7 @@ public final class GameConstants {
     public static final int MS_BETWEEN_ENEMY_SHOTS_MIN = 200;
     public static final int MS_BETWEEN_ENEMY_SHOTS_MAX = 1500;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
+
+    //Values for Collisions
+    public static final int GRID_CONSTANT = 10;
 }

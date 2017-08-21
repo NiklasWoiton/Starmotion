@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
 
+import com.starproductions.starmotion.starmotion.Collider.CollisionManager;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
 import com.starproductions.starmotion.starmotion.GameObjects.HudObject;
@@ -36,6 +37,7 @@ public class GameEngine {
     private ScoreHolder scoreHolder = new ScoreHolder();
     private PowerupFactory powerupFactory;
     private SoundEffectManager soundEffectManager;
+    private CollisionManager collisionManager = new CollisionManager();
 
     private boolean test = false;
 
@@ -68,7 +70,7 @@ public class GameEngine {
 
     public void update(){
         //Process Inputs
-        //Check Collision
+        collisionManager.update(gameActors);
         checkOutOfScreen();
         objectSpawner.update();
         for (GameObject gameObject: gameActors){

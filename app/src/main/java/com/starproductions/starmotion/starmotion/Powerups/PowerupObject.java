@@ -32,6 +32,9 @@ abstract class PowerupObject extends Actor {
     }
 
     @Override
+    public boolean isPlayer(){return false;}
+
+    @Override
     public Rect getHitBox() {
         return new Rect((int) x, (int) y, (int) (x + asset.getWidth()), (int) (y + asset.getHeight()));
     }

@@ -17,8 +17,10 @@ public class Laser extends Actor {
 
     private double speedX;
     private double speedY;
+    
+    private boolean isPlayer;
 
-    public Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY){
+    public Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY, boolean isPlayer){
         super(gameEngine);
 
         this.x = posX - asset.getWidth()/2;
@@ -29,12 +31,16 @@ public class Laser extends Actor {
         }
         this.speedX = speedX;
         this.speedY = speedY;
+        this.isPlayer = isPlayer;
     }
 
     @Override
     public void onCollide(Collidable obstacle) {
 
     }
+
+    @Override
+    public boolean isPlayer(){return isPlayer;}
 
     @Override
     public Rect getHitBox() {
