@@ -38,7 +38,7 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut_test);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.ENEMY_SHIP_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
