@@ -36,7 +36,7 @@ public class Laser extends Actor {
 
     @Override
     public void onCollide(Collidable obstacle) {
-
+        this.destroy();
     }
 
     @Override

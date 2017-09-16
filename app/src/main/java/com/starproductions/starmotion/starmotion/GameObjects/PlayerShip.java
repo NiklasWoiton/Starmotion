@@ -64,7 +64,10 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     public void onCollide(Collidable obstacle) {
-
+        if(obstacle instanceof Laser || obstacle instanceof EnemyShip){
+            life -= 1;//Todo, generalise
+            if(life <=0) this.destroy();
+        }
     }
 
     @Override

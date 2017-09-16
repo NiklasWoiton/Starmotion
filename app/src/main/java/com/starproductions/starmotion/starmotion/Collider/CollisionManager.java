@@ -96,7 +96,6 @@ public class CollisionManager {
                     maxTop = one.getHitBox();
                 }
                 if (minTop.bottom > maxTop.top) {
-                    Log.v("Collision", "Collision");//Todo, delete
                     one.onCollide(two);
                     two.onCollide(one);
                 }

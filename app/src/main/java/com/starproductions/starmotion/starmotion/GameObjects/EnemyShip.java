@@ -52,7 +52,7 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     public void onCollide(Collidable obstacle) {
-
+        this.destroy();
     }
 
     @Override

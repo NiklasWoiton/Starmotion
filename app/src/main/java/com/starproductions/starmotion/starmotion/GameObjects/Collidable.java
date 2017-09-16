@@ -9,7 +9,6 @@ import android.graphics.Rect;
 public interface Collidable {
     void onCollide(Collidable obstacle);
     Rect getHitBox();
-
     boolean isPlayer();
 }
 
