@@ -57,7 +57,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     void shoot() {
         if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS){
             lastShot = System.currentTimeMillis();
-            new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2, true);
+            new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2, isPlayer());
             gameEngine.playSound(SoundEffects.LaserShoot);
         }
     }
@@ -65,7 +65,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     @Override
     public void onCollide(Collidable obstacle) {
         if(obstacle instanceof Laser || obstacle instanceof EnemyShip){
-            life -= 1;//Todo, generalise
+            life -= 1;//Todo
             if(life <=0) this.destroy();
         }
     }

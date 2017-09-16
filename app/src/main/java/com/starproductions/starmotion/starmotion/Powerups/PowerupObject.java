@@ -15,7 +15,7 @@ import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 abstract class PowerupObject extends Actor {
     protected PlayerShip player;
     private double speedX = 0;
-    private double speedY = 2;
+    private double speedY = 1;
 
     PowerupObject(GameEngine gameEngine, PlayerShip player){
         super(gameEngine);

@@ -7,8 +7,11 @@ import android.graphics.Rect;
 
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
+import com.starproductions.starmotion.starmotion.Powerups.PowerupTypes;
 import com.starproductions.starmotion.starmotion.R;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
+
+import java.util.Random;
 
 /**
  * Created by jakob on 23.07.2017.
@@ -46,13 +49,17 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2, false);
+        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2, isPlayer());
             gameEngine.playSound(SoundEffects.LaserShoot);
     }
 
     @Override
     public void onCollide(Collidable obstacle) {
         this.destroy();
+        //Todo, generalised Powerup Spawn
+        if(new Random().nextInt(10)>4){
+            gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);
+        }
     }
 
     @Override
