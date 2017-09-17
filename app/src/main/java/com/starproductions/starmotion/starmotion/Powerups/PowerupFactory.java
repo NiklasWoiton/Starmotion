@@ -21,6 +21,9 @@ public class PowerupFactory {
             case Lifeup:
                 new LifeUp(gameEngine, player, x, y);
                 break;
+            case Fireup:
+                new FireUp(gameEngine, player, x, y);
+                break;
         }
     }
 }

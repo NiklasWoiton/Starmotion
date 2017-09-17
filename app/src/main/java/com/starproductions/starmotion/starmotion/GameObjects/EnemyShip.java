@@ -58,9 +58,14 @@ public class EnemyShip extends SpaceShip {
         this.destroy();
         //Todo, distinguish between different Ships
         gameEngine.getScoreHolder().addScore(1000);
-        //Todo, generalised Powerup Spawn
-        if(new Random().nextInt(10)>4){
-            gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);
+        int random = new Random().nextInt(2);//Todo, make Value a Constant(Nik)
+        switch (random){
+            case 0:
+                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
+                break;
+            case 1:
+                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);
+                break;
         }
     }
 

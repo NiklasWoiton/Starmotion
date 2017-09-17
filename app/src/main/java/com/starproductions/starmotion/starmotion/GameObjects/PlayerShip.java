@@ -24,6 +24,7 @@ public class PlayerShip extends SpaceShip implements Observer{
     private double speedX = 700;
     private double speedY = 0;
     private long lastShot = 0;
+    private double fireRate = 1;
     private int life = GameConstants.PLAYER_START_LIFE;
 
     public PlayerShip(GameEngine gameEngine, InputManager inputManager){
@@ -45,6 +46,14 @@ public class PlayerShip extends SpaceShip implements Observer{
         this.life = life;
     }
 
+    public double getFireRate(){
+        return fireRate;
+    }
+
+    public void setFireRate(double fireRate){
+        this.fireRate = fireRate;
+    }
+
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_player_test);
@@ -55,7 +64,7 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     void shoot() {
-        if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS){
+        if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS / fireRate){
             lastShot = System.currentTimeMillis();
             new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2, isPlayer());
             gameEngine.playSound(SoundEffects.LaserShoot);
