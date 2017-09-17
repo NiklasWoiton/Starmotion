@@ -56,6 +56,8 @@ public class EnemyShip extends SpaceShip {
     @Override
     public void onCollide(Collidable obstacle) {
         this.destroy();
+        //Todo, distinguish between different Ships
+        gameEngine.getScoreHolder().addScore(1000);
         //Todo, generalised Powerup Spawn
         if(new Random().nextInt(10)>4){
             gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);

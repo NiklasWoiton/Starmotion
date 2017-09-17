@@ -23,6 +23,8 @@ public class Laser extends Actor {
     public Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY, boolean isPlayer){
         super(gameEngine);
 
+        this.isPlayer = isPlayer;
+        if(isPlayer) setAsset();//Todo, Is there a better Way to do this, other than creating more Sub-Classes or to change GameObject?(Nik)
         this.x = posX - asset.getWidth()/2;
         if (speedY > 0){
             this.y = posY;
@@ -31,7 +33,7 @@ public class Laser extends Actor {
         }
         this.speedX = speedX;
         this.speedY = speedY;
-        this.isPlayer = isPlayer;
+
     }
 
     @Override
@@ -54,7 +56,13 @@ public class Laser extends Actor {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_red);
+        Bitmap srcAsset;
+        if(isPlayer){
+            srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_blue);
+        }
+        else{
+            srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_red);
+        }
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
