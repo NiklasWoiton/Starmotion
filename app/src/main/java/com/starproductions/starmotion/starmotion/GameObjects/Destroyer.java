@@ -14,13 +14,14 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 import java.util.Random;
 
 /**
- * Created by jakob on 23.07.2017.
+ * Created by Admin on 18.09.2017.
  */
 
-public class EnemyShip extends SpaceShip {
+public class Destroyer extends SpaceShip {
 
     private double speedX = 0;
-    private double speedY = 1;
+    private double speedY = GameConstants.DESTROYER_SPEED;
+    private int health = GameConstants.DESTROYER_HEALTH;
 
     private int shootingInterval;
     private int framesTillShooting;
@@ -31,17 +32,17 @@ public class EnemyShip extends SpaceShip {
      * @param y: the initial y position of the Ship
      * @param shootingInterval: the interval between the shots in Milliseconds
      */
-    public EnemyShip(GameEngine gameEngine, double x, double y, int shootingInterval){
+    public Destroyer(GameEngine gameEngine, double x, double y, int shootingInterval){
         super(gameEngine);
         this.x = x;
         this.y = y;
-        this.shootingInterval = shootingInterval;
+        this.shootingInterval = (int) (shootingInterval * GameConstants.DESTROYER_INTERVAL_MOD);
         framesTillShooting = shootingInterval;
     }
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut_test);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.ENEMY_SHIP_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
@@ -55,17 +56,9 @@ public class EnemyShip extends SpaceShip {
 
     @Override
     public void onCollide(Collidable obstacle) {
-        this.destroy();
-        //Todo, distinguish between different Ships
-        gameEngine.getScoreHolder().addScore(1000);
-        int random = new Random().nextInt(2);//Todo, make Value a Constant(Nik)
-        switch (random){
-            case 0:
-                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
-                break;
-            case 1:
-                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);
-                break;
+        health--;
+        if(health <= 0){
+            onDeath();
         }
     }
 
@@ -103,6 +96,27 @@ public class EnemyShip extends SpaceShip {
         if (framesTillShooting <= 0){
             shoot();
             framesTillShooting = shootingInterval;
+        }
+    }
+
+    private void onDeath(){
+        this.destroy();
+        gameEngine.getScoreHolder().addScore(GameConstants.DESTROYER_SCORE);
+        dropPowerUp();
+    }
+
+    private void dropPowerUp(){
+        int random = new Random().nextInt(5);
+        switch (random){
+            case 0:
+                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
+                break;
+            case 1:
+                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);
+                break;
+            case 2:
+                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Multishoot,x,y);
+                break;
         }
     }
 }

@@ -12,9 +12,9 @@ import com.starproductions.starmotion.starmotion.R;
  * Created by Admin on 17.09.2017.
  */
 
-public class FireUp extends PowerupObject {
+public class MultiShot extends PowerupObject {
 
-    FireUp(GameEngine gameEngine, PlayerShip player, double x, double y) {
+    MultiShot(GameEngine gameEngine, PlayerShip player, double x, double y) {
         super(gameEngine, player);
         this.x = x;
         this.y = y;
@@ -22,13 +22,13 @@ public class FireUp extends PowerupObject {
 
     @Override
     protected void applyEffect() {
-        double newFireRate = player.getFireRate() + GameConstants.FIREUP;//Todo, makes this Value a Constant(Nik)
-        player.setFireRate(newFireRate);
+        int shootMultiplikator = player.getShootMultiplikator() + 1;
+        player.setShootMultiplikator(shootMultiplikator);
     }
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.powerup_fireup);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.powerup_multishoot);
         int newWidth = (int) (GameConstants.SIZE.x * 0.04);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);

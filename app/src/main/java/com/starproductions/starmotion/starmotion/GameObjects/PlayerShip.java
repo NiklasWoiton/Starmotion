@@ -25,6 +25,8 @@ public class PlayerShip extends SpaceShip implements Observer{
     private double speedY = 0;
     private long lastShot = 0;
     private double fireRate = 1;
+
+    private int shootMultiplikator = 1;
     private int life = GameConstants.PLAYER_START_LIFE;
 
     public PlayerShip(GameEngine gameEngine, InputManager inputManager){
@@ -51,7 +53,17 @@ public class PlayerShip extends SpaceShip implements Observer{
     }
 
     public void setFireRate(double fireRate){
-        this.fireRate = fireRate;
+        if(fireRate <= 3 && fireRate >= 1){
+            this.fireRate = fireRate;
+        }
+    }
+
+    public int getShootMultiplikator() {
+        return shootMultiplikator;
+    }
+
+    public void setShootMultiplikator(int shootMultiplikator) {
+        this.shootMultiplikator = shootMultiplikator;
     }
 
     @Override
@@ -66,6 +78,38 @@ public class PlayerShip extends SpaceShip implements Observer{
     void shoot() {
         if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS / fireRate){
             lastShot = System.currentTimeMillis();
+            switch (shootMultiplikator){
+                case 1:
+                    frontLaser();
+                    break;
+                case 2:
+                    twinLaser();
+                    break;
+                case 3:
+                    frontLaser();
+                    sideLasers();
+                    break;
+                case 4:
+                    twinLaser();
+                    sideLasers();
+                    break;
+                case 5:
+                    frontLaser();
+                    sideLasers();
+                    farSideLasers();
+                    break;
+                case 6:
+                    twinLaser();
+                    sideLasers();
+                    farSideLasers();
+                    break;
+                case 7:
+                    frontLaser();
+                    twinLaser();
+                    sideLasers();
+                    farSideLasers();
+                    break;
+            }
             new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2, isPlayer());
             gameEngine.playSound(SoundEffects.LaserShoot);
         }
@@ -73,9 +117,8 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     public void onCollide(Collidable obstacle) {
-        if(obstacle instanceof Laser || obstacle instanceof EnemyShip){
-            life -= 1;//Todo
-            if(life <=0) this.destroy();
+        if(obstacle instanceof Laser || obstacle instanceof Fighter){
+            onDamage();
         }
     }
 
@@ -109,5 +152,31 @@ public class PlayerShip extends SpaceShip implements Observer{
             x = n.getX();
             if( n.isTouching() ) shoot();
         }
+    }
+
+    private void onDamage(){
+        shootMultiplikator = (int) Math.ceil(shootMultiplikator / 2.0);
+        setFireRate(fireRate - GameConstants.FIREUP);
+        life -= 1;
+        if(life <=0) this.destroy();
+        //Todo, end Game
+    }
+
+    private void frontLaser(){
+        new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2, isPlayer());
+    }
+
+    private void twinLaser(){
+        new Laser(gameEngine, x + asset.getWidth()*0.75, y, 0, -2, isPlayer());
+        new Laser(gameEngine, x + asset.getWidth()*0.25, y, 0, -2, isPlayer());
+    }
+    private void sideLasers(){
+        new Laser(gameEngine, x + asset.getWidth()*0.75, y, 0.2, -2, isPlayer());
+        new Laser(gameEngine, x + asset.getWidth()*0.25, y, -0.2, -2, isPlayer());
+    }
+
+    private void farSideLasers(){
+        new Laser(gameEngine, x + asset.getWidth()*0.75, y, 0.4, -2, isPlayer());
+        new Laser(gameEngine, x + asset.getWidth()*0.25, y, -0.4, -2, isPlayer());
     }
 }

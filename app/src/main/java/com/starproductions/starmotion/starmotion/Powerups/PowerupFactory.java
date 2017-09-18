@@ -24,6 +24,9 @@ public class PowerupFactory {
             case Fireup:
                 new FireUp(gameEngine, player, x, y);
                 break;
+            case Multishoot:
+                new MultiShot(gameEngine, player, x, y);
+                break;
         }
     }
 }
