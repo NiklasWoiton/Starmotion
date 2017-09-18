@@ -106,7 +106,7 @@ public class Destroyer extends SpaceShip {
     }
 
     private void dropPowerUp(){
-        int random = new Random().nextInt(5);
+        int random = new Random().nextInt(3);
         switch (random){
             case 0:
                 gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);

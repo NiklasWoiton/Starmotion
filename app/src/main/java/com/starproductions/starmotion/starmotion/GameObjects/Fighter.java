@@ -107,7 +107,7 @@ public class Fighter extends SpaceShip {
     }
 
     private void dropPowerUp(){
-        int random = new Random().nextInt(10);
+        int random = new Random().nextInt(6);
         switch (random){
             case 0:
                 gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
