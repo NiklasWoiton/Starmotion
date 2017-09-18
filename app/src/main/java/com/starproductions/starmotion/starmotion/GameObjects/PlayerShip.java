@@ -110,7 +110,6 @@ public class PlayerShip extends SpaceShip implements Observer{
                     farSideLasers();
                     break;
             }
-            new Laser(gameEngine, x + asset.getWidth()/2, y, 0, -2, isPlayer());
             gameEngine.playSound(SoundEffects.LaserShoot);
         }
     }

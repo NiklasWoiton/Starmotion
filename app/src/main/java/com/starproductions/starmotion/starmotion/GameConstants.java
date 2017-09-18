@@ -26,14 +26,14 @@ public final class GameConstants {
     public static final double ENEMY_SHIP_SCALE_FACTOR = 0.1;
 
     //Values for Fighter
-    public static final int FIGHTER_HEALTH = 2;
+    public static final int FIGHTER_HEALTH = 1;
     public static final int FIGHTER_SCORE = 100;
     public static final double FIGTHER_SPEED = 1;
     public static final double FIGHTER_INTERVAL_MOD = 0.7;
 
     //Values for Destroyer
-    public static final int DESTROYER_HEALTH = 3;
-    public static final int DESTROYER_SCORE = 200;
+    public static final int DESTROYER_HEALTH = 2;
+    public static final int DESTROYER_SCORE = 250;
     public static final double DESTROYER_SPEED = 0.7;
     public static final double DESTROYER_INTERVAL_MOD = 1;
 
