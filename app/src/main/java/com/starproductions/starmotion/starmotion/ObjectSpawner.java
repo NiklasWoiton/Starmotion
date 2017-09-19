@@ -43,7 +43,7 @@ public class ObjectSpawner {
     private void spawnShip(){
         switch(randomSpawn.nextInt(2)){
             case 0:
-                spawnSqudron();
+                spawnFighterSquadron();
                 break;
             case 1:
                 new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
@@ -51,8 +51,14 @@ public class ObjectSpawner {
         }
     }
 
-    private void spawnSqudron(){
+    private void spawnFighterSquadron(){
         Fighter lead = new Fighter(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
+        new Fighter(gameEngine, lead.getX() + lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
+        new Fighter(gameEngine, lead.getX() - lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
+    }
+
+    private void spawnBigSquadron(){
+        Destroyer lead = new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
         new Fighter(gameEngine, lead.getX() + lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
         new Fighter(gameEngine, lead.getX() - lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
     }

@@ -19,13 +19,14 @@ import static java.lang.Math.random;
  * Created by jakob on 23.07.2017.
  */
 
-public class Fighter extends SpaceShip {
+public class Fighter extends SpaceShip implements EnemyShip{
 
-    private double speedX = 0;
-    private double speedY = GameConstants.FIGHTER_SPEED;
+    private double speedX = GameConstants.FIGHTER_SPEED_X;
+    private double speedY = GameConstants.FIGHTER_SPEED_Y;
     private int health = GameConstants.FIGHTER_HEALTH;
 
     private int framesTillShooting;
+    private int framesTillTurn = GameConstants.FIGHTER_FRAMES_TILL_TURN;
 
     /**
      * @param gameEngine: the GameEngine
@@ -41,7 +42,7 @@ public class Fighter extends SpaceShip {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_fighter);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.FIGHTER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
@@ -87,17 +88,24 @@ public class Fighter extends SpaceShip {
         updateShooting();
     }
 
-    private void calcShootingInterval(){
-        this.framesTillShooting = GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - (int) (random() *
+    public void calcShootingInterval(){
+        framesTillShooting = GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - (int) (random() *
                 (GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MIN));
     }
 
-    private void updateSpeed(){
+    public void updateSpeed(){
         x += speedX;
         y += speedY;
+        framesTillTurn--;
+        if(x <= 0) speedX = GameConstants.FIGHTER_SPEED_X;
+        else if(x >= GameConstants.SIZE.x - getHitBox().width()) speedX = -GameConstants.FIGHTER_SPEED_X;
+        else if(framesTillTurn <= 0){
+            speedX *= -1;
+            framesTillTurn = GameConstants.FIGHTER_FRAMES_TILL_TURN;
+        }
     }
 
-    private void updateShooting(){
+    public void updateShooting(){
         framesTillShooting--;
         if (framesTillShooting <= 0){
             shoot();
@@ -105,13 +113,13 @@ public class Fighter extends SpaceShip {
         }
     }
 
-    private void onDeath(){
+    public void onDeath(){
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.FIGHTER_SCORE);
         dropPowerUp();
     }
 
-    private void dropPowerUp(){
+    public void dropPowerUp(){
         int random = new Random().nextInt(6);
         switch (random){
             case 0:

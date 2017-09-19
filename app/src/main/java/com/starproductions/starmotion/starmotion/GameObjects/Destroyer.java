@@ -19,14 +19,14 @@ import static java.lang.Math.random;
  * Created by Admin on 18.09.2017.
  */
 
-public class Destroyer extends SpaceShip {
+public class Destroyer extends SpaceShip implements EnemyShip {
 
-    private double speedX = 0;
-    private double speedY = GameConstants.DESTROYER_SPEED;
+    private double speedX = GameConstants.DESTROYER_SPEED_X;
+    private double speedY = GameConstants.DESTROYER_SPEED_Y;
     private int health = GameConstants.DESTROYER_HEALTH;
 
-    private int shootingInterval;
     private int framesTillShooting;
+    private int framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
 
     /**
      * @param gameEngine: the GameEngine
@@ -41,7 +41,7 @@ public class Destroyer extends SpaceShip {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut_test);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_destroyer);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.DESTROYER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
@@ -85,31 +85,37 @@ public class Destroyer extends SpaceShip {
         updateShooting();
     }
 
-    private void updateSpeed(){
+    public void updateSpeed(){
         x += speedX;
         y += speedY;
+        framesTillTurn--;
+        if(x <= 0 || x >= GameConstants.SIZE.x - getHitBox().width() || framesTillTurn <= 0) {
+            speedX *= -1;
+            framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
+        }
     }
 
-    private void updateShooting(){
+    public void updateShooting(){
         framesTillShooting--;
+
         if (framesTillShooting <= 0){
             shoot();
             calcShootingInterval();
         }
     }
 
-    private void calcShootingInterval(){
-        this.framesTillShooting = GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - (int) (random() *
+    public void calcShootingInterval(){
+        framesTillShooting = GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - (int) (random() *
                 (GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MIN));
     }
 
-    private void onDeath(){
+    public void onDeath(){
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.DESTROYER_SCORE);
         dropPowerUp();
     }
 
-    private void dropPowerUp(){
+    public void dropPowerUp(){
         int random = new Random().nextInt(3);
         switch (random){
             case 0:
