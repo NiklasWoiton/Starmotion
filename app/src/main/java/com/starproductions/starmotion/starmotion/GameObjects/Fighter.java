@@ -13,6 +13,8 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import java.util.Random;
 
+import static java.lang.Math.random;
+
 /**
  * Created by jakob on 23.07.2017.
  */
@@ -20,30 +22,27 @@ import java.util.Random;
 public class Fighter extends SpaceShip {
 
     private double speedX = 0;
-    private double speedY = GameConstants.FIGTHER_SPEED;
+    private double speedY = GameConstants.FIGHTER_SPEED;
     private int health = GameConstants.FIGHTER_HEALTH;
 
-    private int shootingInterval;
     private int framesTillShooting;
 
     /**
      * @param gameEngine: the GameEngine
      * @param x: the initial x position of the ship
      * @param y: the initial y position of the Ship
-     * @param shootingInterval: the interval between the shots in Milliseconds
      */
-    public Fighter(GameEngine gameEngine, double x, double y, int shootingInterval){
+    public Fighter(GameEngine gameEngine, double x, double y){
         super(gameEngine);
         this.x = x;
         this.y = y;
-        this.shootingInterval = (int) (shootingInterval * GameConstants.FIGHTER_INTERVAL_MOD);
-        framesTillShooting = shootingInterval;
+        calcShootingInterval();
     }
 
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.ENEMY_SHIP_SCALE_FACTOR);
+        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.FIGHTER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
     }
@@ -51,7 +50,8 @@ public class Fighter extends SpaceShip {
     @Override
     void shoot() {
         new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2, isPlayer());
-            gameEngine.playSound(SoundEffects.LaserShoot);
+        gameEngine.playSound(SoundEffects.LaserShoot);
+        calcShootingInterval();
     }
 
     @Override
@@ -87,6 +87,11 @@ public class Fighter extends SpaceShip {
         updateShooting();
     }
 
+    private void calcShootingInterval(){
+        this.framesTillShooting = GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - (int) (random() *
+                (GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MIN));
+    }
+
     private void updateSpeed(){
         x += speedX;
         y += speedY;
@@ -96,7 +101,7 @@ public class Fighter extends SpaceShip {
         framesTillShooting--;
         if (framesTillShooting <= 0){
             shoot();
-            framesTillShooting = shootingInterval;
+            calcShootingInterval();
         }
     }
 

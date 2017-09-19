@@ -43,17 +43,18 @@ public class ObjectSpawner {
     private void spawnShip(){
         switch(randomSpawn.nextInt(2)){
             case 0:
-                new Fighter(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y, calcShootingInterval());
+                spawnSqudron();
                 break;
             case 1:
-                new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y, calcShootingInterval());
+                new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
                 break;
         }
     }
 
-    private int calcShootingInterval(){
-        return GameConstants.MS_BETWEEN_ENEMY_SHOTS_MAX - (int) (random() *
-                (GameConstants.MS_BETWEEN_ENEMY_SHOTS_MAX - GameConstants.MS_BETWEEN_ENEMY_SHOTS_MIN));
+    private void spawnSqudron(){
+        Fighter lead = new Fighter(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
+        new Fighter(gameEngine, lead.getX() + lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
+        new Fighter(gameEngine, lead.getX() - lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
     }
 
     private int calcShipXPos(){

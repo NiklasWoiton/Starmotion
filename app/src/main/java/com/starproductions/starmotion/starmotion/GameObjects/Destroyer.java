@@ -13,6 +13,8 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import java.util.Random;
 
+import static java.lang.Math.random;
+
 /**
  * Created by Admin on 18.09.2017.
  */
@@ -30,20 +32,17 @@ public class Destroyer extends SpaceShip {
      * @param gameEngine: the GameEngine
      * @param x: the initial x position of the ship
      * @param y: the initial y position of the Ship
-     * @param shootingInterval: the interval between the shots in Milliseconds
      */
-    public Destroyer(GameEngine gameEngine, double x, double y, int shootingInterval){
+    public Destroyer(GameEngine gameEngine, double x, double y){
         super(gameEngine);
         this.x = x;
         this.y = y;
-        this.shootingInterval = (int) (shootingInterval * GameConstants.DESTROYER_INTERVAL_MOD);
-        framesTillShooting = shootingInterval;
     }
 
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_tut_test);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.ENEMY_SHIP_SCALE_FACTOR);
+        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.DESTROYER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
     }
@@ -95,8 +94,13 @@ public class Destroyer extends SpaceShip {
         framesTillShooting--;
         if (framesTillShooting <= 0){
             shoot();
-            framesTillShooting = shootingInterval;
+            calcShootingInterval();
         }
+    }
+
+    private void calcShootingInterval(){
+        this.framesTillShooting = GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - (int) (random() *
+                (GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MIN));
     }
 
     private void onDeath(){
