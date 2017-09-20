@@ -20,7 +20,8 @@ public final class GameConstants {
     public static final double START_ENEMY_SHIPS_Y_Factor = -0.2;
 
     //Values for Lasers
-    public static final double LASER_SCALE_FACTOR = 0.01;
+    public static final double LASER_SCALE_FACTOR_STRAIGHT = 0.01;
+    public static final double LASER_SCALE_FACTOR_ROUND = 0.025;
 
     //Values for Enemy Ships
     public static final int MS_BETWEEN_ENEMY_SHOTS_MIN = 200;
@@ -49,6 +50,7 @@ public final class GameConstants {
     public static final int MS_BETWEEN_DESTROYER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX * DESTROYER_INTERVAL_MOD);
 
     //Values for PowerUps
+    public static final double POWERUP_SCALE_FACTOR = 0.04;
     public static final double FIREUP = 0.2;
 
     //Values for Player
@@ -58,7 +60,7 @@ public final class GameConstants {
 
     //Values for ObjectSpawner
     public static final int MS_BETWEEN_SHIPS_MAX = 2000;
-    public static final int MS_BETWEEN_SHIPS_MIN = 500;
+    public static final int MS_BETWEEN_SHIPS_MIN = 1000;
     public static final int SCORE_WITH_MAX_SHIPS = 10000;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
 

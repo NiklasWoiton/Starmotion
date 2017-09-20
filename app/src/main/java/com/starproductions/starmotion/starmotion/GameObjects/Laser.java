@@ -57,13 +57,15 @@ public class Laser extends Actor {
     @Override
     protected void setAsset() {
         Bitmap srcAsset;
+        int newWidth;
         if(isPlayer){
-            srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_blue);
+            srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_blue_round);
+            newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR_ROUND);
         }
         else{
             srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_red);
+            newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR_STRAIGHT);
         }
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
     }

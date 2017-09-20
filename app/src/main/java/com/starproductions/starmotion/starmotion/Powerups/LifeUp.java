@@ -26,7 +26,7 @@ class LifeUp extends PowerupObject {
     @Override
     protected void setAsset() {
         Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.powerup_lifeup);
-        int newWidth = (int) (GameConstants.SIZE.x * 0.04);
+        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.POWERUP_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
     }
