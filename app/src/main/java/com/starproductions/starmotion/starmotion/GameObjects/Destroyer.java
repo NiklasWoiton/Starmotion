@@ -116,21 +116,6 @@ public class Destroyer extends SpaceShip implements EnemyShip {
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.DESTROYER_SCORE);
         gameEngine.playSound(SoundEffects.Explosion);
-        dropPowerUp();
-    }
-
-    public void dropPowerUp(){
-        int random = new Random().nextInt((int) (GameConstants.POWERUP_TYPES / GameConstants.DESTROYER_POWERUP_DROPCHANCE));
-        switch (random){
-            case 0:
-                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
-                break;
-            case 1:
-                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Lifeup,x,y);
-                break;
-            case 2:
-                gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Multishoot,x,y);
-                break;
-        }
+        gameEngine.getPowerupFactory().createPowerup(x, y, GameConstants.DESTROYER_POWERUP_DROPCHANCE);
     }
 }
