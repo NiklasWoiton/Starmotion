@@ -85,6 +85,7 @@ public class ScoreManager {
         while(allScores.size() > MAX_SCORES) {
             Score min = getMinScore(allScores);
             db.deleteScores(min.getId());
+            allScores = getAllScores();
         }
     }
 
