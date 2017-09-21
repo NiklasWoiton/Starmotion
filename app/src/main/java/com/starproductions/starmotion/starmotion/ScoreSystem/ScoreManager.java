@@ -63,6 +63,15 @@ public class ScoreManager {
     }
 
     /**
+     * Returns if the given score is a highscore
+     * @param score The score to check
+     * @return If it's a new highscore
+     */
+    public boolean isHighscore(int score){
+        return getMinScore(getAllScores()).getScore() < score;
+    }
+
+    /**
      * Adds a new score for a player
      * @param playername Name of the player
      * @param score Score to add
