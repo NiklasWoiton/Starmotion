@@ -110,7 +110,7 @@ public class PlayerShip extends SpaceShip implements Observer {
                     farSideLasers();
                     break;
             }
-            gameEngine.playSound(SoundEffects.LaserShoot);
+            if (life > 0) gameEngine.playSound(SoundEffects.LaserShoot);
         }
     }
 
