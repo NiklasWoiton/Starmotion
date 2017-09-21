@@ -157,8 +157,11 @@ public class PlayerShip extends SpaceShip implements Observer{
         shootMultiplikator = (int) Math.ceil(shootMultiplikator / 2.0);
         setFireRate(fireRate - GameConstants.FIREUP);
         life -= 1;
-        if(life <=0) this.destroy();
-        //Todo, end Game
+        if(life <=0) {
+            this.destroy();
+            gameEngine.playSound(SoundEffects.Explosion);
+            //Todo, end Game
+        }
     }
 
     private void frontLaser(){

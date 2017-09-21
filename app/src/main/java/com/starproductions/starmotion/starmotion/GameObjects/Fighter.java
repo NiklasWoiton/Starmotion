@@ -116,6 +116,7 @@ public class Fighter extends SpaceShip implements EnemyShip{
     public void onDeath(){
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.FIGHTER_SCORE);
+        gameEngine.playSound(SoundEffects.Explosion);
         dropPowerUp();
     }
 

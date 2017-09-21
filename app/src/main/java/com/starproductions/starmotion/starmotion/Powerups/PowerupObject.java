@@ -7,6 +7,7 @@ import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.Collidable;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
+import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 /**
  * Created by Shoggomo on 28.07.2017.
@@ -25,6 +26,7 @@ abstract class PowerupObject extends Actor {
 
     @Override
     public void onCollide(Collidable obstacle) {
+        gameEngine.playSound(SoundEffects.Powerup);
         if(obstacle instanceof PlayerShip){
             applyEffect();
             destroy();

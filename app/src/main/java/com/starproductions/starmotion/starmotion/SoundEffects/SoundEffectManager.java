@@ -25,6 +25,8 @@ public class SoundEffectManager {
     private void initSounds(){
         //put all sounds here
         registerNewSound(SoundEffects.LaserShoot, R.raw.lasershot);
+        registerNewSound(SoundEffects.Explosion, R.raw.explosion);
+        registerNewSound(SoundEffects.Powerup, R.raw.powerup);
     }
 
     /**
