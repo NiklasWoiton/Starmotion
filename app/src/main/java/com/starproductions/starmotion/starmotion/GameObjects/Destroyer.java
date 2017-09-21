@@ -49,7 +49,7 @@ public class Destroyer extends SpaceShip implements EnemyShip {
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2, isPlayer());
+        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
             gameEngine.playSound(SoundEffects.LaserShoot);
     }
 
@@ -89,7 +89,9 @@ public class Destroyer extends SpaceShip implements EnemyShip {
         x += speedX;
         y += speedY;
         framesTillTurn--;
-        if(x <= 0 || x >= GameConstants.SIZE.x - getHitBox().width() || framesTillTurn <= 0) {
+        if(x <= 0) speedX = GameConstants.DESTROYER_SPEED_X;
+        else if(x >= GameConstants.SIZE.x - getHitBox().width()) speedX = -GameConstants.DESTROYER_SPEED_X;
+        else if(framesTillTurn <= 0){
             speedX *= -1;
             framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
         }
@@ -116,7 +118,7 @@ public class Destroyer extends SpaceShip implements EnemyShip {
     }
 
     public void dropPowerUp(){
-        int random = new Random().nextInt(3);
+        int random = new Random().nextInt((int) (GameConstants.POWERUP_TYPES / GameConstants.DESTROYER_POWERUP_DROPCHANCE));
         switch (random){
             case 0:
                 gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
