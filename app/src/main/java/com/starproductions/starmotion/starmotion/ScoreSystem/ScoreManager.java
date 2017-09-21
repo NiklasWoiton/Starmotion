@@ -71,7 +71,7 @@ public class ScoreManager {
      * @return If it's a new highscore
      */
     public boolean isHighscore(int score){
-        return (getMinScore(getAllScores()) != null) && (getMinScore(getAllScores()).getScore() < score);
+        return (getMinScore(getAllScores()) == null) || (getMinScore(getAllScores()).getScore() < score);
     }
 
     /**
