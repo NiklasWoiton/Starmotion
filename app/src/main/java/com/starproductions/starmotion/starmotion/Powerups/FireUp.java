@@ -22,7 +22,7 @@ class FireUp extends PowerupObject {
 
     @Override
     protected void applyEffect() {
-        double newFireRate = player.getFireRate() + GameConstants.FIREUP_FACTOR;//Todo, makes this Value a Constant(Nik)
+        double newFireRate = player.getFireRate() + GameConstants.FIREUP_FACTOR;
         player.setFireRate(newFireRate);
     }
 
