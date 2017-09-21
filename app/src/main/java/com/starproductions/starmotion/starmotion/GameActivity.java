@@ -63,4 +63,8 @@ public class GameActivity extends Activity implements View.OnTouchListener {
     public boolean onTouch(View view, MotionEvent motionEvent) {
         return inputManager.onTouch(view, motionEvent);
     }
+
+    public void gameFinished(int Score){
+        finish();
+    }
 }

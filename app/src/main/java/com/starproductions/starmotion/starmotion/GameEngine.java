@@ -1,5 +1,6 @@
 package com.starproductions.starmotion.starmotion;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -38,15 +39,17 @@ public class GameEngine {
     private ScoreHolder scoreHolder = new ScoreHolder();
     private PowerupFactory powerupFactory;
     private SoundEffectManager soundEffectManager;
+    private GameActivity gameActivity;
     private CollisionManager collisionManager = new CollisionManager();
-    private boolean gameOver = false;
     private Background background = new Background(this);
 
-    private boolean test = false;
+    private boolean gameOver = false;
+    private int gameOverFrameCounter = (int) (GameConstants.GAME_OVER_SHOW_TIME_MS / GameConstants.MS_PER_UPDATE);
 
-    public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager){
+    public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager, GameActivity gameActivity){
         this.resources = resources;
         this.soundEffectManager = soundEffectManager;
+        this.gameActivity = gameActivity;
         activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_FACTOR),
                                 (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_FACTOR),
                                 (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_FACTOR + 1)),
@@ -72,7 +75,11 @@ public class GameEngine {
     }
 
     public void update(){
-        if (gameOver) return;
+        if (gameOver){
+            gameOverFrameCounter--;
+            if (gameOverFrameCounter <= 0) gameActivity.gameFinished(scoreHolder.getScore());
+            return;
+        }
         collisionManager.update(gameActors);
         checkOutOfScreen();
         objectSpawner.update();
