@@ -14,6 +14,7 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
  */
 
 abstract class PowerupObject extends Actor {
+
     protected PlayerShip player;
     private double speedX = 0;
     private double speedY = 1;
@@ -51,8 +52,6 @@ abstract class PowerupObject extends Actor {
         x += speedX;
         y += speedY;
     }
-
-
 
     protected abstract void applyEffect();
 }

@@ -82,20 +82,28 @@ public class CollisionManager {
 
     private void collisionDetection(Actor one, Actor two) {
         if (one.isPlayer() != two.isPlayer()) {
-            Rect minLeft = one.getHitBox();
-            Rect maxLeft = two.getHitBox();
-            if (two.getHitBox().left < one.getHitBox().left) {
+            Rect minLeft;;
+            Rect maxLeft;
+            if (one.getHitBox().left <= two.getHitBox().left) {
+                minLeft = one.getHitBox();
+                maxLeft = two.getHitBox();
+            }
+            else {
                 minLeft = two.getHitBox();
                 maxLeft = one.getHitBox();
             }
-            if (minLeft.right > maxLeft.left) {
-                Rect minTop = one.getHitBox();
-                Rect maxTop = two.getHitBox();
-                if (two.getHitBox().top < one.getHitBox().top) {
+            if (minLeft.right >= maxLeft.left) {
+                Rect minTop;
+                Rect maxTop;
+                if (one.getHitBox().top <= two.getHitBox().top) {
+                    minTop = one.getHitBox();
+                    maxTop = two.getHitBox();
+                }
+                else {
                     minTop = two.getHitBox();
                     maxTop = one.getHitBox();
                 }
-                if (minTop.bottom > maxTop.top) {
+                if (minTop.bottom >= maxTop.top) {
                     one.onCollide(two);
                     two.onCollide(one);
                 }
