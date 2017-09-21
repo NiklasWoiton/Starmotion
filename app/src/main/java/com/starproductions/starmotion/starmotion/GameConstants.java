@@ -36,7 +36,7 @@ public final class GameConstants {
     public static final double FIGHTER_SPEED_Y = 0.7;
     public static final double FIGHTER_SPEED_X = 0.3;
     public static final int FIGHTER_FRAMES_TILL_TURN = 500;
-    public static final double FIGHTER_POWERUP_DROPCHANCE = 0.5;
+    public static final double FIGHTER_POWERUP_DROPCHANCE = 0.25;
     public static final double FIGHTER_INTERVAL_MOD = 0.3;
     public static final int MS_BETWEEN_FIGHTER_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN * FIGHTER_INTERVAL_MOD);
     public static final int MS_BETWEEN_FIGHTER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX * FIGHTER_INTERVAL_MOD);
@@ -48,7 +48,7 @@ public final class GameConstants {
     public static final double DESTROYER_SPEED_Y = 0.5;
     public static final double DESTROYER_SPEED_X = 0.2;
     public static final int DESTROYER_FRAMES_TILL_TURN = 500;
-    public static final double DESTROYER_POWERUP_DROPCHANCE = 1;
+    public static final double DESTROYER_POWERUP_DROPCHANCE = 0.5;
     public static final double DESTROYER_INTERVAL_MOD = 0.7;
     public static final int MS_BETWEEN_DESTROYER_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN * DESTROYER_INTERVAL_MOD);
     public static final int MS_BETWEEN_DESTROYER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX * DESTROYER_INTERVAL_MOD);
