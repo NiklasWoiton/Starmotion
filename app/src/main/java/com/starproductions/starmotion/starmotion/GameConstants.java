@@ -1,7 +1,7 @@
 package com.starproductions.starmotion.starmotion;
 
+import android.graphics.Color;
 import android.graphics.Point;
-import android.view.Display;
 
 /**
  * Created by jakob on 20.07.2017.
@@ -16,8 +16,8 @@ public final class GameConstants {
 
     //General graphical values
     public static Point SIZE = new Point();
-    public static final double DESPAWN_BORDER_Factor = 0.3;
-    public static final double START_ENEMY_SHIPS_Y_Factor = -0.2;
+    public static final double DESPAWN_BORDER_FACTOR = 0.3;
+    public static final double START_ENEMY_SHIPS_Y_FACTOR = -0.2;
 
     //Values for Lasers
     public static final double LASER_SCALE_FACTOR_STRAIGHT = 0.01;
@@ -66,4 +66,11 @@ public final class GameConstants {
 
     //Values for Collisions
     public static final int GRID_CONSTANT = 10;
+
+    //Values for GameOverText
+    public static final String GAME_OVER_TEXT = "Game Over";
+    public static final int GAME_OVER_COLOR = Color.RED;
+    public static final double GAME_OVER_SIZE_Factor = 0.15;
+    public static final double GAME_OVER_SIZE_X_FACTOR = 0;
+    public static final double GAME_OVER_SIZE_Y_FACTOR = 0;
 }

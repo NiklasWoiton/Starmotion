@@ -160,7 +160,7 @@ public class PlayerShip extends SpaceShip implements Observer{
         if(life <=0) {
             this.destroy();
             gameEngine.playSound(SoundEffects.Explosion);
-            //Todo, end Game
+            gameEngine.gameOver();
         }
     }
 

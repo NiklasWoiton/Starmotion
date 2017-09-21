@@ -46,19 +46,19 @@ public class ObjectSpawner {
                 spawnFighterSquadron();
                 break;
             case 1:
-                new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
+                new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR *GameConstants.SIZE.y);
                 break;
         }
     }
 
     private void spawnFighterSquadron(){
-        Fighter lead = new Fighter(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
+        Fighter lead = new Fighter(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR *GameConstants.SIZE.y);
         new Fighter(gameEngine, lead.getX() + lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
         new Fighter(gameEngine, lead.getX() - lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
     }
 
     private void spawnBigSquadron(){
-        Destroyer lead = new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_Factor*GameConstants.SIZE.y);
+        Destroyer lead = new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR *GameConstants.SIZE.y);
         new Fighter(gameEngine, lead.getX() + lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
         new Fighter(gameEngine, lead.getX() - lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
     }
