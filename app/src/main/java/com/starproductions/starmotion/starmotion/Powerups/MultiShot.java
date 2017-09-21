@@ -12,7 +12,7 @@ import com.starproductions.starmotion.starmotion.R;
  * Created by Admin on 17.09.2017.
  */
 
-public class MultiShot extends PowerupObject {
+class MultiShot extends PowerupObject {
 
     MultiShot(GameEngine gameEngine, PlayerShip player, double x, double y) {
         super(gameEngine, player);

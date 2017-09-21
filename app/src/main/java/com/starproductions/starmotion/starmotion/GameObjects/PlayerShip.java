@@ -32,9 +32,9 @@ public class PlayerShip extends SpaceShip implements Observer {
     public PlayerShip(GameEngine gameEngine, InputManager inputManager) {
         super(gameEngine);
         this.x = GameConstants.SIZE.x;
-        this.y = GameConstants.SIZE.y * 0.8;
+        this.y = GameConstants.SIZE.y * 0.9;
 
-        inputManager.setSpeed((float) speedX);
+        inputManager.setSpeed((float) GameConstants.PLAYER_SPEED_X);
         inputManager.setMaxX(GameConstants.SIZE.x - asset.getWidth());
         inputManager.addObserver(this);
         inputManager.start();
@@ -157,7 +157,7 @@ public class PlayerShip extends SpaceShip implements Observer {
 
     private void onDamage() {
         shootMultiplikator = (int) Math.ceil(shootMultiplikator / 2.0);
-        setFireRate(fireRate - GameConstants.FIREUP);
+        setFireRate(fireRate - GameConstants.FIREUP_FACTOR);
         life -= 1;
         gameEngine.playSound(SoundEffects.PlayerHit);
         if (life <= 0) {
@@ -167,22 +167,22 @@ public class PlayerShip extends SpaceShip implements Observer {
         }
     }
 
-    private void frontLaser() {
-        new Laser(gameEngine, x + asset.getWidth() / 2, y, 0, -2, isPlayer());
+    private void frontLaser(){
+        new PlayerLaser(gameEngine, x + asset.getWidth()/2, y, 0, -2);
     }
 
-    private void twinLasers() {
-        new Laser(gameEngine, x + asset.getWidth() * 0.8, y + asset.getHeight() * 0.1, 0, -2, isPlayer());
-        new Laser(gameEngine, x + asset.getWidth() * 0.2, y + asset.getHeight() * 0.1, 0, -2, isPlayer());
+    private void twinLasers(){
+        new PlayerLaser(gameEngine, x + asset.getWidth()*0.8, y + asset.getHeight() * 0.1, 0, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth()*0.2, y + asset.getHeight() * 0.1, 0, -2);
     }
 
-    private void sideLasers() {
-        new Laser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.2, 0.2, -2, isPlayer());
-        new Laser(gameEngine, x, y + asset.getHeight() * 0.2, -0.2, -2, isPlayer());
+    private void sideLasers(){
+        new PlayerLaser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.2, 0.2, -2);
+        new PlayerLaser(gameEngine, x, y + asset.getHeight() * 0.2, -0.2, -2);
     }
 
-    private void farSideLasers() {
-        new Laser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.3, 0.4, -2, isPlayer());
-        new Laser(gameEngine, x, y + asset.getHeight() * 0.3, -0.4, -2, isPlayer());
+    private void farSideLasers(){
+        new PlayerLaser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.3, 0.4, -2);
+        new PlayerLaser(gameEngine, x, y + asset.getHeight() * 0.3, -0.4, -2);
     }
 }
