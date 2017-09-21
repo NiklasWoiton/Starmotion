@@ -19,15 +19,17 @@ import java.util.Observer;
  * Created by jakob on 23.07.2017.
  */
 
-public class PlayerShip extends SpaceShip implements Observer{
+public class PlayerShip extends SpaceShip implements Observer {
 
+    private double speedX = 700;
+    private double speedY = 0;
     private long lastShot = 0;
     private double fireRate = 1;
 
     private int shootMultiplikator = 1;
     private int life = GameConstants.PLAYER_START_LIFE;
 
-    public PlayerShip(GameEngine gameEngine, InputManager inputManager){
+    public PlayerShip(GameEngine gameEngine, InputManager inputManager) {
         super(gameEngine);
         this.x = GameConstants.SIZE.x;
         this.y = GameConstants.SIZE.y * 0.9;
@@ -42,16 +44,16 @@ public class PlayerShip extends SpaceShip implements Observer{
         return life;
     }
 
-    public void setLife(int life){
+    public void setLife(int life) {
         this.life = life;
     }
 
-    public double getFireRate(){
+    public double getFireRate() {
         return fireRate;
     }
 
-    public void setFireRate(double fireRate){
-        if(fireRate <= 3 && fireRate >= 1){
+    public void setFireRate(double fireRate) {
+        if (fireRate <= 3 && fireRate >= 1) {
             this.fireRate = fireRate;
         }
     }
@@ -66,7 +68,7 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_player);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.spaceship_player);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.PLAYER_SHIP_SCALE_FACTOR);
         int newHeigth = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeigth, true);
@@ -74,9 +76,9 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     void shoot() {
-        if( System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS / fireRate){
+        if (System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS / fireRate) {
             lastShot = System.currentTimeMillis();
-            switch (shootMultiplikator){
+            switch (shootMultiplikator) {
                 case 1:
                     frontLaser();
                     break;
@@ -114,13 +116,15 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     public void onCollide(Collidable obstacle) {
-        if(obstacle instanceof Laser || obstacle instanceof Fighter){
+        if (obstacle instanceof Laser || obstacle instanceof Fighter) {
             onDamage();
         }
     }
 
     @Override
-    public boolean isPlayer(){return true;}
+    public boolean isPlayer() {
+        return true;
+    }
 
     @Override
     public Rect getHitBox() {
@@ -134,7 +138,7 @@ public class PlayerShip extends SpaceShip implements Observer{
 
     @Override
     public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float) x , (float) y, null);
+        c.drawBitmap(asset, (float) x, (float) y, null);
     }
 
     @Override
@@ -144,19 +148,23 @@ public class PlayerShip extends SpaceShip implements Observer{
     // Input update
     @Override
     public void update(Observable observable, Object o) {
-        if(o instanceof Notification){
+        if (o instanceof Notification) {
             Notification n = (Notification) o;
             x = n.getX();
-            if( n.isTouching() ) shoot();
+            if (n.isTouching()) shoot();
         }
     }
 
-    private void onDamage(){
+    private void onDamage() {
         shootMultiplikator = (int) Math.ceil(shootMultiplikator / 2.0);
         setFireRate(fireRate - GameConstants.FIREUP_FACTOR);
         life -= 1;
-        if(life <=0) this.destroy();
-        //Todo, end Game
+        gameEngine.playSound(SoundEffects.PlayerHit);
+        if (life <= 0) {
+            this.destroy();
+            gameEngine.playSound(SoundEffects.Explosion);
+            //Todo, end Game
+        }
     }
 
     private void frontLaser(){
