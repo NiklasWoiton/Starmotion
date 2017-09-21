@@ -66,4 +66,7 @@ public final class GameConstants {
 
     //Values for Collisions
     public static final int GRID_CONSTANT = 10;
+
+    //Background values
+    public static final int STAR_COUNT = 200;
 }

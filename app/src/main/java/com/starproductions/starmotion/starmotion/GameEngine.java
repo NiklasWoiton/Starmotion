@@ -2,12 +2,12 @@ package com.starproductions.starmotion.starmotion;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.Log;
 
 import com.starproductions.starmotion.starmotion.Collider.CollisionManager;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
+import com.starproductions.starmotion.starmotion.GameObjects.Background;
 import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
 import com.starproductions.starmotion.starmotion.GameObjects.HudObject;
 import com.starproductions.starmotion.starmotion.GameObjects.Lifebar;
@@ -38,8 +38,8 @@ public class GameEngine {
     private PowerupFactory powerupFactory;
     private SoundEffectManager soundEffectManager;
     private CollisionManager collisionManager = new CollisionManager();
+    private Background background = new Background(this);
 
-    private boolean test = false;
 
     public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager){
         this.resources = resources;
@@ -80,10 +80,7 @@ public class GameEngine {
     }
 
     public void draw(Canvas canvas, double extrapolation){
-        canvas.drawColor(getResources().getColor(R.color.black));
-        //Todo: Check hardwareacceleration
-        if(canvas.isHardwareAccelerated()) test = true;
-        if(test) canvas.drawColor(Color.YELLOW);
+        background.draw(canvas, extrapolation);
         for (Actor actor: gameActors){
             actor.draw(canvas, extrapolation);
         }
