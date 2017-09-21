@@ -21,8 +21,6 @@ import java.util.Observer;
 
 public class PlayerShip extends SpaceShip implements Observer {
 
-    private double speedX = 700;
-    private double speedY = 0;
     private long lastShot = 0;
     private double fireRate = 1;
 
@@ -103,14 +101,14 @@ public class PlayerShip extends SpaceShip implements Observer {
                     sideLasers();
                     farSideLasers();
                     break;
-                case 7:
+                default:
                     frontLaser();
                     twinLasers();
                     sideLasers();
                     farSideLasers();
                     break;
             }
-            gameEngine.playSound(SoundEffects.LaserShoot);
+            if (life > 0) gameEngine.playSound(SoundEffects.LaserShoot);
         }
     }
 
@@ -163,7 +161,7 @@ public class PlayerShip extends SpaceShip implements Observer {
         if (life <= 0) {
             this.destroy();
             gameEngine.playSound(SoundEffects.Explosion);
-            //Todo, end Game
+            gameEngine.gameOver();
         }
     }
 
@@ -172,13 +170,13 @@ public class PlayerShip extends SpaceShip implements Observer {
     }
 
     private void twinLasers(){
-        new PlayerLaser(gameEngine, x + asset.getWidth()*0.8, y + asset.getHeight() * 0.1, 0, -2);
-        new PlayerLaser(gameEngine, x + asset.getWidth()*0.2, y + asset.getHeight() * 0.1, 0, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth()*0.7, y + asset.getHeight() * 0.1, 0, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth()*0.3, y + asset.getHeight() * 0.1, 0, -2);
     }
 
     private void sideLasers(){
-        new PlayerLaser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.2, 0.2, -2);
-        new PlayerLaser(gameEngine, x, y + asset.getHeight() * 0.2, -0.2, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth()*0.85, y + asset.getHeight() * 0.2, 0.2, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth()*0.15, y + asset.getHeight() * 0.2, -0.2, -2);
     }
 
     private void farSideLasers(){

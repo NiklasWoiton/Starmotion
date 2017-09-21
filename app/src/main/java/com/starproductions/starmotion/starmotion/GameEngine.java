@@ -9,6 +9,7 @@ import com.starproductions.starmotion.starmotion.Collider.CollisionManager;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.Background;
 import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
+import com.starproductions.starmotion.starmotion.GameObjects.GameOver;
 import com.starproductions.starmotion.starmotion.GameObjects.HudObject;
 import com.starproductions.starmotion.starmotion.GameObjects.Lifebar;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
@@ -38,16 +39,18 @@ public class GameEngine {
     private PowerupFactory powerupFactory;
     private SoundEffectManager soundEffectManager;
     private CollisionManager collisionManager = new CollisionManager();
+    private boolean gameOver = false;
     private Background background = new Background(this);
 
+    private boolean test = false;
 
     public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager){
         this.resources = resources;
         this.soundEffectManager = soundEffectManager;
-        activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_Factor),
-                                (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_Factor),
-                                (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_Factor + 1)),
-                                (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_Factor + 1)));
+        activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_FACTOR),
+                                (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_FACTOR),
+                                (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_FACTOR + 1)),
+                                (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_FACTOR + 1)));
 
         objectSpawner = new ObjectSpawner(this);
         PlayerShip playerShip = new PlayerShip(this, inputManager);
@@ -69,7 +72,7 @@ public class GameEngine {
     }
 
     public void update(){
-        //Process Inputs
+        if (gameOver) return;
         collisionManager.update(gameActors);
         checkOutOfScreen();
         objectSpawner.update();
@@ -129,5 +132,10 @@ public class GameEngine {
 
     public Resources getResources(){
         return resources;
+    }
+
+    public void gameOver(){
+        new GameOver(this);
+        gameOver = true;
     }
 }

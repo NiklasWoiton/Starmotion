@@ -15,8 +15,8 @@ import com.starproductions.starmotion.starmotion.R;
 
 class Laser extends Actor {
 
-    private double speedX;
-    private double speedY;
+    protected double speedX = 1;
+    protected double speedY = 1;
     
 
     Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY){
@@ -30,7 +30,6 @@ class Laser extends Actor {
         }
         this.speedX = speedX;
         this.speedY = speedY;
-
     }
 
     @Override

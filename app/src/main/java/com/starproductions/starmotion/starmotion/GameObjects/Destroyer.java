@@ -49,8 +49,9 @@ public class Destroyer extends SpaceShip implements EnemyShip {
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
-            gameEngine.playSound(SoundEffects.LaserShoot);
+        new SlowLaser(gameEngine, x + asset.getWidth() * 0.25, y + asset.getHeight(), 0, GameConstants.LASER_SPEED_DESTROYER);
+        new SlowLaser(gameEngine, x + asset.getWidth() * 0.75, y + asset.getHeight(), 0, GameConstants.LASER_SPEED_DESTROYER);
+        gameEngine.playSound(SoundEffects.LaserShoot);
     }
 
     @Override

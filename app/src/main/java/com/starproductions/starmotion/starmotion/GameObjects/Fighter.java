@@ -50,7 +50,7 @@ public class Fighter extends SpaceShip implements EnemyShip{
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
+        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, GameConstants.LASER_SPEED_FIGHTER);
         gameEngine.playSound(SoundEffects.LaserShoot);
         calcShootingInterval();
     }
