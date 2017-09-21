@@ -13,6 +13,7 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager
 public class GameActivity extends Activity implements View.OnTouchListener {
     private InputManager inputManager;
     private SoundEffectManager soundEffectManager;
+    private BackgroundMusicPlayer backgroundMusicPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         getWindowManager().getDefaultDisplay().getSize(GameConstants.SIZE);
         inputManager = new InputManager(this, GameConstants.SIZE.x);
         soundEffectManager = new SoundEffectManager(this);
+        backgroundMusicPlayer = new BackgroundMusicPlayer(this);
         SurfaceView view = new GameView(this, inputManager, soundEffectManager);
         setContentView(view);
         view.setOnTouchListener(this);
@@ -45,18 +47,21 @@ public class GameActivity extends Activity implements View.OnTouchListener {
     protected void onResume() {
         super.onResume();
         inputManager.start();
+        backgroundMusicPlayer.start();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         inputManager.stop();
+        backgroundMusicPlayer.pause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         soundEffectManager.destroy();
+        backgroundMusicPlayer.release();
     }
 
     @Override
