@@ -27,6 +27,7 @@ public class SoundEffectManager {
         registerNewSound(SoundEffects.LaserShoot, R.raw.lasershot);
         registerNewSound(SoundEffects.Explosion, R.raw.explosion);
         registerNewSound(SoundEffects.Powerup, R.raw.powerup);
+        registerNewSound(SoundEffects.PlayerHit, R.raw.hit);
     }
 
     /**
