@@ -1,19 +1,27 @@
 package com.starproductions.starmotion.starmotion;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
+import com.starproductions.starmotion.starmotion.ScoreSystem.ScoreManager;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;
 
 public class GameActivity extends Activity implements View.OnTouchListener {
     private InputManager inputManager;
     private SoundEffectManager soundEffectManager;
     private BackgroundMusicPlayer backgroundMusicPlayer;
+    private  EditText input;
+    private ScoreManager scoreManager;
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +30,7 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         getWindowManager().getDefaultDisplay().getSize(GameConstants.SIZE);
         inputManager = new InputManager(this, GameConstants.SIZE.x);
         soundEffectManager = new SoundEffectManager(this);
+        scoreManager = new ScoreManager(this);
         backgroundMusicPlayer = new BackgroundMusicPlayer(this);
         SurfaceView view = new GameView(this, inputManager, soundEffectManager);
         setContentView(view);
@@ -69,7 +78,23 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         return inputManager.onTouch(view, motionEvent);
     }
 
-    public void gameFinished(int Score){
+    public void gameFinished(int score){
+        this.score = score;
+        scoreManager.start();
+        boolean isHighscore = scoreManager.isHighscore(score);
+        scoreManager.stop();
+        if (isHighscore){
+            DialogFragment getName = new HighscoreNameDialog();
+            getName.show(getFragmentManager(), "get_name_for_highscore");
+        } else {
+            finish();
+        }
+    }
+
+    public void saveScore(String name){
+        scoreManager.start();
+        scoreManager.addScore(name, score);
+        scoreManager.stop();
         finish();
     }
 }

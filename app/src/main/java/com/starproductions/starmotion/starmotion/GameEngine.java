@@ -77,7 +77,7 @@ public class GameEngine {
     public void update(){
         if (gameOver){
             gameOverFrameCounter--;
-            if (gameOverFrameCounter <= 0) gameActivity.gameFinished(scoreHolder.getScore());
+            if (gameOverFrameCounter == 0) gameActivity.gameFinished(scoreHolder.getScore());
             return;
         }
         collisionManager.update(gameActors);

@@ -83,7 +83,7 @@ public final class GameConstants {
     public static final double GAME_OVER_SIZE_Factor = 0.15;
     public static final double GAME_OVER_SIZE_X_FACTOR = 0;
     public static final double GAME_OVER_SIZE_Y_FACTOR = 0;
-    public static final int GAME_OVER_SHOW_TIME_MS = 3000;
+    public static final int GAME_OVER_SHOW_TIME_MS = 1000;
 
     //Background values
     public static final int STAR_COUNT = 200;
