@@ -12,7 +12,7 @@ import com.starproductions.starmotion.starmotion.R;
  * Created by Admin on 17.09.2017.
  */
 
-public class FireUp extends PowerupObject {
+class FireUp extends PowerupObject {
 
     FireUp(GameEngine gameEngine, PlayerShip player, double x, double y) {
         super(gameEngine, player);
@@ -22,7 +22,7 @@ public class FireUp extends PowerupObject {
 
     @Override
     protected void applyEffect() {
-        double newFireRate = player.getFireRate() + GameConstants.FIREUP;//Todo, makes this Value a Constant(Nik)
+        double newFireRate = player.getFireRate() + GameConstants.FIREUP_FACTOR;//Todo, makes this Value a Constant(Nik)
         player.setFireRate(newFireRate);
     }
 

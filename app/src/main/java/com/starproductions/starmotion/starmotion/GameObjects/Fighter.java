@@ -50,7 +50,7 @@ public class Fighter extends SpaceShip implements EnemyShip{
 
     @Override
     void shoot() {
-        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2, isPlayer());
+        new Laser(gameEngine, x + asset.getWidth()/2, y + asset.getHeight(), 0, 2);
         gameEngine.playSound(SoundEffects.LaserShoot);
         calcShootingInterval();
     }
@@ -121,7 +121,7 @@ public class Fighter extends SpaceShip implements EnemyShip{
     }
 
     public void dropPowerUp(){
-        int random = new Random().nextInt(6);
+        int random = new Random().nextInt((int) (GameConstants.POWERUP_TYPES / GameConstants.FIGHTER_POWERUP_DROPCHANCE));
         switch (random){
             case 0:
                 gameEngine.getPowerupFactory().createPowerup(PowerupTypes.Fireup,x,y);
