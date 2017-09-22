@@ -1,4 +1,4 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,16 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.starproductions.starmotion.starmotion.R;
 import com.starproductions.starmotion.starmotion.ScoreSystem.Score;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by Jakob on 22.09.2017.
- */
-
-public class ScoreAdapter extends ArrayAdapter<Score> {
+class ScoreAdapter extends ArrayAdapter<Score> {
 
     private ArrayList<Score> scoreArrayList;
     private TextView name;
@@ -27,7 +23,7 @@ public class ScoreAdapter extends ArrayAdapter<Score> {
     private Context context;
 
 
-    public ScoreAdapter(@NonNull Context context, @NonNull ArrayList<Score> objects) {
+    ScoreAdapter(@NonNull Context context, @NonNull ArrayList<Score> objects) {
         super(context, R.layout.list_item_score, objects);
         scoreArrayList = objects;
         this.context = context;

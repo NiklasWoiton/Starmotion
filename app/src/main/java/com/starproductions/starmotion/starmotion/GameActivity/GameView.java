@@ -1,15 +1,12 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameActivity;
 
 import android.content.Context;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
+import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;
-
-/**
- * Created by jakob on 17.07.2017.
- */
 
 //Parts of this are created with the help of: https://www.codeproject.com/Articles/827608/Android-Basic-Game-Loop
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {

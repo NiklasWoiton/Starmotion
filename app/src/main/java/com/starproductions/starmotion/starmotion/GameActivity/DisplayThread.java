@@ -1,16 +1,14 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameActivity;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-/**
- * Created by jakob on 17.07.2017.
- */
-
+import com.starproductions.starmotion.starmotion.GameConstants;
+import com.starproductions.starmotion.starmotion.GameEngine;
 //Parts of this are created with the help of:
 // -https://www.codeproject.com/Articles/827608/Android-Basic-Game-Loop
 // -http://gameprogrammingpatterns.com/game-loop.html
-public class DisplayThread extends Thread {
+class DisplayThread extends Thread {
 
     private boolean isRunning;
     private SurfaceHolder surfaceHolder;
@@ -21,7 +19,7 @@ public class DisplayThread extends Thread {
 
     //TODO: Add Framerate
 
-    public DisplayThread(SurfaceHolder surfaceHolder, GameEngine gameEngine){
+    DisplayThread(SurfaceHolder surfaceHolder, GameEngine gameEngine){
         this.surfaceHolder = surfaceHolder;
         this.gameEngine = gameEngine;
         isRunning = true;
@@ -52,11 +50,11 @@ public class DisplayThread extends Thread {
         }
     }
 
-    public boolean getIsRunning(){
+    boolean getIsRunning(){
         return isRunning;
     }
 
-    public void setIsRunning(boolean isRunning){
+    void setIsRunning(boolean isRunning){
         this.isRunning = isRunning;
     }
 

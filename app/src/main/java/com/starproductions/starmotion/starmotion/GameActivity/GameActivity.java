@@ -1,16 +1,15 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.GameActivity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.starproductions.starmotion.starmotion.BackgroundMusicPlayer;
+import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
 import com.starproductions.starmotion.starmotion.ScoreSystem.ScoreManager;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager;

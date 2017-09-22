@@ -1,4 +1,4 @@
-package com.starproductions.starmotion.starmotion;
+package com.starproductions.starmotion.starmotion.MainActivity;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.starproductions.starmotion.starmotion.GameActivity.GameActivity;
+import com.starproductions.starmotion.starmotion.R;
 
 public class MainActivity extends Activity {
 

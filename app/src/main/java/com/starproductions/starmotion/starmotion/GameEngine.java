@@ -1,11 +1,11 @@
 package com.starproductions.starmotion.starmotion;
 
-import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
+import com.starproductions.starmotion.starmotion.GameActivity.GameActivity;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.Background;
 import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
@@ -20,10 +20,6 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffectManager
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import java.util.ArrayList;
-
-/**
- * Created by jakob on 18.07.2017.
- */
 
 public class GameEngine {
 
