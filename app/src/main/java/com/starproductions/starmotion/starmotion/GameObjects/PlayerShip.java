@@ -156,7 +156,7 @@ public class PlayerShip extends SpaceShip implements Observer {
     private void onDamage() {
         shootMultiplikator = (int) Math.ceil(shootMultiplikator / 2.0);
         setFireRate(fireRate - GameConstants.FIREUP_FACTOR);
-        life -= 1;
+        life--;
         gameEngine.playSound(SoundEffects.PlayerHit);
         if (life <= 0) {
             this.destroy();

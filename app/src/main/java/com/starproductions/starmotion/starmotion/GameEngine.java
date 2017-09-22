@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
-import com.starproductions.starmotion.starmotion.Collider.CollisionManager;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.Background;
 import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
