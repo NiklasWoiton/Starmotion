@@ -20,8 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/dialog_name_highscore_message_text"
-        android:textColor="@color/black"
-        android:background="@color/colorStarmotionYellow"
+        android:background="@color/black"
+        android:textColor="@color/colorStarmotionYellow"
         android:textAlignment="center"/>
 
     <EditText
@@ -29,7 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="@string/dialog_name_highscore_input_hint"
+        android:textColor="@color/colorStarmotionYellow"
+        android:backgroundTint="@color/black"
+        android:textCursorDrawable="@null"
         android:textAlignment="center"/>
 
 </LinearLayout>
