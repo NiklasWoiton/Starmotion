@@ -55,7 +55,6 @@ public final class GameConstants {
     public static final int MS_BETWEEN_DESTROYER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX / DESTROYER_INTERVAL_MOD);
 
     //Values for PowerUps
-    public static final int POWERUP_TYPES = PowerupTypes.values().length;
     public static final double POWERUP_SCALE_FACTOR = 0.04;
     public static final double FIREUP_FACTOR = 0.2;
     public static final double POWERUP_DROPCHANCE_LIFEUP = 0.4;
