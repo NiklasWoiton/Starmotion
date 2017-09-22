@@ -56,9 +56,12 @@ public class ScoreManager {
     }
 
     private Score getMinScore(ArrayList<Score> scoreList){
-        Score min = scoreList.get(0);
+        Score min = null;
         for(Score score : scoreList)
-            min = min.getScore() < score.getScore() ? min : score;
+            if (min == null)
+                min = score;
+            else
+                min = min.getScore() < score.getScore() ? min : score;
         return min;
     }
 
@@ -68,7 +71,7 @@ public class ScoreManager {
      * @return If it's a new highscore
      */
     public boolean isHighscore(int score){
-        return getMinScore(getAllScores()).getScore() < score;
+        return (getMinScore(getAllScores()) == null) || (getMinScore(getAllScores()).getScore() < score);
     }
 
     /**
@@ -82,6 +85,7 @@ public class ScoreManager {
         while(allScores.size() > MAX_SCORES) {
             Score min = getMinScore(allScores);
             db.deleteScores(min.getId());
+            allScores = getAllScores();
         }
     }
 

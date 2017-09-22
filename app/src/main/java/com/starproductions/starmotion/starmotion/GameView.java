@@ -22,7 +22,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         getHolder().addCallback(this);
 
-        gameEngine = new GameEngine(getResources(), inputManager, soundEffectManager);
+        gameEngine = new GameEngine(getResources(), inputManager, soundEffectManager, (GameActivity) context);
 
         displayThread = new DisplayThread(getHolder(), gameEngine);
     }

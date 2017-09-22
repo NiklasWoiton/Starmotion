@@ -2,4 +2,7 @@
     <string name="app_name">Starmotion</string>
     <string name="activity_main_title">Starmotion</string>
     <string name="main_activity_button_start">Start</string>
+    <string name="dialog_name_highscore_title_text">Highscore</string>
+    <string name="dialog_name_highscore_message_text">Congratulations, you scored a top 5 high score! Please enter your name:</string>
+    <string name="dialog_name_highscore_input_hint">name</string>
 </resources>
