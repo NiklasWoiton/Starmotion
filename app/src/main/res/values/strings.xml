@@ -5,4 +5,6 @@
     <string name="dialog_name_highscore_title_text">Highscore</string>
     <string name="dialog_name_highscore_message_text">Congratulations, you scored a top 5 high score! Please enter your name:</string>
     <string name="dialog_name_highscore_input_hint">name</string>
+    <string name="main_activity_button_highscore">Highscore</string>
+    <string name="dialog_name_display_title_text">Highscore</string>
 </resources>

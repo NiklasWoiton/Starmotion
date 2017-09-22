@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="activity_main_title_padding_top">20dp</dimen>
-    <dimen name="activity_main_title_text_size">50sp</dimen>
-    <dimen name="activity_main_button_start_text_size">23sp</dimen>
+    <dimen name="activity_main_title_text_size">53sp</dimen>
+    <dimen name="activity_main_button_start_text_size">33sp</dimen>
+    <dimen name="activity_main_button_highscore_text_size">18sp</dimen>
 </resources>

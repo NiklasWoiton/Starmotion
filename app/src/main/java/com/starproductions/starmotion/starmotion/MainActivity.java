@@ -1,6 +1,7 @@
 package com.starproductions.starmotion.starmotion;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,15 @@ public class MainActivity extends Activity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        Button highscoreButton = findViewById(R.id.activity_main_button_highscore);
+        highscoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment displayHighscore = new HighscoreDisplayDialog();
+                displayHighscore.show(getFragmentManager(), "display_highscore");
             }
         });
     }
