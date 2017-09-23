@@ -28,7 +28,7 @@ class FireUp extends PowerupObject {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.powerup_fireup);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.powerup_fireup);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.POWERUP_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);

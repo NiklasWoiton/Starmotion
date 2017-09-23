@@ -18,7 +18,7 @@ public class GameActivity extends Activity implements View.OnTouchListener {
     private InputManager inputManager;
     private SoundEffectManager soundEffectManager;
     private BackgroundMusicPlayer backgroundMusicPlayer;
-    private  EditText input;
+    private EditText input;
     private ScoreManager scoreManager;
     private int score;
 
@@ -77,12 +77,12 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         return inputManager.onTouch(view, motionEvent);
     }
 
-    public void gameFinished(int score){
+    public void gameFinished(int score) {
         this.score = score;
         scoreManager.start();
         boolean isHighscore = scoreManager.isHighscore(score);
         scoreManager.stop();
-        if (isHighscore){
+        if (isHighscore) {
             DialogFragment getName = new HighscoreNameDialog();
             getName.show(getFragmentManager(), "get_name_for_highscore");
         } else {
@@ -90,7 +90,7 @@ public class GameActivity extends Activity implements View.OnTouchListener {
         }
     }
 
-    public void saveScore(String name){
+    public void saveScore(String name) {
         scoreManager.start();
         scoreManager.addScore(name, score);
         scoreManager.stop();

@@ -41,6 +41,7 @@ class OrientationController extends Observable implements SensorEventListener {
 
     /**
      * Calculates orientation from a rotation vector
+     *
      * @param rotationVector rotationVector from a vector sensor
      * @return float[3]:
      * [0]: rotation around x axis
@@ -61,7 +62,7 @@ class OrientationController extends Observable implements SensorEventListener {
         float pitch = orientation[1];
         float roll = orientation[2];
 
-        return new float[] {pitch, roll, azi};
+        return new float[]{pitch, roll, azi};
     }
 
     private void notify(float[] orientation) {

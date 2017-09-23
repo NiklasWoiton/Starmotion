@@ -2,7 +2,6 @@ package com.starproductions.starmotion.starmotion.MainActivity;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,16 +30,16 @@ class ScoreAdapter extends ArrayAdapter<Score> {
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, @NonNull ViewGroup parent){
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         Score score = scoreArrayList.get(position);
 
-        if (convertView == null){
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
+        if (convertView == null) {
+            LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             convertView = inflater.inflate(R.layout.list_item_score, parent, false);
         }
 
-        ((TextView)convertView.findViewById(R.id.score_list_item_name)).setText(score.getPlayername());
-        ((TextView)convertView.findViewById(R.id.score_list_item_score)).setText(String.valueOf(score.getScore()));
+        ((TextView) convertView.findViewById(R.id.score_list_item_name)).setText(score.getPlayername());
+        ((TextView) convertView.findViewById(R.id.score_list_item_score)).setText(String.valueOf(score.getScore()));
 
         return convertView;
     }

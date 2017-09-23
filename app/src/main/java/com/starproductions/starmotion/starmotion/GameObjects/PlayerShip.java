@@ -165,21 +165,21 @@ public class PlayerShip extends SpaceShip implements Observer {
         }
     }
 
-    private void frontLaser(){
-        new PlayerLaser(gameEngine, x + asset.getWidth()/2, y, 0, -2);
+    private void frontLaser() {
+        new PlayerLaser(gameEngine, x + asset.getWidth() / 2, y, 0, -2);
     }
 
-    private void twinLasers(){
-        new PlayerLaser(gameEngine, x + asset.getWidth()*0.7, y + asset.getHeight() * 0.1, 0, -2);
-        new PlayerLaser(gameEngine, x + asset.getWidth()*0.3, y + asset.getHeight() * 0.1, 0, -2);
+    private void twinLasers() {
+        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.7, y + asset.getHeight() * 0.1, 0, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.3, y + asset.getHeight() * 0.1, 0, -2);
     }
 
-    private void sideLasers(){
-        new PlayerLaser(gameEngine, x + asset.getWidth()*0.85, y + asset.getHeight() * 0.2, 0.2, -2);
-        new PlayerLaser(gameEngine, x + asset.getWidth()*0.15, y + asset.getHeight() * 0.2, -0.2, -2);
+    private void sideLasers() {
+        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.85, y + asset.getHeight() * 0.2, 0.2, -2);
+        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.15, y + asset.getHeight() * 0.2, -0.2, -2);
     }
 
-    private void farSideLasers(){
+    private void farSideLasers() {
         new PlayerLaser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.3, 0.4, -2);
         new PlayerLaser(gameEngine, x, y + asset.getHeight() * 0.3, -0.4, -2);
     }

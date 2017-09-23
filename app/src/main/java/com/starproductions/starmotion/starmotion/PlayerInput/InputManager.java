@@ -19,11 +19,10 @@ public class InputManager extends Observable implements Observer {
     private Notification lastNotification = new Notification(0, false);
 
     /**
-     *
      * @param activity The calling activity
-     * @param maxX The maximum X coordinate (should be screen width - the player's width)
+     * @param maxX     The maximum X coordinate (should be screen width - the player's width)
      */
-    public InputManager(Activity activity, int maxX){
+    public InputManager(Activity activity, int maxX) {
         this.maxX = maxX;
         oc = new OrientationController(activity);
         oc.addObserver(this);
@@ -32,20 +31,20 @@ public class InputManager extends Observable implements Observer {
     /**
      * (Re)starts the movement calculation (should be in onResume()).
      */
-    public void start(){
+    public void start() {
         oc.start();
     }
 
     /**
      * Stops the movement calculations to save power (should be in onPause()).
      */
-    public void stop(){
+    public void stop() {
         oc.stop();
     }
 
     @Override
     public void update(Observable observable, Object o) {
-        if(observable instanceof OrientationController){
+        if (observable instanceof OrientationController) {
             float[] orientation = (float[]) o;
             float tilt = orientation[1];
             float x = calculateX(tilt);
@@ -53,33 +52,33 @@ public class InputManager extends Observable implements Observer {
         }
     }
 
-    public float getSpeed(){
+    public float getSpeed() {
         return speed;
     }
 
-    public void setSpeed(float speed){
+    public void setSpeed(float speed) {
         this.speed = speed;
     }
 
-    public void setMaxX(int maxX){
+    public void setMaxX(int maxX) {
         this.maxX = maxX;
     }
 
     private float calculateX(float tilt) {
-        float x = maxX/2 + tilt * speed;
+        float x = maxX / 2 + tilt * speed;
         x = capX(x);
         return x;
     }
 
-    private float capX(float x){
+    private float capX(float x) {
         float result;
         result = x <= 0 ? 0 : x;
         result = x >= maxX ? maxX : result;
         return result;
     }
 
-    private void notifyPosition(float x){
-        if(countObservers() > 0) {
+    private void notifyPosition(float x) {
+        if (countObservers() > 0) {
             setChanged();
             lastNotification = new Notification(x, lastNotification.isTouching());
             notifyObservers(lastNotification);
@@ -88,7 +87,7 @@ public class InputManager extends Observable implements Observer {
 
 
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getActionMasked()){
+        switch (motionEvent.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
                 notifyTouch(true);
                 return true;
@@ -100,8 +99,8 @@ public class InputManager extends Observable implements Observer {
         return true;
     }
 
-    private void notifyTouch(boolean isTouching){
-        if(countObservers() > 0) {
+    private void notifyTouch(boolean isTouching) {
+        if (countObservers() > 0) {
             setChanged();
             lastNotification = new Notification(lastNotification.getX(), isTouching);
             notifyObservers(lastNotification);

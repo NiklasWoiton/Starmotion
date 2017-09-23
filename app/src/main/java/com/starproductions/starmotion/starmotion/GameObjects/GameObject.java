@@ -16,7 +16,7 @@ public abstract class GameObject {
     protected Bitmap asset;
 
 
-    public GameObject(GameEngine gameEngine){
+    public GameObject(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
         setAsset();
         gameEngine.registerGameObject(this);
@@ -40,11 +40,13 @@ public abstract class GameObject {
 
     //Call this and the GameObject will destroy itself.
     //Override to add further actions
-    public void destroy(){
+    public void destroy() {
         gameEngine.deregisterGameObject(this);
     }
 
     abstract protected void setAsset();
+
     abstract public void draw(Canvas c, double extrapolation);
+
     abstract public void update();
 }

@@ -13,16 +13,18 @@ import com.starproductions.starmotion.starmotion.R;
 
 class PlayerLaser extends Laser {
 
-    PlayerLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY){
+    PlayerLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {
         super(gameEngine, posX, posY, speedX, speedY);
     }
 
     @Override
-    public boolean isPlayer(){return true;}
+    public boolean isPlayer() {
+        return true;
+    }
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_blue);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.bullet_blue);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR_STRAIGHT);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);

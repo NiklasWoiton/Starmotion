@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 
 /**
  * MusicPlayer for the music playing in the background.
- *
+ * <p>
  * Credits for the music
  * Author: Jan125
  * Source: "https://opengameart.org/content/stereotypical-90s-space-shooter-music"
@@ -14,27 +14,27 @@ import android.media.MediaPlayer;
 public class BackgroundMusicPlayer {
     private MediaPlayer mp;
 
-    public BackgroundMusicPlayer(Context context){
+    public BackgroundMusicPlayer(Context context) {
         mp = MediaPlayer.create(context, R.raw.bg_music);
         mp.setLooping(true);
     }
 
-    public void start(){
-        if(mp != null)
+    public void start() {
+        if (mp != null)
             mp.start();
     }
 
-    public void stop(){
-        if(mp != null)
+    public void stop() {
+        if (mp != null)
             mp.stop();
     }
 
-    public void pause(){
-        if(mp != null)
+    public void pause() {
+        if (mp != null)
             mp.pause();
     }
 
-    public void release(){
+    public void release() {
         mp.release();
         mp = null;
     }

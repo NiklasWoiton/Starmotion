@@ -29,8 +29,8 @@ public class GameOver extends HudObject {
 
     @Override
     public void draw(Canvas c, double extrapolation) {
-        c.drawText  (GameConstants.GAME_OVER_TEXT, (float)( x + (0.5 * (GameConstants.SIZE.x - textPaint.measureText(GameConstants.GAME_OVER_TEXT)))),
-                    (float)( y + (0.5 * (GameConstants.SIZE.y - textPaint.getTextSize()))), textPaint);
+        c.drawText(GameConstants.GAME_OVER_TEXT, (float) (x + (0.5 * (GameConstants.SIZE.x - textPaint.measureText(GameConstants.GAME_OVER_TEXT)))),
+                (float) (y + (0.5 * (GameConstants.SIZE.y - textPaint.getTextSize()))), textPaint);
     }
 
     @Override

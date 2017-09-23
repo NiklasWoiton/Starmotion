@@ -2,15 +2,12 @@ package com.starproductions.starmotion.starmotion;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.util.Log;
 
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
-import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 import com.starproductions.starmotion.starmotion.GameObjects.SpaceShip;
 
 import java.util.ArrayList;
 
-import static android.content.ContentValues.TAG;
 import static com.starproductions.starmotion.starmotion.GameConstants.GRID_CONSTANT;
 
 /**
@@ -38,23 +35,23 @@ public class CollisionManager {
 
     public void update(ArrayList<Actor> actors) {
         this.actors = actors;
-        grid = new ArrayList [rows][columns];
+        grid = new ArrayList[rows][columns];
         assignActors();
         findPossibleCollisions();
     }
 
-    private void assignActors(){
+    private void assignActors() {
         for (int i = 0; i < actors.size(); i++) {
             Actor actor = actors.get(i);
             Rect hitBox = actor.getHitBox();
             int leftColumn = (int) (hitBox.left / rectWidth);
             int rightColumn = (int) (hitBox.right / rectWidth);
-            for (;leftColumn <= rightColumn; leftColumn++){
+            for (; leftColumn <= rightColumn; leftColumn++) {
                 int topRow = (int) (hitBox.top / rectHeight);
                 int bottomRow = (int) (hitBox.bottom / rectHeight);
-                if(leftColumn >= 0 && leftColumn < columns){
-                    for (;topRow <= bottomRow; topRow++){
-                        if(topRow >= 0 && topRow < rows){
+                if (leftColumn >= 0 && leftColumn < columns) {
+                    for (; topRow <= bottomRow; topRow++) {
+                        if (topRow >= 0 && topRow < rows) {
                             if (grid[topRow][leftColumn] == null) {
                                 grid[topRow][leftColumn] = new ArrayList<>();
                             }
@@ -84,7 +81,7 @@ public class CollisionManager {
     }
 
     private void collisionDetection(Actor one, Actor two) {
-        if (one.isPlayer() != two.isPlayer()){
+        if (one.isPlayer() != two.isPlayer()) {
             if (one.getHitBox().intersect(two.getHitBox())) {
                 one.onCollide(two);
                 two.onCollide(one);

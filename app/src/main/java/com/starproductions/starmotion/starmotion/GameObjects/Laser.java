@@ -17,13 +17,13 @@ class Laser extends Actor {
 
     protected double speedX = 1;
     protected double speedY = 1;
-    
 
-    Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY){
+
+    Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {
         super(gameEngine);
 
-        this.x = posX - asset.getWidth()/2;
-        if (speedY > 0){
+        this.x = posX - asset.getWidth() / 2;
+        if (speedY > 0) {
             this.y = posY;
         } else {
             this.y = posY - asset.getHeight();
@@ -38,7 +38,9 @@ class Laser extends Actor {
     }
 
     @Override
-    public boolean isPlayer(){return false;}
+    public boolean isPlayer() {
+        return false;
+    }
 
     @Override
     public Rect getHitBox() {
@@ -52,7 +54,7 @@ class Laser extends Actor {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.bullet_red);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.bullet_red);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR_STRAIGHT);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
@@ -60,7 +62,7 @@ class Laser extends Actor {
 
     @Override
     public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float)(x + speedX*extrapolation), (float)(y + speedY*extrapolation), null);
+        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
     }
 
     @Override

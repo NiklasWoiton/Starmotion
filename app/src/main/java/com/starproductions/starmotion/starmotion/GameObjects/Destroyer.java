@@ -7,11 +7,8 @@ import android.graphics.Rect;
 
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
-import com.starproductions.starmotion.starmotion.Powerups.PowerupTypes;
 import com.starproductions.starmotion.starmotion.R;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
-
-import java.util.Random;
 
 import static java.lang.Math.random;
 
@@ -30,10 +27,10 @@ public class Destroyer extends SpaceShip implements EnemyShip {
 
     /**
      * @param gameEngine: the GameEngine
-     * @param x: the initial x position of the ship
-     * @param y: the initial y position of the Ship
+     * @param x:          the initial x position of the ship
+     * @param y:          the initial y position of the Ship
      */
-    public Destroyer(GameEngine gameEngine, double x, double y){
+    public Destroyer(GameEngine gameEngine, double x, double y) {
         super(gameEngine);
         this.x = x;
         this.y = y;
@@ -41,7 +38,7 @@ public class Destroyer extends SpaceShip implements EnemyShip {
 
     @Override
     protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources() , R.drawable.spaceship_destroyer);
+        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.spaceship_destroyer);
         int newWidth = (int) (GameConstants.SIZE.x * GameConstants.DESTROYER_SCALE_FACTOR);
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
@@ -57,13 +54,15 @@ public class Destroyer extends SpaceShip implements EnemyShip {
     @Override
     public void onCollide(Collidable obstacle) {
         health--;
-        if(health <= 0){
+        if (health <= 0) {
             onDeath();
         }
     }
 
     @Override
-    public boolean isPlayer(){return false;}
+    public boolean isPlayer() {
+        return false;
+    }
 
     @Override
     public Rect getHitBox() {
@@ -77,7 +76,7 @@ public class Destroyer extends SpaceShip implements EnemyShip {
 
     @Override
     public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float)(x + speedX*extrapolation), (float)(y + speedY*extrapolation), null);
+        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
     }
 
     @Override
@@ -86,33 +85,34 @@ public class Destroyer extends SpaceShip implements EnemyShip {
         updateShooting();
     }
 
-    public void updateSpeed(){
+    public void updateSpeed() {
         x += speedX;
         y += speedY;
         framesTillTurn--;
-        if(x <= 0) speedX = GameConstants.DESTROYER_SPEED_X;
-        else if(x >= GameConstants.SIZE.x - getHitBox().width()) speedX = -GameConstants.DESTROYER_SPEED_X;
-        else if(framesTillTurn <= 0){
+        if (x <= 0) speedX = GameConstants.DESTROYER_SPEED_X;
+        else if (x >= GameConstants.SIZE.x - getHitBox().width())
+            speedX = -GameConstants.DESTROYER_SPEED_X;
+        else if (framesTillTurn <= 0) {
             speedX *= -1;
             framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
         }
     }
 
-    public void updateShooting(){
+    public void updateShooting() {
         framesTillShooting--;
 
-        if (framesTillShooting <= 0){
+        if (framesTillShooting <= 0) {
             shoot();
             calcShootingInterval();
         }
     }
 
-    public void calcShootingInterval(){
+    public void calcShootingInterval() {
         framesTillShooting = GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - (int) (random() *
                 (GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MAX - GameConstants.MS_BETWEEN_DESTROYER_SHOTS_MIN));
     }
 
-    public void onDeath(){
+    public void onDeath() {
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.DESTROYER_SCORE);
         gameEngine.playSound(SoundEffects.Explosion);

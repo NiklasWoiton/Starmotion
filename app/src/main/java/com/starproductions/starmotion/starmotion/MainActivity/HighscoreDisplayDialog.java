@@ -19,8 +19,7 @@ import java.util.ArrayList;
 public class HighscoreDisplayDialog extends DialogFragment {
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         ScoreManager scoreManager = new ScoreManager(getActivity());
         scoreManager.start();
         ArrayList<Score> scores = scoreManager.getAllScores();
@@ -46,11 +45,11 @@ public class HighscoreDisplayDialog extends DialogFragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         Button positive = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
         positive.setTextColor(getResources().getColor(R.color.colorStarmotionYellow));
         positive.setBackgroundColor(getResources().getColor(R.color.black));
-}
+    }
 
 }

@@ -1,8 +1,8 @@
 package com.starproductions.starmotion.starmotion.GameActivity;
 
 import android.content.Context;
-import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
@@ -29,8 +29,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         if (!displayThread.getIsRunning()) {
             displayThread = new DisplayThread(getHolder(), gameEngine);
             displayThread.start();
-        }
-        else {
+        } else {
             displayThread.start();
         }
     }
@@ -49,8 +48,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
             try {
                 displayThread.join();
                 retry = false;
+            } catch (InterruptedException ignored) {
             }
-            catch (InterruptedException ignored) {}
     }
 
 

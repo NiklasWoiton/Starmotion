@@ -5,9 +5,10 @@ import android.provider.BaseColumns;
 /**
  * A contract class that represents the Database
  */
-final class StarmotionContract{
+final class StarmotionContract {
 
-    private StarmotionContract(){}
+    private StarmotionContract() {
+    }
 
     static class ScoreEntry implements BaseColumns {
         static final String TABLE_NAME = "scores";

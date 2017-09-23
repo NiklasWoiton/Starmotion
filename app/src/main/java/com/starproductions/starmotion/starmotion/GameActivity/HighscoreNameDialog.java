@@ -15,8 +15,7 @@ public class HighscoreNameDialog extends DialogFragment {
 
 
     @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState)
-    {
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.DarkAlertStyle);
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
@@ -25,7 +24,7 @@ public class HighscoreNameDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 GameActivity gameActivity = (GameActivity) getActivity();
-                EditText input = ((AlertDialog)dialogInterface).findViewById(R.id.dialog_name_highscore_input);
+                EditText input = ((AlertDialog) dialogInterface).findViewById(R.id.dialog_name_highscore_input);
                 gameActivity.saveScore(input.getText().toString());
             }
         });
@@ -34,7 +33,7 @@ public class HighscoreNameDialog extends DialogFragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         Button positive = ((AlertDialog) getDialog()).getButton(AlertDialog.BUTTON_POSITIVE);
         positive.setTextColor(getResources().getColor(R.color.colorStarmotionYellow));

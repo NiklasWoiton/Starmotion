@@ -17,10 +17,10 @@ class ScoreDbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "Starmotion.db";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + StarmotionContract.ScoreEntry.TABLE_NAME + " (" +
-            StarmotionContract.ScoreEntry._ID + " INTEGER PRIMARY KEY," +
-            StarmotionContract.ScoreEntry.COLUMN_NAME_PLAYERNAME + " TEXT," +
-            StarmotionContract.ScoreEntry.COLUMN_NAME_SCORE + " INT)";
-    private static final String SQL_DELETE_ENTRIES ="DROP TABLE IF EXISTS " + StarmotionContract.ScoreEntry.TABLE_NAME;
+                    StarmotionContract.ScoreEntry._ID + " INTEGER PRIMARY KEY," +
+                    StarmotionContract.ScoreEntry.COLUMN_NAME_PLAYERNAME + " TEXT," +
+                    StarmotionContract.ScoreEntry.COLUMN_NAME_SCORE + " INT)";
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + StarmotionContract.ScoreEntry.TABLE_NAME;
 
     private SQLiteDatabase db = null;
 
@@ -40,17 +40,17 @@ class ScoreDbHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    void openDatabase(){
-        if(db == null || !db.isOpen())
+    void openDatabase() {
+        if (db == null || !db.isOpen())
             db = getWritableDatabase();
     }
 
-    void closeDatabase(){
-        if(db != null && db.isOpen())
+    void closeDatabase() {
+        if (db != null && db.isOpen())
             db.close();
     }
 
-    long insertScore(String playername, int score){
+    long insertScore(String playername, int score) {
         ContentValues values = new ContentValues();
         values.put(StarmotionContract.ScoreEntry.COLUMN_NAME_PLAYERNAME, playername);
         values.put(StarmotionContract.ScoreEntry.COLUMN_NAME_SCORE, score);
@@ -58,7 +58,7 @@ class ScoreDbHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    Cursor readAllScores(){
+    Cursor readAllScores() {
         String[] projection = {
                 StarmotionContract.ScoreEntry._ID,
                 StarmotionContract.ScoreEntry.COLUMN_NAME_PLAYERNAME,
@@ -71,7 +71,7 @@ class ScoreDbHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void deleteScores(int... scoreIds){
+    void deleteScores(int... scoreIds) {
         String selection = StarmotionContract.ScoreEntry._ID + " = ?";
         String[] selectionArgs = Arrays.toString(scoreIds).split("[\\[\\]]")[1].split(", ");
         db.delete(StarmotionContract.ScoreEntry.TABLE_NAME, selection, selectionArgs);

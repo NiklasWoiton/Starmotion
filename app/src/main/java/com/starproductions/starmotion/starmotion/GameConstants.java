@@ -3,8 +3,6 @@ package com.starproductions.starmotion.starmotion;
 import android.graphics.Color;
 import android.graphics.Point;
 
-import com.starproductions.starmotion.starmotion.Powerups.PowerupTypes;
-
 /**
  * Created by jakob on 20.07.2017.
  */
@@ -32,7 +30,6 @@ public final class GameConstants {
 
     //Values for Fighter
     public static final double FIGHTER_SCALE_FACTOR = 0.06;
-    public static final int FIGHTER_HEALTH = 1;
     public static final int FIGHTER_SCORE = 100;
     public static final double FIGHTER_SPEED_Y = 0.6;
     public static final double FIGHTER_SPEED_X = 0.3;
@@ -72,6 +69,8 @@ public final class GameConstants {
     public static final int MS_BETWEEN_SHIPS_MIN = 1000;
     public static final int SCORE_WITH_MAX_SHIPS = 10000;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
+    public static final double SPAWN_CHANCE_FIGHTER_SQUADRON = 0.7;
+    public static final double SPAWN_CHANCE_DESTROYER = 0.3;
 
     //Values for Collisions
     public static final int GRID_CONSTANT = 10;

@@ -3,11 +3,11 @@ package com.starproductions.starmotion.starmotion.ScoreSystem;
 /**
  * Stores score data like the playername and the score
  */
-public class Score{
+public class Score {
     private final int id, score;
     private final String playername;
 
-    public Score(int id, int score, String playername){
+    public Score(int id, int score, String playername) {
         this.id = id;
         this.score = score;
         this.playername = playername;

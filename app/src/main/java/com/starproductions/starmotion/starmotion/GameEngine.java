@@ -41,14 +41,14 @@ public class GameEngine {
     private boolean gameOver = false;
     private int gameOverFrameCounter = (int) (GameConstants.GAME_OVER_SHOW_TIME_MS / GameConstants.MS_PER_UPDATE);
 
-    public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager, GameActivity gameActivity){
+    public GameEngine(Resources resources, InputManager inputManager, SoundEffectManager soundEffectManager, GameActivity gameActivity) {
         this.resources = resources;
         this.soundEffectManager = soundEffectManager;
         this.gameActivity = gameActivity;
-        activeSpace = new Rect( (int) (GameConstants.SIZE.x*-GameConstants.DESPAWN_BORDER_FACTOR),
-                                (int) (GameConstants.SIZE.y*-GameConstants.DESPAWN_BORDER_FACTOR),
-                                (int) (GameConstants.SIZE.x*(GameConstants.DESPAWN_BORDER_FACTOR + 1)),
-                                (int) (GameConstants.SIZE.y*(GameConstants.DESPAWN_BORDER_FACTOR + 1)));
+        activeSpace = new Rect((int) (GameConstants.SIZE.x * -GameConstants.DESPAWN_BORDER_FACTOR),
+                (int) (GameConstants.SIZE.y * -GameConstants.DESPAWN_BORDER_FACTOR),
+                (int) (GameConstants.SIZE.x * (GameConstants.DESPAWN_BORDER_FACTOR + 1)),
+                (int) (GameConstants.SIZE.y * (GameConstants.DESPAWN_BORDER_FACTOR + 1)));
 
         objectSpawner = new ObjectSpawner(this);
         PlayerShip playerShip = new PlayerShip(this, inputManager);
@@ -57,7 +57,7 @@ public class GameEngine {
         powerupFactory = new PowerupFactory(this, playerShip);
     }
 
-    public PowerupFactory getPowerupFactory(){
+    public PowerupFactory getPowerupFactory() {
         return powerupFactory;
     }
 
@@ -65,12 +65,12 @@ public class GameEngine {
         return scoreHolder;
     }
 
-    public void playSound(SoundEffects soundEffect){
+    public void playSound(SoundEffects soundEffect) {
         soundEffectManager.playSound(soundEffect);
     }
 
-    public void update(){
-        if (gameOver){
+    public void update() {
+        if (gameOver) {
             gameOverFrameCounter--;
             if (gameOverFrameCounter == 0) gameActivity.gameFinished(scoreHolder.getScore());
             return;
@@ -78,18 +78,18 @@ public class GameEngine {
         collisionManager.update(gameActors);
         checkOutOfScreen();
         objectSpawner.update();
-        for (GameObject gameObject: gameActors){
+        for (GameObject gameObject : gameActors) {
             gameObject.update();
         }
         refreshGameObjectsList();
     }
 
-    public void draw(Canvas canvas, double extrapolation){
+    public void draw(Canvas canvas, double extrapolation) {
         background.draw(canvas, extrapolation);
-        for (Actor actor: gameActors){
+        for (Actor actor : gameActors) {
             actor.draw(canvas, extrapolation);
         }
-        for(HudObject hudObject: hudObjects){
+        for (HudObject hudObject : hudObjects) {
             hudObject.draw(canvas, extrapolation);
         }
     }
@@ -106,37 +106,37 @@ public class GameEngine {
         }
     }
 
-    private void refreshGameObjectsList(){
-        for (GameObject gameObject: toAdd){
-            if(gameObject instanceof Actor)
+    private void refreshGameObjectsList() {
+        for (GameObject gameObject : toAdd) {
+            if (gameObject instanceof Actor)
                 gameActors.add((Actor) gameObject);
-            else if(gameObject instanceof HudObject)
+            else if (gameObject instanceof HudObject)
                 hudObjects.add((HudObject) gameObject);
         }
         toAdd.clear();
-        for (GameObject gameObject: toRemove){
-            if(gameObject instanceof Actor)
+        for (GameObject gameObject : toRemove) {
+            if (gameObject instanceof Actor)
                 gameActors.remove(gameObject);
-            else if(gameObject instanceof HudObject)
+            else if (gameObject instanceof HudObject)
                 hudObjects.remove(gameObject);
         }
         toRemove.clear();
     }
 
-    public void registerGameObject(GameObject gameObject){
+    public void registerGameObject(GameObject gameObject) {
         toAdd.add(gameObject);
         Log.d("GameObject Count", "registeredGameObjects: " + gameActors.size());
     }
 
-    public void deregisterGameObject(GameObject gameObject){
+    public void deregisterGameObject(GameObject gameObject) {
         toRemove.add(gameObject);
     }
 
-    public Resources getResources(){
+    public Resources getResources() {
         return resources;
     }
 
-    public void gameOver(){
+    public void gameOver() {
         new GameOver(this);
         gameOver = true;
     }

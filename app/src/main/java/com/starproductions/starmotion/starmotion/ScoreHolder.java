@@ -15,7 +15,7 @@ public class ScoreHolder {
         this.score = score;
     }
 
-    public void addScore(int score){
+    public void addScore(int score) {
         this.score += score;
     }
 }
