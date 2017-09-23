@@ -14,7 +14,7 @@ import static com.starproductions.starmotion.starmotion.GameConstants.GRID_CONST
  * Created by Admin on 23.07.2017.
  */
 
-public class CollisionManager {
+class CollisionManager {
 
     private ArrayList<Actor> actors;
     private ArrayList<Actor>[][] grid;
@@ -23,7 +23,7 @@ public class CollisionManager {
     private int rows;
     private int columns;
 
-    public CollisionManager() {
+    CollisionManager() {
         int displayWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
         int displayHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
         float aspectRatio = (float) displayWidth / displayHeight;

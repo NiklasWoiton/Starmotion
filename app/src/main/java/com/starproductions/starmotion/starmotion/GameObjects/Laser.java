@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.util.Log;
 
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
@@ -15,8 +16,8 @@ import com.starproductions.starmotion.starmotion.R;
 
 class Laser extends Actor {
 
-    protected double speedX = 1;
-    protected double speedY = 1;
+    protected double speedX;
+    protected double speedY;
 
 
     Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {

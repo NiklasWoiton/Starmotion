@@ -21,8 +21,10 @@ public final class GameConstants {
 
     //Values for Lasers
     public static final double LASER_SCALE_FACTOR_STRAIGHT = 0.0125;
+    public static final double LASER_SCALE_FACTOR_ROUND = 0.04;
     public static final double LASER_SPEED_FIGHTER = 1.5;
     public static final double LASER_SPEED_DESTROYER = 1;
+    public static final double LASER_SPEED_DISK = 0.7;
 
     //Values for Enemy Ships
     public static final int MS_BETWEEN_ENEMY_SHOTS_MIN = 1000;
@@ -51,12 +53,26 @@ public final class GameConstants {
     public static final int MS_BETWEEN_DESTROYER_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN / DESTROYER_INTERVAL_MOD);
     public static final int MS_BETWEEN_DESTROYER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX / DESTROYER_INTERVAL_MOD);
 
+    //Values for Disk
+    public static final double DISK_SCALE_FACTOR = 0.1;
+    public static final int DISK_HEALTH = 2;
+    public static final int DISK_SCORE = 400;
+    public static final double DISK_SPEED_Y = 0.3;
+    public static final double DISK_SPEED_X = 0.2;
+    public static final int DISK_FRAMES_TILL_TURN = 1500;
+    public static final double DISK_POWERUP_DROPCHANCE = 0.6;
+    public static final double DISK_INTERVAL_MOD = 2;
+    public static final int MS_BETWEEN_DISK_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN / DISK_INTERVAL_MOD);
+    public static final int MS_BETWEEN_DISK_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX / DISK_INTERVAL_MOD);
+
     //Values for PowerUps
     public static final double POWERUP_SCALE_FACTOR = 0.04;
     public static final double FIREUP_FACTOR = 0.2;
     public static final double POWERUP_DROPCHANCE_LIFEUP = 0.4;
     public static final double POWERUP_DROPCHANCE_FIREUP = 0.4;
     public static final double POWERUP_DROPCHANCE_MULTISHOOT = 0.2;
+    public static final int POWERUP_MULTISHOOT_MAX = 7;
+
 
     //Values for Player
     public static final int MS_BETWEEN_PLAYER_SHOOTS = 1000;
@@ -69,8 +85,10 @@ public final class GameConstants {
     public static final int MS_BETWEEN_SHIPS_MIN = 1000;
     public static final int SCORE_WITH_MAX_SHIPS = 10000;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
-    public static final double SPAWN_CHANCE_FIGHTER_SQUADRON = 0.7;
+    public static final double SPAWN_CHANCE_FIGHTER_SQUADRON = 0.6;
     public static final double SPAWN_CHANCE_DESTROYER = 0.3;
+    public static final double SPAWN_CHANCE_DISK = 0.1;
+
 
     //Values for Collisions
     public static final int GRID_CONSTANT = 10;

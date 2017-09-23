@@ -1,6 +1,7 @@
 package com.starproductions.starmotion.starmotion;
 
 import com.starproductions.starmotion.starmotion.GameObjects.Destroyer;
+import com.starproductions.starmotion.starmotion.GameObjects.Disk;
 import com.starproductions.starmotion.starmotion.GameObjects.Fighter;
 
 import static java.lang.Math.random;
@@ -42,6 +43,11 @@ class ObjectSpawner {
             random -= GameConstants.SPAWN_CHANCE_FIGHTER_SQUADRON;
             if (random < GameConstants.SPAWN_CHANCE_DESTROYER) {
                 new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR * GameConstants.SIZE.y);
+            }else{
+                random -= GameConstants.SPAWN_CHANCE_DESTROYER;
+                if (random < GameConstants.SPAWN_CHANCE_DISK){
+                    new Disk(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR * GameConstants.SIZE.y);
+                }
             }
         }
     }

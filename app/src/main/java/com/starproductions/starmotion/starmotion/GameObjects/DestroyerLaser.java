@@ -11,9 +11,9 @@ import com.starproductions.starmotion.starmotion.R;
  * Created by Admin on 21.09.2017.
  */
 
-class SlowLaser extends Laser {
+class DestroyerLaser extends Laser {
 
-    SlowLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {
+    DestroyerLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {
         super(gameEngine, posX, posY, speedX, speedY);
     }
 
