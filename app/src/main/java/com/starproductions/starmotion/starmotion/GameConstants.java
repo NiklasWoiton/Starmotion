@@ -71,7 +71,7 @@ public final class GameConstants {
     public static final double POWERUP_DROPCHANCE_LIFEUP = 0.4;
     public static final double POWERUP_DROPCHANCE_FIREUP = 0.4;
     public static final double POWERUP_DROPCHANCE_MULTISHOOT = 0.2;
-    public static final int POWERUP_MULTISHOOT_MAX = 7;
+    public static final int POWERUP_MULTISHOOT_MAX = 5;
 
 
     //Values for Player

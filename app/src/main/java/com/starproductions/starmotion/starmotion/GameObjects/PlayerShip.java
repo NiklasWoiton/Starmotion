@@ -91,21 +91,10 @@ public class PlayerShip extends SpaceShip implements Observer {
                     twinLasers();
                     sideLasers();
                     break;
-                case 5:
-                    frontLaser();
-                    twinLasers();
-                    sideLasers();
-                    break;
-                case 6:
-                    twinLasers();
-                    sideLasers();
-                    farSideLasers();
-                    break;
                 default:
                     frontLaser();
                     twinLasers();
                     sideLasers();
-                    farSideLasers();
                     break;
             }
             if (life > 0) gameEngine.playSound(SoundEffects.LaserShoot);
@@ -179,10 +168,5 @@ public class PlayerShip extends SpaceShip implements Observer {
     private void sideLasers() {
         new PlayerLaser(gameEngine, x + asset.getWidth() * 0.85, y + asset.getHeight() * 0.2, 0.2, -2);
         new PlayerLaser(gameEngine, x + asset.getWidth() * 0.15, y + asset.getHeight() * 0.2, -0.2, -2);
-    }
-
-    private void farSideLasers() {
-        new PlayerLaser(gameEngine, x + asset.getWidth(), y + asset.getHeight() * 0.3, 0.4, -2);
-        new PlayerLaser(gameEngine, x, y + asset.getHeight() * 0.3, -0.4, -2);
     }
 }
