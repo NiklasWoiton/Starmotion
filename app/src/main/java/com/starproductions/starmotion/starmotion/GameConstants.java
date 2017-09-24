@@ -80,7 +80,7 @@ public final class GameConstants {
     //Values for ObjectSpawner
     public static final int MS_BETWEEN_SHIPS_START = 3000;
     public static final double SPAWN_LOG_MOD = 0.2;
-    public static final double SPAWN_TYPE_LOG_MOD = 0.1;
+    public static final double SPAWN_TYPE_LOG_MOD = 0.13;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
     public static final double SPAWN_CHANCE_FIGHTER_SQUADRON_START = 0.6;
     public static final double SPAWN_CHANCE_DESTROYER_START = 0.3;
