@@ -17,8 +17,6 @@ import java.util.ArrayList;
 class ScoreAdapter extends ArrayAdapter<Score> {
 
     private ArrayList<Score> scoreArrayList;
-    private TextView name;
-    private TextView score;
     private Context context;
 
 

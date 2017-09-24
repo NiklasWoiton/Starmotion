@@ -2,7 +2,6 @@ package com.starproductions.starmotion.starmotion.GameActivity;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
-
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 
@@ -17,8 +16,6 @@ class DisplayThread extends Thread {
 
     private double previous = System.currentTimeMillis();
     private double lag = 0.0;
-
-    //TODO: Add Framerate
 
     DisplayThread(SurfaceHolder surfaceHolder, GameEngine gameEngine) {
         this.surfaceHolder = surfaceHolder;

@@ -107,20 +107,30 @@ public class GameEngine {
     }
 
     private void refreshGameObjectsList() {
-        for (GameObject gameObject : toAdd) {
-            if (gameObject instanceof Actor)
-                gameActors.add((Actor) gameObject);
-            else if (gameObject instanceof HudObject)
-                hudObjects.add((HudObject) gameObject);
+        try{
+            for (GameObject gameObject : toAdd) {
+                if (gameObject instanceof Actor)
+                    gameActors.add((Actor) gameObject);
+                else if (gameObject instanceof HudObject)
+                    hudObjects.add((HudObject) gameObject);
+            }
+            toAdd.clear();
         }
-        toAdd.clear();
-        for (GameObject gameObject : toRemove) {
-            if (gameObject instanceof Actor)
-                gameActors.remove(gameObject);
-            else if (gameObject instanceof HudObject)
-                hudObjects.remove(gameObject);
+        catch (Exception e){
+            Log.e("AddGameObjects", "Failed", e);
         }
-        toRemove.clear();
+
+        try {
+            for (GameObject gameObject : toRemove) {
+                if (gameObject instanceof Actor)
+                    gameActors.remove(gameObject);
+                else if (gameObject instanceof HudObject)
+                    hudObjects.remove(gameObject);
+            }
+            toRemove.clear();
+        } catch (Exception e){
+            Log.e("RemoveGameObjects", "Failed", e);
+        }
     }
 
     public void registerGameObject(GameObject gameObject) {
