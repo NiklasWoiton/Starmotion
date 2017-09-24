@@ -4,6 +4,7 @@ import com.starproductions.starmotion.starmotion.GameObjects.Destroyer;
 import com.starproductions.starmotion.starmotion.GameObjects.Disk;
 import com.starproductions.starmotion.starmotion.GameObjects.Fighter;
 
+import static java.lang.Math.log10;
 import static java.lang.Math.random;
 
 class ObjectSpawner {
@@ -12,6 +13,9 @@ class ObjectSpawner {
     private ScoreHolder scoreHolder;
     private int millisToNextShip = 0;
     private int lastShipXPos = -1000;
+
+    private double spawnChanceFighterSquadron;
+    private double spawnChanceDestroyer;
 
     ObjectSpawner(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
@@ -22,29 +26,19 @@ class ObjectSpawner {
         millisToNextShip -= GameConstants.MS_PER_UPDATE;
         if (millisToNextShip <= 0) {
             spawnShip();
-            millisToNextShip = (scoreHolder.getScore() >= GameConstants.SCORE_WITH_MAX_SHIPS) ? GameConstants.MS_BETWEEN_SHIPS_MIN : calcMillisToNextShip();
+            calcMillisToNextShip();
         }
     }
 
-    private int calcMillisToNextShip() {
-        return GameConstants.MS_BETWEEN_SHIPS_MAX - (int) ((GameConstants.MS_BETWEEN_SHIPS_MAX - GameConstants.MS_BETWEEN_SHIPS_MIN) *
-                (((double) scoreHolder.getScore() + 1) / (double) GameConstants.SCORE_WITH_MAX_SHIPS));
-    }
-
     private void spawnShip() {
+        updateSpawnChance();
         double random = Math.random();
-        if (random < GameConstants.SPAWN_CHANCE_FIGHTER_SQUADRON) {
+        if (random < spawnChanceFighterSquadron) {
             spawnFighterSquadron();
         } else {
-            random -= GameConstants.SPAWN_CHANCE_FIGHTER_SQUADRON;
-            if (random < GameConstants.SPAWN_CHANCE_DESTROYER) {
+            if (random < spawnChanceDestroyer + spawnChanceFighterSquadron) {
                 new Destroyer(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR * GameConstants.SIZE.y);
-            } else {
-                random -= GameConstants.SPAWN_CHANCE_DESTROYER;
-                if (random < GameConstants.SPAWN_CHANCE_DISK) {
-                    new Disk(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR * GameConstants.SIZE.y);
-                }
-            }
+            } else new Disk(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR * GameConstants.SIZE.y);
         }
     }
 
@@ -52,6 +46,12 @@ class ObjectSpawner {
         Fighter lead = new Fighter(gameEngine, calcShipXPos(), GameConstants.START_ENEMY_SHIPS_Y_FACTOR * GameConstants.SIZE.y);
         new Fighter(gameEngine, lead.getX() + lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
         new Fighter(gameEngine, lead.getX() - lead.getHitBox().width(), lead.getY() - lead.getHitBox().height());
+    }
+
+    private void updateSpawnChance(){
+        spawnChanceFighterSquadron  = GameConstants.SPAWN_CHANCE_FIGHTER_SQUADRON_START / calcSpawnTypeLogMod();
+        spawnChanceDestroyer = GameConstants.SPAWN_CHANCE_DESTROYER_START +
+                (GameConstants.SPAWN_CHANCE_FIGHTER_SQUADRON_START - spawnChanceFighterSquadron) * GameConstants.SPAWN_CHANCE_DESTROYER_INCREASE_MOD;
     }
 
     private int calcShipXPos() {
@@ -64,4 +64,15 @@ class ObjectSpawner {
         return posX;
     }
 
+    private void calcMillisToNextShip(){
+        millisToNextShip = (int) (GameConstants.MS_BETWEEN_SHIPS_START / calcSpawnLogMod());
+    }
+
+    private double calcSpawnLogMod(){
+        return 1 + log10(1 + scoreHolder.getScore()) * GameConstants.SPAWN_LOG_MOD;
+    }
+
+    private double calcSpawnTypeLogMod(){
+        return 1 + log10(1 + scoreHolder.getScore()) * GameConstants.SPAWN_TYPE_LOG_MOD;
+    }
 }
