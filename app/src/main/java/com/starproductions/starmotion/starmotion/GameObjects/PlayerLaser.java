@@ -30,6 +30,6 @@ class PlayerLaser extends Laser {
     public void move(){
         x += speedX;
         y += speedY;
-        if(x < 0) this.destroy();
+        if(x < -asset.getHeight()) this.destroy();
     }
 }
