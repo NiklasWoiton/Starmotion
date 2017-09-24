@@ -87,8 +87,8 @@ public final class GameConstants {
     public static final int SCORE_WITH_MAX_SHIPS = 10000;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
     public static final double SPAWN_CHANCE_FIGHTER_SQUADRON = 0.6;
-    public static final double SPAWN_CHANCE_DESTROYER = 0.25;
-    public static final double SPAWN_CHANCE_DISK = 0.15;
+    public static final double SPAWN_CHANCE_DESTROYER = 0.30;
+    public static final double SPAWN_CHANCE_DISK = 0.1;
 
 
     //Values for Collisions
