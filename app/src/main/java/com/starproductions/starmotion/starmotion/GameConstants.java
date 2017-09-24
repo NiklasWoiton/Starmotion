@@ -82,14 +82,13 @@ public final class GameConstants {
     public static final float PLAYER_SPEED_X = 700;
 
     //Values for ObjectSpawner
-    public static final int MS_BETWEEN_SHIPS_MAX = 2000;
-    public static final int MS_BETWEEN_SHIPS_MIN = 1000;
-    public static final int SCORE_WITH_MAX_SHIPS = 10000;
+    public static final int MS_BETWEEN_SHIPS_START = 2000;
+    public static final double SPAWN_LOG_MOD = 0.25;
+    public static final double SPAWN_TYPE_LOG_MOD = 0.2;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
-    public static final double SPAWN_CHANCE_FIGHTER_SQUADRON = 0.6;
-    public static final double SPAWN_CHANCE_DESTROYER = 0.30;
-    public static final double SPAWN_CHANCE_DISK = 0.1;
-
+    public static final double SPAWN_CHANCE_FIGHTER_SQUADRON_START = 0.6;
+    public static final double SPAWN_CHANCE_DESTROYER_START = 0.30;
+    public static final double SPAWN_CHANCE_DESTROYER_INCREASE_MOD = 0.5;
 
     //Values for Collisions
     public static final int GRID_CONSTANT = 10;

@@ -29,4 +29,11 @@ class PlayerLaser extends Laser {
         int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
         asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
     }
+
+    @Override
+    public void move(){
+        x += speedX;
+        y += speedY;
+        if(x < 0) this.destroy();
+    }
 }
