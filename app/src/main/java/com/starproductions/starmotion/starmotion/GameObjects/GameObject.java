@@ -15,8 +15,7 @@ public abstract class GameObject {
     protected GameEngine gameEngine;
     protected Bitmap asset;
 
-
-    public GameObject(GameEngine gameEngine) {
+    GameObject(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
         setAsset();
         gameEngine.registerGameObject(this);

@@ -7,7 +7,7 @@ import com.starproductions.starmotion.starmotion.GameEngine;
  */
 
 public abstract class SpaceShip extends Actor {
-    public SpaceShip(GameEngine gameEngine) {
+    SpaceShip(GameEngine gameEngine) {
         super(gameEngine);
     }
 

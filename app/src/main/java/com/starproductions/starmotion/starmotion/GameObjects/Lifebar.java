@@ -13,7 +13,7 @@ import com.starproductions.starmotion.starmotion.R;
  */
 
 public class Lifebar extends HudObject {
-    PlayerShip player;
+    private PlayerShip player;
 
     public Lifebar(GameEngine gameEngine, PlayerShip player) {
         super(gameEngine);

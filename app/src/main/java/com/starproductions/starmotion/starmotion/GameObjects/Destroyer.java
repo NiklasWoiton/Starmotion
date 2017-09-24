@@ -71,21 +71,6 @@ public class Destroyer extends SpaceShip implements EnemyShip {
 
     @Override
     public void move() {
-
-    }
-
-    @Override
-    public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
-    }
-
-    @Override
-    public void update() {
-        updateSpeed();
-        updateShooting();
-    }
-
-    public void updateSpeed() {
         x += speedX;
         y += speedY;
         framesTillTurn--;
@@ -96,6 +81,17 @@ public class Destroyer extends SpaceShip implements EnemyShip {
             speedX *= -1;
             framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
         }
+    }
+
+    @Override
+    public void draw(Canvas c, double extrapolation) {
+        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
+    }
+
+    @Override
+    public void update() {
+        move();
+        updateShooting();
     }
 
     public void updateShooting() {

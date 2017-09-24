@@ -8,8 +8,7 @@ import com.starproductions.starmotion.starmotion.GameEngine;
 
 public abstract class HudObject extends GameObject {
 
-    public HudObject(GameEngine gameEngine) {
+    HudObject(GameEngine gameEngine) {
         super(gameEngine);
     }
-
 }

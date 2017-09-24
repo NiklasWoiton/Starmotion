@@ -47,8 +47,10 @@ public class Disk extends SpaceShip implements EnemyShip {
 
     @Override
     void shoot() {
-        if(nextShootLeft)new DiskLaser(gameEngine, x + asset.getWidth() * 0.25, y + asset.getHeight() , -GameConstants.LASER_SPEED_DISK / 2, GameConstants.LASER_SPEED_DISK);
-        else new DiskLaser(gameEngine, x + asset.getWidth() * 0.75, y + asset.getHeight(), GameConstants.LASER_SPEED_DISK / 2, GameConstants.LASER_SPEED_DISK);
+        if (nextShootLeft)
+            new DiskLaser(gameEngine, x + asset.getWidth() * 0.25, y + asset.getHeight(), -GameConstants.LASER_SPEED_DISK / 2, GameConstants.LASER_SPEED_DISK);
+        else
+            new DiskLaser(gameEngine, x + asset.getWidth() * 0.75, y + asset.getHeight(), GameConstants.LASER_SPEED_DISK / 2, GameConstants.LASER_SPEED_DISK);
         nextShootLeft = !nextShootLeft;
         gameEngine.playSound(SoundEffects.LaserShoot);
     }
@@ -71,7 +73,16 @@ public class Disk extends SpaceShip implements EnemyShip {
 
     @Override
     public void move() {
-
+        x += speedX;
+        y += speedY;
+        framesTillTurn--;
+        if (x <= 0) speedX = GameConstants.DISK_SPEED_X;
+        else if (x >= GameConstants.SIZE.x - getHitBox().width())
+            speedX = -GameConstants.DISK_SPEED_X;
+        else if (framesTillTurn <= 0) {
+            speedX *= -1;
+            framesTillTurn = GameConstants.DISK_FRAMES_TILL_TURN;
+        }
     }
 
     @Override
@@ -81,20 +92,8 @@ public class Disk extends SpaceShip implements EnemyShip {
 
     @Override
     public void update() {
-        updateSpeed();
+        move();
         updateShooting();
-    }
-
-    public void updateSpeed() {
-        x += speedX;
-        y += speedY;
-        framesTillTurn--;
-        if (x <= 0) speedX = GameConstants.DISK_SPEED_X;
-        else if (x >= GameConstants.SIZE.x - getHitBox().width()) speedX = -GameConstants.DISK_SPEED_X;
-        else if (framesTillTurn <= 0) {
-            speedX *= -1;
-            framesTillTurn = GameConstants.DISK_FRAMES_TILL_TURN;
-        }
     }
 
     public void updateShooting() {

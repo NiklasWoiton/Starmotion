@@ -56,7 +56,7 @@ public final class GameConstants {
     //Values for Disk
     public static final double DISK_SCALE_FACTOR = 0.1;
     public static final int DISK_HEALTH = 2;
-    public static final int DISK_SCORE = 400;
+    public static final int DISK_SCORE = 350;
     public static final double DISK_SPEED_Y = 0.3;
     public static final double DISK_SPEED_X = 0.2;
     public static final int DISK_FRAMES_TILL_TURN = 1500;
@@ -72,6 +72,7 @@ public final class GameConstants {
     public static final double POWERUP_DROPCHANCE_FIREUP = 0.4;
     public static final double POWERUP_DROPCHANCE_MULTISHOOT = 0.2;
     public static final int POWERUP_MULTISHOOT_MAX = 5;
+    public static final double POWERUP_SPEED_Y = 0.8;
 
 
     //Values for Player
@@ -86,8 +87,8 @@ public final class GameConstants {
     public static final int SCORE_WITH_MAX_SHIPS = 10000;
     public static final double GAP_BETWEEN_ENEMY_SHIPS_X_FACTOR = 0.2;
     public static final double SPAWN_CHANCE_FIGHTER_SQUADRON = 0.6;
-    public static final double SPAWN_CHANCE_DESTROYER = 0.3;
-    public static final double SPAWN_CHANCE_DISK = 0.1;
+    public static final double SPAWN_CHANCE_DESTROYER = 0.25;
+    public static final double SPAWN_CHANCE_DISK = 0.15;
 
 
     //Values for Collisions
