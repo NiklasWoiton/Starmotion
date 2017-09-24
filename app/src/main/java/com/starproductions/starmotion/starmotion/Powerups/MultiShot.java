@@ -18,7 +18,7 @@ class MultiShot extends PowerupObject {
 
     @Override
     protected void applyEffect() {
-        if(player.getShootMultiplikator() <= GameConstants.POWERUP_MULTISHOOT_MAX){
+        if (player.getShootMultiplikator() <= GameConstants.POWERUP_MULTISHOOT_MAX) {
             int shootMultiplikator = player.getShootMultiplikator() + 1;
             player.setShootMultiplikator(shootMultiplikator);
         }

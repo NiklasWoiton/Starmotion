@@ -5,7 +5,5 @@ interface EnemyShip {
 
     void onDeath();
 
-    void updateSpeed();
-
     void updateShooting();
 }

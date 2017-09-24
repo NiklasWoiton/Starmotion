@@ -139,7 +139,7 @@ public class PlayerShip extends SpaceShip implements Observer {
     }
 
     private void onDamage() {
-        if(shootMultiplikator > 1){
+        if (shootMultiplikator > 1) {
             shootMultiplikator--;
         }
         setFireRate(fireRate - GameConstants.FIREUP_FACTOR);

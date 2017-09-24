@@ -7,5 +7,4 @@ public abstract class HudObject extends GameObject {
     HudObject(GameEngine gameEngine) {
         super(gameEngine);
     }
-
 }

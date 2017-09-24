@@ -3,6 +3,7 @@ package com.starproductions.starmotion.starmotion.Powerups;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.Collidable;
@@ -12,8 +13,7 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 abstract class PowerupObject extends Actor {
 
     protected PlayerShip player;
-    private double speedX = 0;
-    private double speedY = 1;
+    private double speedY = GameConstants.POWERUP_SPEED_Y;
 
     PowerupObject(GameEngine gameEngine, PlayerShip player) {
         super(gameEngine);
@@ -42,12 +42,11 @@ abstract class PowerupObject extends Actor {
 
     @Override
     public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
+        c.drawBitmap(asset, (float) x, (float) (y + speedY * extrapolation), null);
     }
 
     @Override
     public void update() {
-        x += speedX;
         y += speedY;
     }
 

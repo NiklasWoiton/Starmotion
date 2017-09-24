@@ -13,7 +13,7 @@ import static com.starproductions.starmotion.starmotion.GameConstants.GRID_CONST
 class CollisionManager {
 
     private ArrayList<Actor> actors;
-    private ArrayList<Actor>[][] grid;
+    private ArrayList[][] grid;
     private float rectWidth;
     private float rectHeight;
     private int rows;

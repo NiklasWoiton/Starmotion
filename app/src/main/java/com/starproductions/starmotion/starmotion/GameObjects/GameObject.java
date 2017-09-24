@@ -11,7 +11,6 @@ public abstract class GameObject {
     protected GameEngine gameEngine;
     protected Bitmap asset;
 
-
     GameObject(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
         setAsset();
