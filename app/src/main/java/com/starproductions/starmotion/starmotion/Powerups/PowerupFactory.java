@@ -4,10 +4,6 @@ import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 
-/**
- * Created by Shoggomo on 28.07.2017.
- */
-
 public class PowerupFactory {
     private GameEngine gameEngine;
     private PlayerShip player;

@@ -12,10 +12,6 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import static java.lang.Math.random;
 
-/**
- * Created by Admin on 18.09.2017.
- */
-
 public class Destroyer extends SpaceShip implements EnemyShip {
 
     private double speedX = GameConstants.DESTROYER_SPEED_X;

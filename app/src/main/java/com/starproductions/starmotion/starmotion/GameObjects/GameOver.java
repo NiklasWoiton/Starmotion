@@ -6,10 +6,6 @@ import android.text.TextPaint;
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 
-/**
- * Created by Jakob on 21.09.2017.
- */
-
 public class GameOver extends HudObject {
 
     private TextPaint textPaint;

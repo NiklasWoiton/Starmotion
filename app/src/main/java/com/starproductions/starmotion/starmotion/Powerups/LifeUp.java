@@ -8,7 +8,6 @@ import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 import com.starproductions.starmotion.starmotion.R;
 
-
 class LifeUp extends PowerupObject {
 
     LifeUp(GameEngine gameEngine, PlayerShip player, double x, double y) {

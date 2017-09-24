@@ -10,10 +10,6 @@ import java.util.ArrayList;
 
 import static com.starproductions.starmotion.starmotion.GameConstants.GRID_CONSTANT;
 
-/**
- * Created by Admin on 23.07.2017.
- */
-
 class CollisionManager {
 
     private ArrayList<Actor> actors;

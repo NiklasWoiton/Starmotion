@@ -8,12 +8,8 @@ import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.R;
 
-/**
- * Created by Shoggomo on 26.07.2017.
- */
-
 public class Lifebar extends HudObject {
-    PlayerShip player;
+    private PlayerShip player;
 
     public Lifebar(GameEngine gameEngine, PlayerShip player) {
         super(gameEngine);

@@ -7,10 +7,6 @@ import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.R;
 
-/**
- * Created by Admin on 21.09.2017.
- */
-
 class PlayerLaser extends Laser {
 
     PlayerLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {

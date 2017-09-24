@@ -10,10 +10,6 @@ import com.starproductions.starmotion.starmotion.R;
 
 import java.util.Random;
 
-/**
- * Created by Shoggomo on 21.09.2017.
- */
-
 public class Background extends GameObject {
     private float[] pts;
     private Paint p;

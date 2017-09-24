@@ -6,10 +6,6 @@ import com.starproductions.starmotion.starmotion.GameObjects.Fighter;
 
 import static java.lang.Math.random;
 
-/**
- * Created by jakob on 23.07.2017.
- */
-
 class ObjectSpawner {
 
     private GameEngine gameEngine;

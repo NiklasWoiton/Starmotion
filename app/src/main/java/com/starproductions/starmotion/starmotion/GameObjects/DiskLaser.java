@@ -8,10 +8,6 @@ import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.R;
 
-/**
- * Created by Admin on 21.09.2017.
- */
-
 class DiskLaser extends Laser {
 
     DiskLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {

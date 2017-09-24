@@ -8,10 +8,6 @@ import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 import com.starproductions.starmotion.starmotion.R;
 
-/**
- * Created by Admin on 17.09.2017.
- */
-
 class MultiShot extends PowerupObject {
 
     MultiShot(GameEngine gameEngine, PlayerShip player, double x, double y) {

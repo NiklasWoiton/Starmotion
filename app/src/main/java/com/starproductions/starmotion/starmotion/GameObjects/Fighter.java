@@ -12,10 +12,6 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
 import static java.lang.Math.random;
 
-/**
- * Created by jakob on 23.07.2017.
- */
-
 public class Fighter extends SpaceShip implements EnemyShip {
 
     private double speedX = GameConstants.FIGHTER_SPEED_X;

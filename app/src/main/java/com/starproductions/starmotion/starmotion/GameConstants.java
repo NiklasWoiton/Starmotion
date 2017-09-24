@@ -3,10 +3,6 @@ package com.starproductions.starmotion.starmotion;
 import android.graphics.Color;
 import android.graphics.Point;
 
-/**
- * Created by jakob on 20.07.2017.
- */
-
 public final class GameConstants {
 
     //Performance values

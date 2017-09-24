@@ -5,10 +5,6 @@ import android.graphics.Canvas;
 
 import com.starproductions.starmotion.starmotion.GameEngine;
 
-/**
- * Created by Shoggomo on 11.07.2017.
- */
-
 public abstract class GameObject {
 
     protected double x, y;
@@ -16,7 +12,7 @@ public abstract class GameObject {
     protected Bitmap asset;
 
 
-    public GameObject(GameEngine gameEngine) {
+    GameObject(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
         setAsset();
         gameEngine.registerGameObject(this);

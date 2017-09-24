@@ -10,14 +10,10 @@ import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.R;
 
-/**
- * Created by jakob on 24.07.2017.
- */
-
 class Laser extends Actor {
 
-    protected double speedX;
-    protected double speedY;
+    double speedX;
+    double speedY;
 
 
     Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {

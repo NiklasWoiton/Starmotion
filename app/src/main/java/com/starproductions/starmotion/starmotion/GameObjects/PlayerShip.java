@@ -15,10 +15,6 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by jakob on 23.07.2017.
- */
-
 public class PlayerShip extends SpaceShip implements Observer {
 
     private long lastShot = 0;
@@ -32,7 +28,7 @@ public class PlayerShip extends SpaceShip implements Observer {
         this.x = GameConstants.SIZE.x;
         this.y = GameConstants.SIZE.y * 0.9;
 
-        inputManager.setSpeed((float) GameConstants.PLAYER_SPEED_X);
+        inputManager.setSpeed(GameConstants.PLAYER_SPEED_X);
         inputManager.setMaxX(GameConstants.SIZE.x - asset.getWidth());
         inputManager.addObserver(this);
         inputManager.start();
