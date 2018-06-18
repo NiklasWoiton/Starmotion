@@ -101,14 +101,13 @@ public class Disk extends SpaceShip implements EnemyShip {
     }
 
     public void calcShootingInterval() {
-        framesTillShooting = GameConstants.MS_BETWEEN_DISK_SHOTS_MAX - (int) (random() *
-                (GameConstants.MS_BETWEEN_DISK_SHOTS_MAX - GameConstants.MS_BETWEEN_DISK_SHOTS_MIN));
+        framesTillShooting = (int) (GameConstants.MS_BETWEEN_DISK_SHOTS * (1 + 2 * random()));
     }
 
     public void onDeath() {
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.DISK_SCORE);
         gameEngine.playSound(SoundEffects.Explosion);
-        gameEngine.getPowerupFactory().createPowerup(x, y, GameConstants.DISK_POWERUP_DROPCHANCE);
+        gameEngine.getPowerupFactory().createPowerup(x, y, GameConstants.DISK_SCORE);
     }
 }

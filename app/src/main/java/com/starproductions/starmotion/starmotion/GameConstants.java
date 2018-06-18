@@ -23,8 +23,7 @@ public final class GameConstants {
     public static final double LASER_SPEED_DISK = 0.7;
 
     //Values for Enemy Ships
-    public static final int MS_BETWEEN_ENEMY_SHOTS_MIN = 1000;
-    public static final int MS_BETWEEN_ENEMY_SHOTS_MAX = 3000;
+    public static final int MS_BETWEEN_ENEMY_SHOTS = 1000;
 
     //Values for Fighter
     public static final double FIGHTER_SCALE_FACTOR = 0.06;
@@ -32,10 +31,8 @@ public final class GameConstants {
     public static final double FIGHTER_SPEED_Y = 0.6;
     public static final double FIGHTER_SPEED_X = 0.3;
     public static final int FIGHTER_FRAMES_TILL_TURN = 500;
-    public static final double FIGHTER_POWERUP_DROPCHANCE = 0.15;
     public static final double FIGHTER_INTERVAL_MOD = 1.5;
-    public static final int MS_BETWEEN_FIGHTER_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN / FIGHTER_INTERVAL_MOD);
-    public static final int MS_BETWEEN_FIGHTER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX / FIGHTER_INTERVAL_MOD);
+    public static final int MS_BETWEEN_FIGHTER_SHOTS = (int) (MS_BETWEEN_ENEMY_SHOTS / FIGHTER_INTERVAL_MOD);
 
     //Values for Destroyer
     public static final double DESTROYER_SCALE_FACTOR = 0.1;
@@ -44,10 +41,8 @@ public final class GameConstants {
     public static final double DESTROYER_SPEED_Y = 0.4;
     public static final double DESTROYER_SPEED_X = 0.2;
     public static final int DESTROYER_FRAMES_TILL_TURN = 500;
-    public static final double DESTROYER_POWERUP_DROPCHANCE = 0.3;
     public static final double DESTROYER_INTERVAL_MOD = 1;
-    public static final int MS_BETWEEN_DESTROYER_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN / DESTROYER_INTERVAL_MOD);
-    public static final int MS_BETWEEN_DESTROYER_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX / DESTROYER_INTERVAL_MOD);
+    public static final int MS_BETWEEN_DESTROYER_SHOTS = (int) (MS_BETWEEN_ENEMY_SHOTS / DESTROYER_INTERVAL_MOD);
 
     //Values for Disk
     public static final double DISK_SCALE_FACTOR = 0.1;
@@ -56,20 +51,17 @@ public final class GameConstants {
     public static final double DISK_SPEED_Y = 0.3;
     public static final double DISK_SPEED_X = 0.2;
     public static final int DISK_FRAMES_TILL_TURN = 1500;
-    public static final double DISK_POWERUP_DROPCHANCE = 0.6;
     public static final double DISK_INTERVAL_MOD = 2;
-    public static final int MS_BETWEEN_DISK_SHOTS_MIN = (int) (MS_BETWEEN_ENEMY_SHOTS_MIN / DISK_INTERVAL_MOD);
-    public static final int MS_BETWEEN_DISK_SHOTS_MAX = (int) (MS_BETWEEN_ENEMY_SHOTS_MAX / DISK_INTERVAL_MOD);
+    public static final int MS_BETWEEN_DISK_SHOTS = (int) (MS_BETWEEN_ENEMY_SHOTS / DISK_INTERVAL_MOD);
 
     //Values for PowerUps
     public static final double POWERUP_SCALE_FACTOR = 0.04;
     public static final double FIREUP_FACTOR = 0.2;
-    public static final double POWERUP_DROPCHANCE_LIFEUP = 0.4;
-    public static final double POWERUP_DROPCHANCE_FIREUP = 0.4;
+    public static final double POWERUP_DROPCHANCE_FIREUP = 0.6;
     public static final double POWERUP_DROPCHANCE_MULTISHOOT = 0.2;
     public static final int POWERUP_MULTISHOOT_MAX = 5;
     public static final double POWERUP_SPEED_Y = 0.8;
-
+    public static final double POWERUP_DROPCHANCE_PER_SCORE = 1000;
 
     //Values for Player
     public static final int MS_BETWEEN_PLAYER_SHOOTS = 1000;

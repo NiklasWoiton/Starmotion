@@ -88,8 +88,8 @@ public class Fighter extends SpaceShip implements EnemyShip {
     }
 
     public void calcShootingInterval() {
-        framesTillShooting = GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - (int) (random() *
-                (GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MAX - GameConstants.MS_BETWEEN_FIGHTER_SHOTS_MIN));
+        framesTillShooting = (int) (GameConstants.MS_BETWEEN_FIGHTER_SHOTS * (1 + 2 * random()));
+
     }
 
     public void updateShooting() {
@@ -104,6 +104,6 @@ public class Fighter extends SpaceShip implements EnemyShip {
         this.destroy();
         gameEngine.getScoreHolder().addScore(GameConstants.FIGHTER_SCORE);
         gameEngine.playSound(SoundEffects.Explosion);
-        gameEngine.getPowerupFactory().createPowerup(x, y, GameConstants.FIGHTER_POWERUP_DROPCHANCE);
+        gameEngine.getPowerupFactory().createPowerup(x, y, GameConstants.FIGHTER_SCORE);
     }
 }

@@ -13,22 +13,16 @@ public class PowerupFactory {
         this.player = player;
     }
 
-    public void createPowerup(double x, double y, double dropChance) {
-        if (Math.random() < dropChance) {
-            double random = Math.random();
-            if (random < GameConstants.POWERUP_DROPCHANCE_LIFEUP) {
-                new LifeUp(gameEngine, player, x, y);
-            } else {
-                random -= GameConstants.POWERUP_DROPCHANCE_LIFEUP;
-                if (random < GameConstants.POWERUP_DROPCHANCE_FIREUP) {
-                    new FireUp(gameEngine, player, x, y);
-                } else {
-                    random -= GameConstants.POWERUP_DROPCHANCE_FIREUP;
-                    if (random < GameConstants.POWERUP_DROPCHANCE_MULTISHOOT) {
-                        new MultiShot(gameEngine, player, x, y);
-                    }
-                }
-            }
+
+    public void createPowerup(double x, double y, int score) {
+        double dropChance = score / GameConstants.POWERUP_DROPCHANCE_PER_SCORE;
+        double drop = Math.random();
+        if (drop < dropChance) {
+            if (drop < GameConstants.POWERUP_DROPCHANCE_MULTISHOOT / (1 + 0.5 * player.getShootMultiplikator()))
+                new MultiShot(gameEngine, player, x, y);
+            else if (drop < GameConstants.POWERUP_DROPCHANCE_FIREUP / player.getFireRate())
+                new FireUp(gameEngine, player, x, y);
+            else new LifeUp(gameEngine, player, x, y);
         }
     }
 }
