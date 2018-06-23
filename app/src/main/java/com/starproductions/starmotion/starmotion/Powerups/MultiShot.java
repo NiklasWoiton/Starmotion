@@ -1,8 +1,5 @@
 package com.starproductions.starmotion.starmotion.Powerups;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
@@ -11,29 +8,16 @@ import com.starproductions.starmotion.starmotion.R;
 class MultiShot extends PowerupObject {
 
     MultiShot(GameEngine gameEngine, PlayerShip player, double x, double y) {
-        super(gameEngine, player);
+        super(gameEngine, player, R.drawable.powerup_multishoot, GameConstants.POWERUP_SCALE_FACTOR);
         this.x = x;
         this.y = y;
     }
 
     @Override
     protected void applyEffect() {
-        if (player.getShootMultiplikator() <= GameConstants.POWERUP_MULTISHOOT_MAX) {
+        if (player.getShootMultiplikator() < GameConstants.POWERUP_MULTISHOOT_MAX) {
             int shootMultiplikator = player.getShootMultiplikator() + 1;
             player.setShootMultiplikator(shootMultiplikator);
         }
-    }
-
-    @Override
-    protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.powerup_multishoot);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.POWERUP_SCALE_FACTOR);
-        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
-        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
-    }
-
-    @Override
-    public void move() {
-
     }
 }
