@@ -22,7 +22,7 @@ public class PowerupFactory {
                 new MultiShot(gameEngine, player, x, y);
             else if (drop < GameConstants.POWERUP_DROPCHANCE_FIREUP / player.getFireRate())
                 new FireUp(gameEngine, player, x, y);
-            else new LifeUp(gameEngine, player, x, y);
+            else new HealthUp(gameEngine, player, x, y);
         }
     }
 }

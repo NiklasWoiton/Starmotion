@@ -1,25 +1,11 @@
 package com.starproductions.starmotion.starmotion.GameObjects;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.R;
 import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 
-import static java.lang.Math.random;
-
-public class Destroyer extends SpaceShip implements EnemyShip {
-
-    private double speedX = GameConstants.DESTROYER_SPEED_X;
-    private double speedY = GameConstants.DESTROYER_SPEED_Y;
-    private int health = GameConstants.DESTROYER_HEALTH;
-
-    private int framesTillShooting;
-    private int framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
+public class Destroyer extends EnemyShip {
 
     /**
      * @param gameEngine: the GameEngine
@@ -27,42 +13,19 @@ public class Destroyer extends SpaceShip implements EnemyShip {
      * @param y:          the initial y position of the Ship
      */
     public Destroyer(GameEngine gameEngine, double x, double y) {
-        super(gameEngine);
-        this.x = x;
-        this.y = y;
+        super(gameEngine, x, y, R.drawable.spaceship_destroyer, GameConstants.DESTROYER_SCALE_FACTOR);
+        this.speedX = GameConstants.DESTROYER_SPEED_X;
+        this.speedY = GameConstants.DESTROYER_SPEED_Y;
+        this.health = GameConstants.DESTROYER_HEALTH;
+        this.score = GameConstants.DESTROYER_SCORE;
+        this.framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
+        this.shootingCooldown = GameConstants.MS_BETWEEN_DESTROYER_SHOTS;
     }
 
     @Override
-    protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.spaceship_destroyer);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.DESTROYER_SCALE_FACTOR);
-        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
-        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
-    }
-
-    @Override
-    void shoot() {
-        new DestroyerLaser(gameEngine, x + asset.getWidth() * 0.25, y + asset.getHeight(), 0, GameConstants.LASER_SPEED_DESTROYER);
-        new DestroyerLaser(gameEngine, x + asset.getWidth() * 0.75, y + asset.getHeight(), 0, GameConstants.LASER_SPEED_DESTROYER);
+    public void shoot() {
+        laser();
         gameEngine.playSound(SoundEffects.LaserShoot);
-    }
-
-    @Override
-    public void onCollide(Collidable obstacle) {
-        health--;
-        if (health <= 0) {
-            onDeath();
-        }
-    }
-
-    @Override
-    public boolean isPlayer() {
-        return false;
-    }
-
-    @Override
-    public Rect getHitBox() {
-        return new Rect((int) x, (int) y, (int) (x + asset.getWidth()), (int) (y + asset.getHeight()));
     }
 
     @Override
@@ -70,43 +33,25 @@ public class Destroyer extends SpaceShip implements EnemyShip {
         x += speedX;
         y += speedY;
         framesTillTurn--;
-        if (x <= 0) speedX = GameConstants.DESTROYER_SPEED_X;
-        else if (x >= GameConstants.SIZE.x - getHitBox().width())
+        if (x <= 0) {
+            speedX = GameConstants.DESTROYER_SPEED_X;
+            framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
+        } else if (x >= GameConstants.SIZE.x - getHitBox().width()) {
             speedX = -GameConstants.DESTROYER_SPEED_X;
+            framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
+        }
         else if (framesTillTurn <= 0) {
             speedX *= -1;
             framesTillTurn = GameConstants.DESTROYER_FRAMES_TILL_TURN;
         }
     }
 
-    @Override
-    public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
+    private void laser() {
+        destroyerLaser(0.25);
+        destroyerLaser(0.75);
     }
 
-    @Override
-    public void update() {
-        move();
-        updateShooting();
-    }
-
-    public void updateShooting() {
-        framesTillShooting--;
-        if (framesTillShooting <= 0) {
-            shoot();
-            calcShootingInterval();
-        }
-    }
-
-    public void calcShootingInterval() {
-        framesTillShooting = (int) (GameConstants.MS_BETWEEN_DESTROYER_SHOTS * (1 + 2 * random()));
-
-    }
-
-    public void onDeath() {
-        this.destroy();
-        gameEngine.getScoreHolder().addScore(GameConstants.DESTROYER_SCORE);
-        gameEngine.playSound(SoundEffects.Explosion);
-        gameEngine.getPowerupFactory().createPowerup(x, y, GameConstants.DESTROYER_SCORE);
+    private void destroyerLaser(double horizontalOffset) {
+        new Laser(gameEngine, x + asset.getWidth() * horizontalOffset, y + asset.getHeight(), 0, GameConstants.LASER_SPEED_DESTROYER, R.drawable.laser_red, GameConstants.LASER_SCALE_FACTOR_STRAIGHT, false);
     }
 }

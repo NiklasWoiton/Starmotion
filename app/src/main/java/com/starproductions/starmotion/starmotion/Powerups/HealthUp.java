@@ -5,17 +5,17 @@ import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 import com.starproductions.starmotion.starmotion.R;
 
-class FireUp extends PowerupObject {
+class HealthUp extends PowerupObject {
 
-    FireUp(GameEngine gameEngine, PlayerShip player, double x, double y) {
-        super(gameEngine, player, R.drawable.powerup_fireup, GameConstants.POWERUP_SCALE_FACTOR);
+    HealthUp(GameEngine gameEngine, PlayerShip player, double x, double y) {
+        super(gameEngine, player, R.drawable.powerup_healthup, GameConstants.POWERUP_SCALE_FACTOR);
         this.x = x;
         this.y = y;
     }
 
     @Override
     protected void applyEffect() {
-        double newFireRate = player.getFireRate() + GameConstants.FIREUP_FACTOR;
-        player.setFireRate(newFireRate);
+        int newHealth = player.getHealth() + 1;
+        player.setHealth(newHealth);
     }
 }

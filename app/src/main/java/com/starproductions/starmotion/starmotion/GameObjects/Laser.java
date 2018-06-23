@@ -1,22 +1,13 @@
 package com.starproductions.starmotion.starmotion.GameObjects;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Rect;
-
-import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
-import com.starproductions.starmotion.starmotion.R;
 
 class Laser extends Actor {
 
-    double speedX;
-    double speedY;
+    protected boolean isPlayer;
 
-
-    Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {
-        super(gameEngine);
+    Laser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY, int drawable, double drawableScale, boolean isPlayer) {
+        super(gameEngine, drawable, drawableScale);
 
         this.x = posX - asset.getWidth() / 2;
         if (speedY > 0) {
@@ -26,6 +17,7 @@ class Laser extends Actor {
         }
         this.speedX = speedX;
         this.speedY = speedY;
+        this.isPlayer = isPlayer;
     }
 
     @Override
@@ -35,31 +27,14 @@ class Laser extends Actor {
 
     @Override
     public boolean isPlayer() {
-        return false;
+        return isPlayer;
     }
 
-    @Override
-    public Rect getHitBox() {
-        return new Rect((int) x, (int) y, (int) (x + asset.getWidth()), (int) (y + asset.getHeight()));
-    }
 
     @Override
     public void move() {
         x += speedX;
         y += speedY;
-    }
-
-    @Override
-    protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.bullet_red);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR_STRAIGHT);
-        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
-        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
-    }
-
-    @Override
-    public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float) (x + speedX * extrapolation), (float) (y + speedY * extrapolation), null);
     }
 
     @Override

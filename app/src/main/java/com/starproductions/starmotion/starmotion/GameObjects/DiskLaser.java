@@ -1,28 +1,16 @@
 package com.starproductions.starmotion.starmotion.GameObjects;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
-import com.starproductions.starmotion.starmotion.R;
 
 class DiskLaser extends Laser {
 
-    DiskLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY) {
-        super(gameEngine, posX, posY, speedX, speedY);
+    DiskLaser(GameEngine gameEngine, double posX, double posY, double speedX, double speedY, int drawable, double drawableScale, boolean isPlayer) {
+        super(gameEngine, posX, posY, speedX, speedY, drawable, drawableScale, isPlayer);
     }
 
     @Override
-    protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.bullet_round);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.LASER_SCALE_FACTOR_ROUND);
-        int newHeight = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
-        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeight, true);
-    }
-
-    @Override
-    public void update() {
+    public void move() {
         x += speedX;
         y += speedY;
         if (x <= 0) {

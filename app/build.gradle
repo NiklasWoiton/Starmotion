@@ -5,7 +5,7 @@ android {
     buildToolsVersion "28"
     defaultConfig {
         applicationId "com.starproductions.starmotion.starmotion"
-        minSdkVersion 19
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"

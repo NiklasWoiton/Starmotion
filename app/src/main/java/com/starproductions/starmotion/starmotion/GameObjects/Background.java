@@ -16,6 +16,7 @@ public class Background extends GameObject {
 
     public Background(GameEngine gameEngine) {
         super(gameEngine);
+        setAsset();
         p = new Paint();
         p.setColor(Color.WHITE);
         p.setStrokeWidth(3);

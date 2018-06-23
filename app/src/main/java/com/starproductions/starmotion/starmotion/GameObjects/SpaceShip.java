@@ -1,11 +1,6 @@
 package com.starproductions.starmotion.starmotion.GameObjects;
 
-import com.starproductions.starmotion.starmotion.GameEngine;
+public interface SpaceShip {
 
-public abstract class SpaceShip extends Actor {
-    SpaceShip(GameEngine gameEngine) {
-        super(gameEngine);
-    }
-
-    abstract void shoot();
+    void shoot();
 }

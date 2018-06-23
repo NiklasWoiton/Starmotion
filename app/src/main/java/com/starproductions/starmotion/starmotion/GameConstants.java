@@ -27,6 +27,7 @@ public final class GameConstants {
 
     //Values for Fighter
     public static final double FIGHTER_SCALE_FACTOR = 0.06;
+    public static final int FIGHTER_HEALTH = 1;
     public static final int FIGHTER_SCORE = 100;
     public static final double FIGHTER_SPEED_Y = 0.6;
     public static final double FIGHTER_SPEED_X = 0.3;
@@ -66,8 +67,10 @@ public final class GameConstants {
     //Values for Player
     public static final int MS_BETWEEN_PLAYER_SHOOTS = 1000;
     public static final double PLAYER_SHIP_SCALE_FACTOR = 0.1;
-    public static final int PLAYER_START_LIFE = 5;
+    public static final int PLAYER_START_HEALTH = 5;
     public static final float PLAYER_SPEED_X = 700;
+    public static final double PLAYER_FIRERATE_MIN = 1;
+    public static final double PLAYER_FIRERATE_MAX = 3;
 
     //Values for ObjectSpawner
     public static final int MS_BETWEEN_SHIPS_START = 3000;

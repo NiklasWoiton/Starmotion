@@ -1,8 +1,5 @@
 package com.starproductions.starmotion.starmotion.Powerups;
 
-import android.graphics.Canvas;
-import android.graphics.Rect;
-
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
@@ -13,13 +10,12 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 abstract class PowerupObject extends Actor {
 
     protected PlayerShip player;
-    private double speedY = GameConstants.POWERUP_SPEED_Y;
+    protected double speedY = GameConstants.POWERUP_SPEED_Y;
 
-    PowerupObject(GameEngine gameEngine, PlayerShip player) {
-        super(gameEngine);
+    PowerupObject(GameEngine gameEngine, PlayerShip player, int drawable, double drawableScale) {
+        super(gameEngine, drawable, drawableScale);
         this.player = player;
     }
-
 
     @Override
     public void onCollide(Collidable obstacle) {
@@ -36,19 +32,15 @@ abstract class PowerupObject extends Actor {
     }
 
     @Override
-    public Rect getHitBox() {
-        return new Rect((int) x, (int) y, (int) (x + asset.getWidth()), (int) (y + asset.getHeight()));
-    }
-
-    @Override
-    public void draw(Canvas c, double extrapolation) {
-        c.drawBitmap(asset, (float) x, (float) (y + speedY * extrapolation), null);
-    }
-
-    @Override
     public void update() {
+        move();
+    }
+
+    @Override
+    public void move() {
         y += speedY;
     }
 
     protected abstract void applyEffect();
+
 }

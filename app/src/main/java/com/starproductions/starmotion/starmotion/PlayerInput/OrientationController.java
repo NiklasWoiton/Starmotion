@@ -53,11 +53,11 @@ class OrientationController extends Observable implements SensorEventListener {
         float[] orientation = new float[3];
         SensorManager.getRotationMatrixFromVector(rotationMatrix, rotationVector);
         SensorManager.getOrientation(rotationMatrix, orientation);
-            /*
-             * [0] : azi, rotation around z axis
-             * [1] : pitch, rotation around x axis
-             * [2] : roll, rotation around y axis
-             * */
+        /*
+         * [0] : azi, rotation around z axis
+         * [1] : pitch, rotation around x axis
+         * [2] : roll, rotation around y axis
+         * */
         float azi = orientation[0];
         float pitch = orientation[1];
         float roll = orientation[2];

@@ -13,7 +13,6 @@ public abstract class GameObject {
 
     GameObject(GameEngine gameEngine) {
         this.gameEngine = gameEngine;
-        setAsset();
         gameEngine.registerGameObject(this);
     }
 

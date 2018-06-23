@@ -12,6 +12,7 @@ public class GameOver extends HudObject {
 
     public GameOver(GameEngine gameEngine) {
         super(gameEngine);
+        setAsset();
         x = GameConstants.SIZE.x * GameConstants.GAME_OVER_SIZE_X_FACTOR;
         y = GameConstants.SIZE.y * GameConstants.GAME_OVER_SIZE_Y_FACTOR;
     }

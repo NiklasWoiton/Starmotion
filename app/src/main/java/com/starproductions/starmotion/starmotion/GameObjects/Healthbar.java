@@ -8,11 +8,12 @@ import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
 import com.starproductions.starmotion.starmotion.R;
 
-public class Lifebar extends HudObject {
+public class Healthbar extends HudObject {
     private PlayerShip player;
 
-    public Lifebar(GameEngine gameEngine, PlayerShip player) {
+    public Healthbar(GameEngine gameEngine, PlayerShip player) {
         super(gameEngine);
+        setAsset();
         this.player = player;
         x = GameConstants.SIZE.x * 0.05;
         y = GameConstants.SIZE.y * 0.05;
@@ -29,7 +30,7 @@ public class Lifebar extends HudObject {
     @Override
     public void draw(Canvas c, double extrapolation) {
         float space = asset.getWidth();
-        for (int i = 0; i < player.getLife(); i++)
+        for (int i = 0; i < player.getHealth(); i++)
             c.drawBitmap(asset, (float) x + i * space, (float) y, null);
     }
 

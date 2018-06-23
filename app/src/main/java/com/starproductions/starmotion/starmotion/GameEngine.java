@@ -8,10 +8,11 @@ import android.util.Log;
 import com.starproductions.starmotion.starmotion.GameActivity.GameActivity;
 import com.starproductions.starmotion.starmotion.GameObjects.Actor;
 import com.starproductions.starmotion.starmotion.GameObjects.Background;
+import com.starproductions.starmotion.starmotion.GameObjects.Formation;
 import com.starproductions.starmotion.starmotion.GameObjects.GameObject;
 import com.starproductions.starmotion.starmotion.GameObjects.GameOver;
+import com.starproductions.starmotion.starmotion.GameObjects.Healthbar;
 import com.starproductions.starmotion.starmotion.GameObjects.HudObject;
-import com.starproductions.starmotion.starmotion.GameObjects.Lifebar;
 import com.starproductions.starmotion.starmotion.GameObjects.PlayerShip;
 import com.starproductions.starmotion.starmotion.GameObjects.ScoreDisplay;
 import com.starproductions.starmotion.starmotion.PlayerInput.InputManager;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 public class GameEngine {
 
     private ArrayList<Actor> gameActors = new ArrayList<>();
+    private ArrayList<Formation> formations = new ArrayList<>();
     private ArrayList<HudObject> hudObjects = new ArrayList<>();
     private ArrayList<GameObject> toAdd = new ArrayList<>();
     private ArrayList<GameObject> toRemove = new ArrayList<>();
@@ -52,7 +54,7 @@ public class GameEngine {
 
         objectSpawner = new ObjectSpawner(this);
         PlayerShip playerShip = new PlayerShip(this, inputManager);
-        new Lifebar(this, playerShip);
+        new Healthbar(this, playerShip);
         new ScoreDisplay(this);
         powerupFactory = new PowerupFactory(this, playerShip);
     }
@@ -81,6 +83,9 @@ public class GameEngine {
         for (GameObject gameObject : gameActors) {
             gameObject.update();
         }
+        for (GameObject gameObject : formations) {
+            gameObject.update();
+        }
         refreshGameObjectsList();
     }
 
@@ -107,16 +112,17 @@ public class GameEngine {
     }
 
     private void refreshGameObjectsList() {
-        try{
+        try {
             for (GameObject gameObject : toAdd) {
                 if (gameObject instanceof Actor)
                     gameActors.add((Actor) gameObject);
+                if (gameObject instanceof Formation)
+                    formations.add((Formation) gameObject);
                 else if (gameObject instanceof HudObject)
                     hudObjects.add((HudObject) gameObject);
             }
             toAdd.clear();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             Log.e("AddGameObjects", "Failed", e);
         }
 
@@ -128,7 +134,7 @@ public class GameEngine {
                     hudObjects.remove(gameObject);
             }
             toRemove.clear();
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("RemoveGameObjects", "Failed", e);
         }
     }

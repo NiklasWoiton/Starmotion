@@ -8,5 +8,7 @@ public interface Collidable {
     Rect getHitBox();
 
     boolean isPlayer();
+
+    void move();
 }
 

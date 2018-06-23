@@ -1,9 +1,6 @@
 package com.starproductions.starmotion.starmotion.GameObjects;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 
 import com.starproductions.starmotion.starmotion.GameConstants;
 import com.starproductions.starmotion.starmotion.GameEngine;
@@ -15,16 +12,16 @@ import com.starproductions.starmotion.starmotion.SoundEffects.SoundEffects;
 import java.util.Observable;
 import java.util.Observer;
 
-public class PlayerShip extends SpaceShip implements Observer {
+public class PlayerShip extends Actor implements Observer, SpaceShip {
 
     private long lastShot = 0;
-    private double fireRate = 1;
+    private double fireRate = GameConstants.PLAYER_FIRERATE_MIN;
 
     private int shootMultiplikator = 1;
-    private int life = GameConstants.PLAYER_START_LIFE;
+    private int health = GameConstants.PLAYER_START_HEALTH;
 
     public PlayerShip(GameEngine gameEngine, InputManager inputManager) {
-        super(gameEngine);
+        super(gameEngine, R.drawable.spaceship_player, GameConstants.PLAYER_SHIP_SCALE_FACTOR);
         this.x = GameConstants.SIZE.x;
         this.y = GameConstants.SIZE.y * 0.9;
 
@@ -34,12 +31,12 @@ public class PlayerShip extends SpaceShip implements Observer {
         inputManager.start();
     }
 
-    public int getLife() {
-        return life;
+    public int getHealth() {
+        return health;
     }
 
-    public void setLife(int life) {
-        this.life = life;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public double getFireRate() {
@@ -47,7 +44,7 @@ public class PlayerShip extends SpaceShip implements Observer {
     }
 
     public void setFireRate(double fireRate) {
-        if (fireRate <= 3 && fireRate >= 1) {
+        if (fireRate <= GameConstants.PLAYER_FIRERATE_MAX && fireRate >= GameConstants.PLAYER_FIRERATE_MIN) {
             this.fireRate = fireRate;
         }
     }
@@ -61,15 +58,7 @@ public class PlayerShip extends SpaceShip implements Observer {
     }
 
     @Override
-    protected void setAsset() {
-        Bitmap srcAsset = BitmapFactory.decodeResource(gameEngine.getResources(), R.drawable.spaceship_player);
-        int newWidth = (int) (GameConstants.SIZE.x * GameConstants.PLAYER_SHIP_SCALE_FACTOR);
-        int newHeigth = (int) ((double) srcAsset.getHeight() * ((double) newWidth / (double) srcAsset.getWidth()));
-        asset = Bitmap.createScaledBitmap(srcAsset, newWidth, newHeigth, true);
-    }
-
-    @Override
-    void shoot() {
+    public void shoot() {
         if (System.currentTimeMillis() - lastShot >= GameConstants.MS_BETWEEN_PLAYER_SHOOTS / fireRate) {
             lastShot = System.currentTimeMillis();
             switch (shootMultiplikator) {
@@ -93,13 +82,13 @@ public class PlayerShip extends SpaceShip implements Observer {
                     sideLasers();
                     break;
             }
-            if (life > 0) gameEngine.playSound(SoundEffects.LaserShoot);
+            if (health > 0) gameEngine.playSound(SoundEffects.LaserShoot);
         }
     }
 
     @Override
     public void onCollide(Collidable obstacle) {
-        if (obstacle instanceof Laser || obstacle instanceof Fighter) {
+        if (obstacle instanceof Laser || obstacle instanceof EnemyShip) {
             onDamage();
         }
     }
@@ -110,15 +99,13 @@ public class PlayerShip extends SpaceShip implements Observer {
     }
 
     @Override
-    public Rect getHitBox() {
-        return new Rect((int) x, (int) y, (int) (x + asset.getWidth()), (int) (y + asset.getHeight()));
-    }
-
-    @Override
     public void move() {
 
     }
 
+    /*
+     *Unique draw method, as PlayerShip has no fixed speed for extrapolation
+     */
     @Override
     public void draw(Canvas c, double extrapolation) {
         c.drawBitmap(asset, (float) x, (float) y, null);
@@ -143,9 +130,9 @@ public class PlayerShip extends SpaceShip implements Observer {
             shootMultiplikator--;
         }
         setFireRate(fireRate - GameConstants.FIREUP_FACTOR);
-        life--;
+        //health--;Todo, Bugtest
         gameEngine.playSound(SoundEffects.PlayerHit);
-        if (life <= 0) {
+        if (health <= 0) {
             this.destroy();
             gameEngine.playSound(SoundEffects.Explosion);
             gameEngine.gameOver();
@@ -153,16 +140,20 @@ public class PlayerShip extends SpaceShip implements Observer {
     }
 
     private void frontLaser() {
-        new PlayerLaser(gameEngine, x + asset.getWidth() / 2, y, 0, -2);
+        playerLaser(0.5, 0, 0, -2);
     }
 
     private void twinLasers() {
-        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.7, y + asset.getHeight() * 0.1, 0, -2);
-        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.3, y + asset.getHeight() * 0.1, 0, -2);
+        playerLaser(0.7, 0.1, 0, -2);
+        playerLaser(0.3, 0.1, 0, -2);
     }
 
     private void sideLasers() {
-        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.85, y + asset.getHeight() * 0.2, 0.2, -2);
-        new PlayerLaser(gameEngine, x + asset.getWidth() * 0.15, y + asset.getHeight() * 0.2, -0.2, -2);
+        playerLaser(0.85, 0.2, 0.2, -2);
+        playerLaser(0.15, 0.2, -0.2, -2);
+    }
+
+    private void playerLaser(double horizontalOffset, double verticalOffset, double horizontalSpeed, double verticalSpeed) {
+        new Laser(gameEngine, x + asset.getWidth() * horizontalOffset, y + asset.getHeight() * verticalOffset, horizontalSpeed, verticalSpeed, R.drawable.laser_blue, GameConstants.LASER_SCALE_FACTOR_STRAIGHT, true);
     }
 }
