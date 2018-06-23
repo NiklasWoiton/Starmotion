@@ -58,8 +58,9 @@ public final class GameConstants {
     //Values for PowerUps
     public static final double POWERUP_SCALE_FACTOR = 0.04;
     public static final double FIREUP_FACTOR = 0.2;
-    public static final double POWERUP_DROPCHANCE_FIREUP = 0.6;
-    public static final double POWERUP_DROPCHANCE_MULTISHOOT = 0.2;
+    public static final double POWERUP_DROPMOD_FIREUP = 3;
+    public static final double POWERUP_DROPMOD_MULTISHOOT = 1;
+    public static final double POWERUP_DROPMOD_HEALTHUP = 2;
     public static final int POWERUP_MULTISHOOT_MAX = 5;
     public static final double POWERUP_SPEED_Y = 0.8;
     public static final double POWERUP_DROPCHANCE_PER_SCORE = 1000;
