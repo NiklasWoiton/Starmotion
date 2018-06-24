@@ -20,13 +20,13 @@ public class PowerupFactory {
         this.gameEngine = gameEngine;
         this.player = player;
         initPowerups();
-        powerupDistribution();//Todo, Muss bei jeder Veränderung der Playerwerte angepasst werden
     }
 
 
     public void createPowerup(double x, double y, int score) {
-        double dropChance = score / GameConstants.POWERUP_DROPCHANCE_PER_SCORE;
+        double dropChance = score / GameConstants.POWERUP_DROP_CHANCE_PER_SCORE;
         double drop = Math.random();
+        powerupDistribution();//Todo, Wenn möglich nur bei Änderungen der Modifikatoren updaten.
         if (drop < dropChance) {
             drop = Math.random();
             for (int i = 0; i < powerupArray.size(); i++) {
@@ -49,10 +49,11 @@ public class PowerupFactory {
         }
     }
 
+    //Initialization and Implementation of Powerups
     private void initPowerups() {
-        addPowerup(PowerupTypes.Multishoot, GameConstants.POWERUP_DROPMOD_MULTISHOOT);
-        addPowerup(PowerupTypes.Fireup, GameConstants.POWERUP_DROPMOD_FIREUP);
-        addPowerup(PowerupTypes.Healthup, GameConstants.POWERUP_DROPMOD_HEALTHUP);
+        addPowerup(PowerupTypes.Multishoot, multishootDropMod());
+        addPowerup(PowerupTypes.Fireup, fireupDropMod());
+        addPowerup(PowerupTypes.Healthup, healthupDropMod());
     }
 
     private void addPowerup(PowerupTypes powerup, double powerupDropMod) {
@@ -74,5 +75,18 @@ public class PowerupFactory {
             default:
                 Log.d("Invalid PowerupType", "dropPowerup: " + powerupType);
         }
+    }
+
+    //Flexible DropMods#############################################################################
+    private double multishootDropMod() {
+        return GameConstants.POWERUP_MULTISHOOT_DROP_MOD / (1 + GameConstants.POWERUP_MULTISHOOT_DROP_MOD_REDUCTION * player.getShootMultiplikator());
+    }
+
+    private double fireupDropMod() {
+        return GameConstants.POWERUP_FIREUP_DROP_MOD / player.getFireRate();
+    }
+
+    private double healthupDropMod() {
+        return GameConstants.POWERUP_HEALTHUP_DROPMOD;
     }
 }

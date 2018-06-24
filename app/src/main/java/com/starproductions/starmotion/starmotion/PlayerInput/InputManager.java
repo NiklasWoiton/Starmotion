@@ -1,6 +1,7 @@
 package com.starproductions.starmotion.starmotion.PlayerInput;
 
 import android.app.Activity;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -14,7 +15,10 @@ import java.util.Observer;
  */
 public class InputManager extends Observable implements Observer {
     private final OrientationController oc;
+    private final KeyController kc;
+    private boolean keyboardActive = false;
     private int maxX;
+    private float currentX = maxX / 2;
     private float speed = 1;
     private Notification lastNotification = new Notification(0, false);
 
@@ -26,13 +30,15 @@ public class InputManager extends Observable implements Observer {
         this.maxX = maxX;
         oc = new OrientationController(activity);
         oc.addObserver(this);
+        kc = new KeyController(this);
+        kc.addObserver(this);
     }
 
     /**
      * (Re)starts the movement calculation (should be in onResume()).
      */
     public void start() {
-        oc.start();
+        if (!keyboardActive) oc.start();
     }
 
     /**
@@ -48,6 +54,12 @@ public class InputManager extends Observable implements Observer {
             float[] orientation = (float[]) o;
             float tilt = orientation[1];
             float x = calculateX(tilt);
+            notifyPosition(x);
+        }
+
+        if (observable instanceof KeyController) {
+            float velocity = (float) o;
+            float x = calculateXKeyboard(velocity);
             notifyPosition(x);
         }
     }
@@ -68,6 +80,12 @@ public class InputManager extends Observable implements Observer {
         float x = maxX / 2 + tilt * speed;
         x = capX(x);
         return x;
+    }
+
+    private float calculateXKeyboard(float velocity) {
+        currentX += velocity;
+        currentX = capX(currentX);
+        return currentX;
     }
 
     private float capX(float x) {
@@ -99,6 +117,19 @@ public class InputManager extends Observable implements Observer {
         return true;
     }
 
+    public boolean onTouchEmulation(KeyEvent keyEvent) {
+        switch (keyEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                notifyTouch(true);
+                return true;
+
+            case MotionEvent.ACTION_UP:
+                notifyTouch(false);
+                return false;
+        }
+        return true;
+    }
+
     private void notifyTouch(boolean isTouching) {
         if (countObservers() > 0) {
             setChanged();
@@ -107,4 +138,21 @@ public class InputManager extends Observable implements Observer {
         }
     }
 
+    public boolean onKey(int keyCode, KeyEvent keyEvent) {
+        if (!keyboardActive) {
+            switchKeyboardActive();
+        }
+        return kc.onKey(keyCode, keyEvent);
+    }
+
+    public void switchKeyboardActive() {
+        if (keyboardActive) {
+            keyboardActive = false;
+            start();
+        } else {
+            keyboardActive = true;
+            stop();
+        }
+
+    }
 }

@@ -15,6 +15,9 @@ public final class GameConstants {
     public static final double DESPAWN_BORDER_FACTOR = 0.3;
     public static final double START_ENEMY_SHIPS_Y_FACTOR = -0.2;
 
+    //Keyboard values
+    public static final float KEYBOARD_SPEED_CHANGE = 100f;
+
     //Values for Lasers
     public static final double LASER_SCALE_FACTOR_STRAIGHT = 0.0125;
     public static final double LASER_SCALE_FACTOR_ROUND = 0.04;
@@ -57,21 +60,22 @@ public final class GameConstants {
 
     //Values for PowerUps
     public static final double POWERUP_SCALE_FACTOR = 0.04;
-    public static final double FIREUP_FACTOR = 0.2;
-    public static final double POWERUP_DROPMOD_FIREUP = 3;
-    public static final double POWERUP_DROPMOD_MULTISHOOT = 1;
-    public static final double POWERUP_DROPMOD_HEALTHUP = 2;
+    public static final double POWERUP_FIREUP_INCREASE = 0.2;
+    public static final double POWERUP_FIREUP_DROP_MOD = 3;
+    public static final double POWERUP_FIRERATE_MIN = 1;
+    public static final double POWERUP_FIRERATE_MAX = 3;
+    public static final double POWERUP_MULTISHOOT_DROP_MOD = 1;
+    public static final double POWERUP_MULTISHOOT_DROP_MOD_REDUCTION = 0.5;
     public static final int POWERUP_MULTISHOOT_MAX = 5;
+    public static final double POWERUP_HEALTHUP_DROPMOD = 2;
     public static final double POWERUP_SPEED_Y = 0.8;
-    public static final double POWERUP_DROPCHANCE_PER_SCORE = 1000;
+    public static final double POWERUP_DROP_CHANCE_PER_SCORE = 1000;
 
     //Values for Player
     public static final int MS_BETWEEN_PLAYER_SHOOTS = 1000;
     public static final double PLAYER_SHIP_SCALE_FACTOR = 0.1;
     public static final int PLAYER_START_HEALTH = 5;
     public static final float PLAYER_SPEED_X = 700;
-    public static final double PLAYER_FIRERATE_MIN = 1;
-    public static final double PLAYER_FIRERATE_MAX = 3;
 
     //Values for ObjectSpawner
     public static final int MS_BETWEEN_SHIPS_START = 3000;

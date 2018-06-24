@@ -15,7 +15,7 @@ import java.util.Observer;
 public class PlayerShip extends Actor implements Observer, SpaceShip {
 
     private long lastShot = 0;
-    private double fireRate = GameConstants.PLAYER_FIRERATE_MIN;
+    private double fireRate = GameConstants.POWERUP_FIRERATE_MIN;
 
     private int shootMultiplikator = 1;
     private int health = GameConstants.PLAYER_START_HEALTH;
@@ -44,7 +44,7 @@ public class PlayerShip extends Actor implements Observer, SpaceShip {
     }
 
     public void setFireRate(double fireRate) {
-        if (fireRate <= GameConstants.PLAYER_FIRERATE_MAX && fireRate >= GameConstants.PLAYER_FIRERATE_MIN) {
+        if (fireRate <= GameConstants.POWERUP_FIRERATE_MAX && fireRate >= GameConstants.POWERUP_FIRERATE_MIN) {
             this.fireRate = fireRate;
         }
     }
@@ -129,7 +129,7 @@ public class PlayerShip extends Actor implements Observer, SpaceShip {
         if (shootMultiplikator > 1) {
             shootMultiplikator--;
         }
-        setFireRate(fireRate - GameConstants.FIREUP_FACTOR);
+        setFireRate(fireRate - GameConstants.POWERUP_FIREUP_INCREASE);
         //health--;Todo, Bugtest
         gameEngine.playSound(SoundEffects.PlayerHit);
         if (health <= 0) {

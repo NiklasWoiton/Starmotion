@@ -15,7 +15,7 @@ class FireUp extends PowerupObject {
 
     @Override
     protected void applyEffect() {
-        double newFireRate = player.getFireRate() + GameConstants.FIREUP_FACTOR;
+        double newFireRate = player.getFireRate() + GameConstants.POWERUP_FIREUP_INCREASE;
         player.setFireRate(newFireRate);
     }
 }

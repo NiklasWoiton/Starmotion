@@ -3,6 +3,7 @@ package com.starproductions.starmotion.starmotion.GameActivity;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -75,6 +76,16 @@ public class GameActivity extends Activity implements View.OnTouchListener {
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         return inputManager.onTouch(view, motionEvent);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent keyEvent) {
+        return inputManager.onKey(keyCode, keyEvent);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent keyEvent) {
+        return inputManager.onKey(keyCode, keyEvent);
     }
 
     public void gameFinished(int score) {
