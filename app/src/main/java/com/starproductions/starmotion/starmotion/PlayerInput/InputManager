@@ -1,0 +1,146 @@
+{
+    private var oc: OrientationController
+    private var kc: KeyController
+    private var keyboardActive = false
+    private var maxX: Int = 0
+    private var currentX = (maxX / 2).toFloat()
+    private var speed = 1f
+    private var lastNotification = Notification(0, false)
+
+    /**
+     * @param activity The calling activity
+     * @param maxX     The maximum X coordinate (should be screen width - the player's width)
+     */
+    fun InputManager(activity: Activity, maxX: Int): ??? {
+        this.maxX = maxX
+        oc = OrientationController(activity)
+        oc.addObserver(this)
+        kc = KeyController(this)
+        kc.addObserver(this)
+    }
+
+    /**
+     * (Re)starts the movement calculation (should be in onResume()).
+     */
+    fun start() {
+        if (!keyboardActive) oc.start()
+    }
+
+    /**
+     * Stops the movement calculations to save power (should be in onPause()).
+     */
+    fun stop() {
+        oc.stop()
+    }
+
+    override fun update(observable: Observable, o: Any) {
+        if (observable is OrientationController) {
+            val orientation = o as FloatArray
+            val tilt = orientation[1]
+            val x = calculateX(tilt)
+            notifyPosition(x)
+        }
+
+        if (observable is KeyController) {
+            val velocity = o as Float
+            val x = calculateXKeyboard(velocity)
+            notifyPosition(x)
+        }
+    }
+
+    fun getSpeed(): Float {
+        return speed
+    }
+
+    fun setSpeed(speed: Float) {
+        this.speed = speed
+    }
+
+    fun setMaxX(maxX: Int) {
+        this.maxX = maxX
+    }
+
+    private fun calculateX(tilt: Float): Float {
+        var x = maxX / 2 + tilt * speed
+        x = capX(x)
+        return x
+    }
+
+    private fun calculateXKeyboard(velocity: Float): Float {
+        currentX += velocity
+        currentX = capX(currentX)
+        return currentX
+    }
+
+    private fun capX(x: Float): Float {
+        var result: Float
+        result = if (x <= 0) 0 else x
+        result = if (x >= maxX) maxX else result
+        return result
+    }
+
+    private fun notifyPosition(x: Float) {
+        if (countObservers() > 0) {
+            setChanged()
+            lastNotification = Notification(x, lastNotification.isTouching())
+            notifyObservers(lastNotification)
+        }
+    }
+
+
+    fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
+        when (motionEvent.getActionMasked()) {
+            MotionEvent.ACTION_DOWN -> {
+                notifyTouch(true)
+                return true
+            }
+
+            MotionEvent.ACTION_UP -> {
+                notifyTouch(false)
+                return false
+            }
+        }
+        return true
+    }
+
+    fun onTouchEmulation(keyEvent: KeyEvent): Boolean {
+        when (keyEvent.getAction()) {
+            MotionEvent.ACTION_DOWN -> {
+                notifyTouch(true)
+                return true
+            }
+
+            MotionEvent.ACTION_UP -> {
+                notifyTouch(false)
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun notifyTouch(isTouching: Boolean) {
+        if (countObservers() > 0) {
+            setChanged()
+            lastNotification = Notification(lastNotification.getX(), isTouching)
+            notifyObservers(lastNotification)
+        }
+    }
+
+    fun onKey(keyCode: Int, keyEvent: KeyEvent): Boolean {
+        if (!keyboardActive) {
+            switchKeyboardActive()
+        }
+        return kc.onKey(keyCode, keyEvent)
+    }
+
+    fun switchKeyboardActive() {
+        if (keyboardActive) {
+            keyboardActive = false
+            start()
+        } else {
+            keyboardActive = true
+            stop()
+        }
+
+    }
+}
